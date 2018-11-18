@@ -1,0 +1,13 @@
+language: typescript
+
+schema: schema.graphql
+context: ./src/types.ts:Context
+models:
+  files:
+    - ./node_modules/@ffb/prisma/dist/index.d.ts
+
+output: ./src/generated/graphqlgen.ts
+
+resolver-scaffolding:
+  output: ./src/generated/tmp-resolvers/
+  layout: file-per-type

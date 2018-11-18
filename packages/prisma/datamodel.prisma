@@ -1,0 +1,43 @@
+type League @pgTable(name: "league") {
+  id: Int! @unique
+  name: String
+  teams: [Team!]!
+}
+
+type Nfl_player @pgTable(name: "nfl_player") {
+  id: Int! @unique
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String @unique
+  nfl_team: Nfl_team @pgRelation(column: "nfl_team_id")
+  position: String
+  position_group: String
+  status: String
+  team_players: [Team_player!]!
+}
+
+type Nfl_team @pgTable(name: "nfl_team") {
+  id: Int! @unique
+  city: String
+  code: String
+  full_name: String
+  name: String
+  nfl_feed_id: String @unique
+  nfl_players: [Nfl_player!]!
+}
+
+type Team @pgTable(name: "team") {
+  id: Int! @unique
+  league: League @pgRelation(column: "league_id")
+  name: String!
+  team_players: [Team_player!]!
+}
+
+type Team_player @pgTable(name: "team_player") {
+  id: Int! @unique
+  nfl_player: Nfl_player @pgRelation(column: "nfl_player_id")
+  team: Team @pgRelation(column: "team_id")
+}

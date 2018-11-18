@@ -1,0 +1,1784 @@
+# source: http://localhost:4466
+# timestamp: Sun Nov 18 2018 08:48:26 GMT-0500 (EST)
+
+type AggregateLeague {
+  count: Int!
+}
+
+type AggregateNfl_player {
+  count: Int!
+}
+
+type AggregateNfl_team {
+  count: Int!
+}
+
+type AggregateTeam {
+  count: Int!
+}
+
+type AggregateTeam_player {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+"""Raw JSON value"""
+scalar Json
+
+type League {
+  id: Int!
+  name: String
+  teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
+}
+
+"""A connection to a list of items."""
+type LeagueConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [LeagueEdge]!
+  aggregate: AggregateLeague!
+}
+
+input LeagueCreateInput {
+  name: String
+  teams: TeamCreateManyWithoutLeagueInput
+}
+
+input LeagueCreateOneWithoutTeamsInput {
+  create: LeagueCreateWithoutTeamsInput
+  connect: LeagueWhereUniqueInput
+}
+
+input LeagueCreateWithoutTeamsInput {
+  name: String
+}
+
+"""An edge in a connection."""
+type LeagueEdge {
+  """The item at the end of the edge."""
+  node: League!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum LeagueOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type LeaguePreviousValues {
+  id: Int!
+  name: String
+}
+
+type LeagueSubscriptionPayload {
+  mutation: MutationType!
+  node: League
+  updatedFields: [String!]
+  previousValues: LeaguePreviousValues
+}
+
+input LeagueSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LeagueSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LeagueSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LeagueSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: LeagueWhereInput
+}
+
+input LeagueUpdateInput {
+  name: String
+  teams: TeamUpdateManyWithoutLeagueInput
+}
+
+input LeagueUpdateManyMutationInput {
+  name: String
+}
+
+input LeagueUpdateOneWithoutTeamsInput {
+  create: LeagueCreateWithoutTeamsInput
+  connect: LeagueWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: LeagueUpdateWithoutTeamsDataInput
+  upsert: LeagueUpsertWithoutTeamsInput
+}
+
+input LeagueUpdateWithoutTeamsDataInput {
+  name: String
+}
+
+input LeagueUpsertWithoutTeamsInput {
+  update: LeagueUpdateWithoutTeamsDataInput!
+  create: LeagueCreateWithoutTeamsInput!
+}
+
+input LeagueWhereInput {
+  """Logical AND on all given filters."""
+  AND: [LeagueWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [LeagueWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [LeagueWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  teams_every: TeamWhereInput
+  teams_some: TeamWhereInput
+  teams_none: TeamWhereInput
+}
+
+input LeagueWhereUniqueInput {
+  id: Int
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createLeague(data: LeagueCreateInput!): League!
+  createNfl_player(data: Nfl_playerCreateInput!): Nfl_player!
+  createNfl_team(data: Nfl_teamCreateInput!): Nfl_team!
+  createTeam(data: TeamCreateInput!): Team!
+  createTeam_player(data: Team_playerCreateInput!): Team_player!
+  updateLeague(data: LeagueUpdateInput!, where: LeagueWhereUniqueInput!): League
+  updateNfl_player(data: Nfl_playerUpdateInput!, where: Nfl_playerWhereUniqueInput!): Nfl_player
+  updateNfl_team(data: Nfl_teamUpdateInput!, where: Nfl_teamWhereUniqueInput!): Nfl_team
+  updateTeam(data: TeamUpdateInput!, where: TeamWhereUniqueInput!): Team
+  updateTeam_player(data: Team_playerUpdateInput!, where: Team_playerWhereUniqueInput!): Team_player
+  deleteLeague(where: LeagueWhereUniqueInput!): League
+  deleteNfl_player(where: Nfl_playerWhereUniqueInput!): Nfl_player
+  deleteNfl_team(where: Nfl_teamWhereUniqueInput!): Nfl_team
+  deleteTeam(where: TeamWhereUniqueInput!): Team
+  deleteTeam_player(where: Team_playerWhereUniqueInput!): Team_player
+  upsertLeague(where: LeagueWhereUniqueInput!, create: LeagueCreateInput!, update: LeagueUpdateInput!): League!
+  upsertNfl_player(where: Nfl_playerWhereUniqueInput!, create: Nfl_playerCreateInput!, update: Nfl_playerUpdateInput!): Nfl_player!
+  upsertNfl_team(where: Nfl_teamWhereUniqueInput!, create: Nfl_teamCreateInput!, update: Nfl_teamUpdateInput!): Nfl_team!
+  upsertTeam(where: TeamWhereUniqueInput!, create: TeamCreateInput!, update: TeamUpdateInput!): Team!
+  upsertTeam_player(where: Team_playerWhereUniqueInput!, create: Team_playerCreateInput!, update: Team_playerUpdateInput!): Team_player!
+  updateManyLeagues(data: LeagueUpdateManyMutationInput!, where: LeagueWhereInput): BatchPayload!
+  updateManyNfl_players(data: Nfl_playerUpdateManyMutationInput!, where: Nfl_playerWhereInput): BatchPayload!
+  updateManyNfl_teams(data: Nfl_teamUpdateManyMutationInput!, where: Nfl_teamWhereInput): BatchPayload!
+  updateManyTeams(data: TeamUpdateManyMutationInput!, where: TeamWhereInput): BatchPayload!
+  deleteManyLeagues(where: LeagueWhereInput): BatchPayload!
+  deleteManyNfl_players(where: Nfl_playerWhereInput): BatchPayload!
+  deleteManyNfl_teams(where: Nfl_teamWhereInput): BatchPayload!
+  deleteManyTeams(where: TeamWhereInput): BatchPayload!
+  deleteManyTeam_players(where: Team_playerWhereInput): BatchPayload!
+  executeRaw(database: PrismaDatabase, query: String!): Json!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+type Nfl_player {
+  id: Int!
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  nfl_team: Nfl_team
+  position: String
+  position_group: String
+  status: String
+  team_players(where: Team_playerWhereInput, orderBy: Team_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team_player!]
+}
+
+"""A connection to a list of items."""
+type Nfl_playerConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [Nfl_playerEdge]!
+  aggregate: AggregateNfl_player!
+}
+
+input Nfl_playerCreateInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  position: String
+  position_group: String
+  status: String
+  nfl_team: Nfl_teamCreateOneWithoutNfl_playersInput
+  team_players: Team_playerCreateManyWithoutNfl_playerInput
+}
+
+input Nfl_playerCreateManyWithoutNfl_teamInput {
+  create: [Nfl_playerCreateWithoutNfl_teamInput!]
+  connect: [Nfl_playerWhereUniqueInput!]
+}
+
+input Nfl_playerCreateOneWithoutTeam_playersInput {
+  create: Nfl_playerCreateWithoutTeam_playersInput
+  connect: Nfl_playerWhereUniqueInput
+}
+
+input Nfl_playerCreateWithoutNfl_teamInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  position: String
+  position_group: String
+  status: String
+  team_players: Team_playerCreateManyWithoutNfl_playerInput
+}
+
+input Nfl_playerCreateWithoutTeam_playersInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  position: String
+  position_group: String
+  status: String
+  nfl_team: Nfl_teamCreateOneWithoutNfl_playersInput
+}
+
+"""An edge in a connection."""
+type Nfl_playerEdge {
+  """The item at the end of the edge."""
+  node: Nfl_player!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum Nfl_playerOrderByInput {
+  id_ASC
+  id_DESC
+  display_name_ASC
+  display_name_DESC
+  esb_id_ASC
+  esb_id_DESC
+  first_name_ASC
+  first_name_DESC
+  gsis_id_ASC
+  gsis_id_DESC
+  last_name_ASC
+  last_name_DESC
+  nfl_feed_id_ASC
+  nfl_feed_id_DESC
+  position_ASC
+  position_DESC
+  position_group_ASC
+  position_group_DESC
+  status_ASC
+  status_DESC
+}
+
+type Nfl_playerPreviousValues {
+  id: Int!
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  position: String
+  position_group: String
+  status: String
+}
+
+type Nfl_playerSubscriptionPayload {
+  mutation: MutationType!
+  node: Nfl_player
+  updatedFields: [String!]
+  previousValues: Nfl_playerPreviousValues
+}
+
+input Nfl_playerSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [Nfl_playerSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [Nfl_playerSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [Nfl_playerSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: Nfl_playerWhereInput
+}
+
+input Nfl_playerUpdateInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  position: String
+  position_group: String
+  status: String
+  nfl_team: Nfl_teamUpdateOneWithoutNfl_playersInput
+  team_players: Team_playerUpdateManyWithoutNfl_playerInput
+}
+
+input Nfl_playerUpdateManyMutationInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  position: String
+  position_group: String
+  status: String
+}
+
+input Nfl_playerUpdateManyWithoutNfl_teamInput {
+  create: [Nfl_playerCreateWithoutNfl_teamInput!]
+  connect: [Nfl_playerWhereUniqueInput!]
+  disconnect: [Nfl_playerWhereUniqueInput!]
+  delete: [Nfl_playerWhereUniqueInput!]
+  update: [Nfl_playerUpdateWithWhereUniqueWithoutNfl_teamInput!]
+  upsert: [Nfl_playerUpsertWithWhereUniqueWithoutNfl_teamInput!]
+}
+
+input Nfl_playerUpdateOneWithoutTeam_playersInput {
+  create: Nfl_playerCreateWithoutTeam_playersInput
+  connect: Nfl_playerWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: Nfl_playerUpdateWithoutTeam_playersDataInput
+  upsert: Nfl_playerUpsertWithoutTeam_playersInput
+}
+
+input Nfl_playerUpdateWithoutNfl_teamDataInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  position: String
+  position_group: String
+  status: String
+  team_players: Team_playerUpdateManyWithoutNfl_playerInput
+}
+
+input Nfl_playerUpdateWithoutTeam_playersDataInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  position: String
+  position_group: String
+  status: String
+  nfl_team: Nfl_teamUpdateOneWithoutNfl_playersInput
+}
+
+input Nfl_playerUpdateWithWhereUniqueWithoutNfl_teamInput {
+  where: Nfl_playerWhereUniqueInput!
+  data: Nfl_playerUpdateWithoutNfl_teamDataInput!
+}
+
+input Nfl_playerUpsertWithoutTeam_playersInput {
+  update: Nfl_playerUpdateWithoutTeam_playersDataInput!
+  create: Nfl_playerCreateWithoutTeam_playersInput!
+}
+
+input Nfl_playerUpsertWithWhereUniqueWithoutNfl_teamInput {
+  where: Nfl_playerWhereUniqueInput!
+  update: Nfl_playerUpdateWithoutNfl_teamDataInput!
+  create: Nfl_playerCreateWithoutNfl_teamInput!
+}
+
+input Nfl_playerWhereInput {
+  """Logical AND on all given filters."""
+  AND: [Nfl_playerWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [Nfl_playerWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [Nfl_playerWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  display_name: String
+
+  """All values that are not equal to given value."""
+  display_name_not: String
+
+  """All values that are contained in given list."""
+  display_name_in: [String!]
+
+  """All values that are not contained in given list."""
+  display_name_not_in: [String!]
+
+  """All values less than the given value."""
+  display_name_lt: String
+
+  """All values less than or equal the given value."""
+  display_name_lte: String
+
+  """All values greater than the given value."""
+  display_name_gt: String
+
+  """All values greater than or equal the given value."""
+  display_name_gte: String
+
+  """All values containing the given string."""
+  display_name_contains: String
+
+  """All values not containing the given string."""
+  display_name_not_contains: String
+
+  """All values starting with the given string."""
+  display_name_starts_with: String
+
+  """All values not starting with the given string."""
+  display_name_not_starts_with: String
+
+  """All values ending with the given string."""
+  display_name_ends_with: String
+
+  """All values not ending with the given string."""
+  display_name_not_ends_with: String
+  esb_id: String
+
+  """All values that are not equal to given value."""
+  esb_id_not: String
+
+  """All values that are contained in given list."""
+  esb_id_in: [String!]
+
+  """All values that are not contained in given list."""
+  esb_id_not_in: [String!]
+
+  """All values less than the given value."""
+  esb_id_lt: String
+
+  """All values less than or equal the given value."""
+  esb_id_lte: String
+
+  """All values greater than the given value."""
+  esb_id_gt: String
+
+  """All values greater than or equal the given value."""
+  esb_id_gte: String
+
+  """All values containing the given string."""
+  esb_id_contains: String
+
+  """All values not containing the given string."""
+  esb_id_not_contains: String
+
+  """All values starting with the given string."""
+  esb_id_starts_with: String
+
+  """All values not starting with the given string."""
+  esb_id_not_starts_with: String
+
+  """All values ending with the given string."""
+  esb_id_ends_with: String
+
+  """All values not ending with the given string."""
+  esb_id_not_ends_with: String
+  first_name: String
+
+  """All values that are not equal to given value."""
+  first_name_not: String
+
+  """All values that are contained in given list."""
+  first_name_in: [String!]
+
+  """All values that are not contained in given list."""
+  first_name_not_in: [String!]
+
+  """All values less than the given value."""
+  first_name_lt: String
+
+  """All values less than or equal the given value."""
+  first_name_lte: String
+
+  """All values greater than the given value."""
+  first_name_gt: String
+
+  """All values greater than or equal the given value."""
+  first_name_gte: String
+
+  """All values containing the given string."""
+  first_name_contains: String
+
+  """All values not containing the given string."""
+  first_name_not_contains: String
+
+  """All values starting with the given string."""
+  first_name_starts_with: String
+
+  """All values not starting with the given string."""
+  first_name_not_starts_with: String
+
+  """All values ending with the given string."""
+  first_name_ends_with: String
+
+  """All values not ending with the given string."""
+  first_name_not_ends_with: String
+  gsis_id: String
+
+  """All values that are not equal to given value."""
+  gsis_id_not: String
+
+  """All values that are contained in given list."""
+  gsis_id_in: [String!]
+
+  """All values that are not contained in given list."""
+  gsis_id_not_in: [String!]
+
+  """All values less than the given value."""
+  gsis_id_lt: String
+
+  """All values less than or equal the given value."""
+  gsis_id_lte: String
+
+  """All values greater than the given value."""
+  gsis_id_gt: String
+
+  """All values greater than or equal the given value."""
+  gsis_id_gte: String
+
+  """All values containing the given string."""
+  gsis_id_contains: String
+
+  """All values not containing the given string."""
+  gsis_id_not_contains: String
+
+  """All values starting with the given string."""
+  gsis_id_starts_with: String
+
+  """All values not starting with the given string."""
+  gsis_id_not_starts_with: String
+
+  """All values ending with the given string."""
+  gsis_id_ends_with: String
+
+  """All values not ending with the given string."""
+  gsis_id_not_ends_with: String
+  last_name: String
+
+  """All values that are not equal to given value."""
+  last_name_not: String
+
+  """All values that are contained in given list."""
+  last_name_in: [String!]
+
+  """All values that are not contained in given list."""
+  last_name_not_in: [String!]
+
+  """All values less than the given value."""
+  last_name_lt: String
+
+  """All values less than or equal the given value."""
+  last_name_lte: String
+
+  """All values greater than the given value."""
+  last_name_gt: String
+
+  """All values greater than or equal the given value."""
+  last_name_gte: String
+
+  """All values containing the given string."""
+  last_name_contains: String
+
+  """All values not containing the given string."""
+  last_name_not_contains: String
+
+  """All values starting with the given string."""
+  last_name_starts_with: String
+
+  """All values not starting with the given string."""
+  last_name_not_starts_with: String
+
+  """All values ending with the given string."""
+  last_name_ends_with: String
+
+  """All values not ending with the given string."""
+  last_name_not_ends_with: String
+  nfl_feed_id: String
+
+  """All values that are not equal to given value."""
+  nfl_feed_id_not: String
+
+  """All values that are contained in given list."""
+  nfl_feed_id_in: [String!]
+
+  """All values that are not contained in given list."""
+  nfl_feed_id_not_in: [String!]
+
+  """All values less than the given value."""
+  nfl_feed_id_lt: String
+
+  """All values less than or equal the given value."""
+  nfl_feed_id_lte: String
+
+  """All values greater than the given value."""
+  nfl_feed_id_gt: String
+
+  """All values greater than or equal the given value."""
+  nfl_feed_id_gte: String
+
+  """All values containing the given string."""
+  nfl_feed_id_contains: String
+
+  """All values not containing the given string."""
+  nfl_feed_id_not_contains: String
+
+  """All values starting with the given string."""
+  nfl_feed_id_starts_with: String
+
+  """All values not starting with the given string."""
+  nfl_feed_id_not_starts_with: String
+
+  """All values ending with the given string."""
+  nfl_feed_id_ends_with: String
+
+  """All values not ending with the given string."""
+  nfl_feed_id_not_ends_with: String
+  position: String
+
+  """All values that are not equal to given value."""
+  position_not: String
+
+  """All values that are contained in given list."""
+  position_in: [String!]
+
+  """All values that are not contained in given list."""
+  position_not_in: [String!]
+
+  """All values less than the given value."""
+  position_lt: String
+
+  """All values less than or equal the given value."""
+  position_lte: String
+
+  """All values greater than the given value."""
+  position_gt: String
+
+  """All values greater than or equal the given value."""
+  position_gte: String
+
+  """All values containing the given string."""
+  position_contains: String
+
+  """All values not containing the given string."""
+  position_not_contains: String
+
+  """All values starting with the given string."""
+  position_starts_with: String
+
+  """All values not starting with the given string."""
+  position_not_starts_with: String
+
+  """All values ending with the given string."""
+  position_ends_with: String
+
+  """All values not ending with the given string."""
+  position_not_ends_with: String
+  position_group: String
+
+  """All values that are not equal to given value."""
+  position_group_not: String
+
+  """All values that are contained in given list."""
+  position_group_in: [String!]
+
+  """All values that are not contained in given list."""
+  position_group_not_in: [String!]
+
+  """All values less than the given value."""
+  position_group_lt: String
+
+  """All values less than or equal the given value."""
+  position_group_lte: String
+
+  """All values greater than the given value."""
+  position_group_gt: String
+
+  """All values greater than or equal the given value."""
+  position_group_gte: String
+
+  """All values containing the given string."""
+  position_group_contains: String
+
+  """All values not containing the given string."""
+  position_group_not_contains: String
+
+  """All values starting with the given string."""
+  position_group_starts_with: String
+
+  """All values not starting with the given string."""
+  position_group_not_starts_with: String
+
+  """All values ending with the given string."""
+  position_group_ends_with: String
+
+  """All values not ending with the given string."""
+  position_group_not_ends_with: String
+  status: String
+
+  """All values that are not equal to given value."""
+  status_not: String
+
+  """All values that are contained in given list."""
+  status_in: [String!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [String!]
+
+  """All values less than the given value."""
+  status_lt: String
+
+  """All values less than or equal the given value."""
+  status_lte: String
+
+  """All values greater than the given value."""
+  status_gt: String
+
+  """All values greater than or equal the given value."""
+  status_gte: String
+
+  """All values containing the given string."""
+  status_contains: String
+
+  """All values not containing the given string."""
+  status_not_contains: String
+
+  """All values starting with the given string."""
+  status_starts_with: String
+
+  """All values not starting with the given string."""
+  status_not_starts_with: String
+
+  """All values ending with the given string."""
+  status_ends_with: String
+
+  """All values not ending with the given string."""
+  status_not_ends_with: String
+  nfl_team: Nfl_teamWhereInput
+  team_players_every: Team_playerWhereInput
+  team_players_some: Team_playerWhereInput
+  team_players_none: Team_playerWhereInput
+}
+
+input Nfl_playerWhereUniqueInput {
+  id: Int
+  nfl_feed_id: String
+}
+
+type Nfl_team {
+  id: Int!
+  city: String
+  code: String
+  full_name: String
+  name: String
+  nfl_feed_id: String
+  nfl_players(where: Nfl_playerWhereInput, orderBy: Nfl_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Nfl_player!]
+}
+
+"""A connection to a list of items."""
+type Nfl_teamConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [Nfl_teamEdge]!
+  aggregate: AggregateNfl_team!
+}
+
+input Nfl_teamCreateInput {
+  city: String
+  code: String
+  full_name: String
+  name: String
+  nfl_feed_id: String
+  nfl_players: Nfl_playerCreateManyWithoutNfl_teamInput
+}
+
+input Nfl_teamCreateOneWithoutNfl_playersInput {
+  create: Nfl_teamCreateWithoutNfl_playersInput
+  connect: Nfl_teamWhereUniqueInput
+}
+
+input Nfl_teamCreateWithoutNfl_playersInput {
+  city: String
+  code: String
+  full_name: String
+  name: String
+  nfl_feed_id: String
+}
+
+"""An edge in a connection."""
+type Nfl_teamEdge {
+  """The item at the end of the edge."""
+  node: Nfl_team!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum Nfl_teamOrderByInput {
+  id_ASC
+  id_DESC
+  city_ASC
+  city_DESC
+  code_ASC
+  code_DESC
+  full_name_ASC
+  full_name_DESC
+  name_ASC
+  name_DESC
+  nfl_feed_id_ASC
+  nfl_feed_id_DESC
+}
+
+type Nfl_teamPreviousValues {
+  id: Int!
+  city: String
+  code: String
+  full_name: String
+  name: String
+  nfl_feed_id: String
+}
+
+type Nfl_teamSubscriptionPayload {
+  mutation: MutationType!
+  node: Nfl_team
+  updatedFields: [String!]
+  previousValues: Nfl_teamPreviousValues
+}
+
+input Nfl_teamSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [Nfl_teamSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [Nfl_teamSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [Nfl_teamSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: Nfl_teamWhereInput
+}
+
+input Nfl_teamUpdateInput {
+  city: String
+  code: String
+  full_name: String
+  name: String
+  nfl_feed_id: String
+  nfl_players: Nfl_playerUpdateManyWithoutNfl_teamInput
+}
+
+input Nfl_teamUpdateManyMutationInput {
+  city: String
+  code: String
+  full_name: String
+  name: String
+  nfl_feed_id: String
+}
+
+input Nfl_teamUpdateOneWithoutNfl_playersInput {
+  create: Nfl_teamCreateWithoutNfl_playersInput
+  connect: Nfl_teamWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: Nfl_teamUpdateWithoutNfl_playersDataInput
+  upsert: Nfl_teamUpsertWithoutNfl_playersInput
+}
+
+input Nfl_teamUpdateWithoutNfl_playersDataInput {
+  city: String
+  code: String
+  full_name: String
+  name: String
+  nfl_feed_id: String
+}
+
+input Nfl_teamUpsertWithoutNfl_playersInput {
+  update: Nfl_teamUpdateWithoutNfl_playersDataInput!
+  create: Nfl_teamCreateWithoutNfl_playersInput!
+}
+
+input Nfl_teamWhereInput {
+  """Logical AND on all given filters."""
+  AND: [Nfl_teamWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [Nfl_teamWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [Nfl_teamWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  city: String
+
+  """All values that are not equal to given value."""
+  city_not: String
+
+  """All values that are contained in given list."""
+  city_in: [String!]
+
+  """All values that are not contained in given list."""
+  city_not_in: [String!]
+
+  """All values less than the given value."""
+  city_lt: String
+
+  """All values less than or equal the given value."""
+  city_lte: String
+
+  """All values greater than the given value."""
+  city_gt: String
+
+  """All values greater than or equal the given value."""
+  city_gte: String
+
+  """All values containing the given string."""
+  city_contains: String
+
+  """All values not containing the given string."""
+  city_not_contains: String
+
+  """All values starting with the given string."""
+  city_starts_with: String
+
+  """All values not starting with the given string."""
+  city_not_starts_with: String
+
+  """All values ending with the given string."""
+  city_ends_with: String
+
+  """All values not ending with the given string."""
+  city_not_ends_with: String
+  code: String
+
+  """All values that are not equal to given value."""
+  code_not: String
+
+  """All values that are contained in given list."""
+  code_in: [String!]
+
+  """All values that are not contained in given list."""
+  code_not_in: [String!]
+
+  """All values less than the given value."""
+  code_lt: String
+
+  """All values less than or equal the given value."""
+  code_lte: String
+
+  """All values greater than the given value."""
+  code_gt: String
+
+  """All values greater than or equal the given value."""
+  code_gte: String
+
+  """All values containing the given string."""
+  code_contains: String
+
+  """All values not containing the given string."""
+  code_not_contains: String
+
+  """All values starting with the given string."""
+  code_starts_with: String
+
+  """All values not starting with the given string."""
+  code_not_starts_with: String
+
+  """All values ending with the given string."""
+  code_ends_with: String
+
+  """All values not ending with the given string."""
+  code_not_ends_with: String
+  full_name: String
+
+  """All values that are not equal to given value."""
+  full_name_not: String
+
+  """All values that are contained in given list."""
+  full_name_in: [String!]
+
+  """All values that are not contained in given list."""
+  full_name_not_in: [String!]
+
+  """All values less than the given value."""
+  full_name_lt: String
+
+  """All values less than or equal the given value."""
+  full_name_lte: String
+
+  """All values greater than the given value."""
+  full_name_gt: String
+
+  """All values greater than or equal the given value."""
+  full_name_gte: String
+
+  """All values containing the given string."""
+  full_name_contains: String
+
+  """All values not containing the given string."""
+  full_name_not_contains: String
+
+  """All values starting with the given string."""
+  full_name_starts_with: String
+
+  """All values not starting with the given string."""
+  full_name_not_starts_with: String
+
+  """All values ending with the given string."""
+  full_name_ends_with: String
+
+  """All values not ending with the given string."""
+  full_name_not_ends_with: String
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  nfl_feed_id: String
+
+  """All values that are not equal to given value."""
+  nfl_feed_id_not: String
+
+  """All values that are contained in given list."""
+  nfl_feed_id_in: [String!]
+
+  """All values that are not contained in given list."""
+  nfl_feed_id_not_in: [String!]
+
+  """All values less than the given value."""
+  nfl_feed_id_lt: String
+
+  """All values less than or equal the given value."""
+  nfl_feed_id_lte: String
+
+  """All values greater than the given value."""
+  nfl_feed_id_gt: String
+
+  """All values greater than or equal the given value."""
+  nfl_feed_id_gte: String
+
+  """All values containing the given string."""
+  nfl_feed_id_contains: String
+
+  """All values not containing the given string."""
+  nfl_feed_id_not_contains: String
+
+  """All values starting with the given string."""
+  nfl_feed_id_starts_with: String
+
+  """All values not starting with the given string."""
+  nfl_feed_id_not_starts_with: String
+
+  """All values ending with the given string."""
+  nfl_feed_id_ends_with: String
+
+  """All values not ending with the given string."""
+  nfl_feed_id_not_ends_with: String
+  nfl_players_every: Nfl_playerWhereInput
+  nfl_players_some: Nfl_playerWhereInput
+  nfl_players_none: Nfl_playerWhereInput
+}
+
+input Nfl_teamWhereUniqueInput {
+  id: Int
+  nfl_feed_id: String
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+enum PrismaDatabase {
+  default
+}
+
+type Query {
+  leagues(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [League]!
+  nfl_players(where: Nfl_playerWhereInput, orderBy: Nfl_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Nfl_player]!
+  nfl_teams(where: Nfl_teamWhereInput, orderBy: Nfl_teamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Nfl_team]!
+  teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team]!
+  team_players(where: Team_playerWhereInput, orderBy: Team_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team_player]!
+  league(where: LeagueWhereUniqueInput!): League
+  nfl_player(where: Nfl_playerWhereUniqueInput!): Nfl_player
+  nfl_team(where: Nfl_teamWhereUniqueInput!): Nfl_team
+  team(where: TeamWhereUniqueInput!): Team
+  team_player(where: Team_playerWhereUniqueInput!): Team_player
+  leaguesConnection(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LeagueConnection!
+  nfl_playersConnection(where: Nfl_playerWhereInput, orderBy: Nfl_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): Nfl_playerConnection!
+  nfl_teamsConnection(where: Nfl_teamWhereInput, orderBy: Nfl_teamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): Nfl_teamConnection!
+  teamsConnection(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamConnection!
+  team_playersConnection(where: Team_playerWhereInput, orderBy: Team_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): Team_playerConnection!
+}
+
+type Subscription {
+  league(where: LeagueSubscriptionWhereInput): LeagueSubscriptionPayload
+  nfl_player(where: Nfl_playerSubscriptionWhereInput): Nfl_playerSubscriptionPayload
+  nfl_team(where: Nfl_teamSubscriptionWhereInput): Nfl_teamSubscriptionPayload
+  team(where: TeamSubscriptionWhereInput): TeamSubscriptionPayload
+  team_player(where: Team_playerSubscriptionWhereInput): Team_playerSubscriptionPayload
+}
+
+type Team {
+  id: Int!
+  league: League
+  name: String!
+  team_players(where: Team_playerWhereInput, orderBy: Team_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team_player!]
+}
+
+type Team_player {
+  id: Int!
+  nfl_player: Nfl_player
+  team: Team
+}
+
+"""A connection to a list of items."""
+type Team_playerConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [Team_playerEdge]!
+  aggregate: AggregateTeam_player!
+}
+
+input Team_playerCreateInput {
+  nfl_player: Nfl_playerCreateOneWithoutTeam_playersInput
+  team: TeamCreateOneWithoutTeam_playersInput
+}
+
+input Team_playerCreateManyWithoutNfl_playerInput {
+  create: [Team_playerCreateWithoutNfl_playerInput!]
+  connect: [Team_playerWhereUniqueInput!]
+}
+
+input Team_playerCreateManyWithoutTeamInput {
+  create: [Team_playerCreateWithoutTeamInput!]
+  connect: [Team_playerWhereUniqueInput!]
+}
+
+input Team_playerCreateWithoutNfl_playerInput {
+  team: TeamCreateOneWithoutTeam_playersInput
+}
+
+input Team_playerCreateWithoutTeamInput {
+  nfl_player: Nfl_playerCreateOneWithoutTeam_playersInput
+}
+
+"""An edge in a connection."""
+type Team_playerEdge {
+  """The item at the end of the edge."""
+  node: Team_player!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum Team_playerOrderByInput {
+  id_ASC
+  id_DESC
+}
+
+type Team_playerPreviousValues {
+  id: Int!
+}
+
+type Team_playerSubscriptionPayload {
+  mutation: MutationType!
+  node: Team_player
+  updatedFields: [String!]
+  previousValues: Team_playerPreviousValues
+}
+
+input Team_playerSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [Team_playerSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [Team_playerSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [Team_playerSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: Team_playerWhereInput
+}
+
+input Team_playerUpdateInput {
+  nfl_player: Nfl_playerUpdateOneWithoutTeam_playersInput
+  team: TeamUpdateOneWithoutTeam_playersInput
+}
+
+input Team_playerUpdateManyWithoutNfl_playerInput {
+  create: [Team_playerCreateWithoutNfl_playerInput!]
+  connect: [Team_playerWhereUniqueInput!]
+  disconnect: [Team_playerWhereUniqueInput!]
+  delete: [Team_playerWhereUniqueInput!]
+  update: [Team_playerUpdateWithWhereUniqueWithoutNfl_playerInput!]
+  upsert: [Team_playerUpsertWithWhereUniqueWithoutNfl_playerInput!]
+}
+
+input Team_playerUpdateManyWithoutTeamInput {
+  create: [Team_playerCreateWithoutTeamInput!]
+  connect: [Team_playerWhereUniqueInput!]
+  disconnect: [Team_playerWhereUniqueInput!]
+  delete: [Team_playerWhereUniqueInput!]
+  update: [Team_playerUpdateWithWhereUniqueWithoutTeamInput!]
+  upsert: [Team_playerUpsertWithWhereUniqueWithoutTeamInput!]
+}
+
+input Team_playerUpdateWithoutNfl_playerDataInput {
+  team: TeamUpdateOneWithoutTeam_playersInput
+}
+
+input Team_playerUpdateWithoutTeamDataInput {
+  nfl_player: Nfl_playerUpdateOneWithoutTeam_playersInput
+}
+
+input Team_playerUpdateWithWhereUniqueWithoutNfl_playerInput {
+  where: Team_playerWhereUniqueInput!
+  data: Team_playerUpdateWithoutNfl_playerDataInput!
+}
+
+input Team_playerUpdateWithWhereUniqueWithoutTeamInput {
+  where: Team_playerWhereUniqueInput!
+  data: Team_playerUpdateWithoutTeamDataInput!
+}
+
+input Team_playerUpsertWithWhereUniqueWithoutNfl_playerInput {
+  where: Team_playerWhereUniqueInput!
+  update: Team_playerUpdateWithoutNfl_playerDataInput!
+  create: Team_playerCreateWithoutNfl_playerInput!
+}
+
+input Team_playerUpsertWithWhereUniqueWithoutTeamInput {
+  where: Team_playerWhereUniqueInput!
+  update: Team_playerUpdateWithoutTeamDataInput!
+  create: Team_playerCreateWithoutTeamInput!
+}
+
+input Team_playerWhereInput {
+  """Logical AND on all given filters."""
+  AND: [Team_playerWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [Team_playerWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [Team_playerWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  nfl_player: Nfl_playerWhereInput
+  team: TeamWhereInput
+}
+
+input Team_playerWhereUniqueInput {
+  id: Int
+}
+
+"""A connection to a list of items."""
+type TeamConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [TeamEdge]!
+  aggregate: AggregateTeam!
+}
+
+input TeamCreateInput {
+  name: String!
+  league: LeagueCreateOneWithoutTeamsInput
+  team_players: Team_playerCreateManyWithoutTeamInput
+}
+
+input TeamCreateManyWithoutLeagueInput {
+  create: [TeamCreateWithoutLeagueInput!]
+  connect: [TeamWhereUniqueInput!]
+}
+
+input TeamCreateOneWithoutTeam_playersInput {
+  create: TeamCreateWithoutTeam_playersInput
+  connect: TeamWhereUniqueInput
+}
+
+input TeamCreateWithoutLeagueInput {
+  name: String!
+  team_players: Team_playerCreateManyWithoutTeamInput
+}
+
+input TeamCreateWithoutTeam_playersInput {
+  name: String!
+  league: LeagueCreateOneWithoutTeamsInput
+}
+
+"""An edge in a connection."""
+type TeamEdge {
+  """The item at the end of the edge."""
+  node: Team!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum TeamOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+}
+
+type TeamPreviousValues {
+  id: Int!
+  name: String!
+}
+
+type TeamSubscriptionPayload {
+  mutation: MutationType!
+  node: Team
+  updatedFields: [String!]
+  previousValues: TeamPreviousValues
+}
+
+input TeamSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TeamSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TeamSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TeamSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: TeamWhereInput
+}
+
+input TeamUpdateInput {
+  name: String
+  league: LeagueUpdateOneWithoutTeamsInput
+  team_players: Team_playerUpdateManyWithoutTeamInput
+}
+
+input TeamUpdateManyMutationInput {
+  name: String
+}
+
+input TeamUpdateManyWithoutLeagueInput {
+  create: [TeamCreateWithoutLeagueInput!]
+  connect: [TeamWhereUniqueInput!]
+  disconnect: [TeamWhereUniqueInput!]
+  delete: [TeamWhereUniqueInput!]
+  update: [TeamUpdateWithWhereUniqueWithoutLeagueInput!]
+  upsert: [TeamUpsertWithWhereUniqueWithoutLeagueInput!]
+}
+
+input TeamUpdateOneWithoutTeam_playersInput {
+  create: TeamCreateWithoutTeam_playersInput
+  connect: TeamWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: TeamUpdateWithoutTeam_playersDataInput
+  upsert: TeamUpsertWithoutTeam_playersInput
+}
+
+input TeamUpdateWithoutLeagueDataInput {
+  name: String
+  team_players: Team_playerUpdateManyWithoutTeamInput
+}
+
+input TeamUpdateWithoutTeam_playersDataInput {
+  name: String
+  league: LeagueUpdateOneWithoutTeamsInput
+}
+
+input TeamUpdateWithWhereUniqueWithoutLeagueInput {
+  where: TeamWhereUniqueInput!
+  data: TeamUpdateWithoutLeagueDataInput!
+}
+
+input TeamUpsertWithoutTeam_playersInput {
+  update: TeamUpdateWithoutTeam_playersDataInput!
+  create: TeamCreateWithoutTeam_playersInput!
+}
+
+input TeamUpsertWithWhereUniqueWithoutLeagueInput {
+  where: TeamWhereUniqueInput!
+  update: TeamUpdateWithoutLeagueDataInput!
+  create: TeamCreateWithoutLeagueInput!
+}
+
+input TeamWhereInput {
+  """Logical AND on all given filters."""
+  AND: [TeamWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [TeamWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [TeamWhereInput!]
+  id: Int
+
+  """All values that are not equal to given value."""
+  id_not: Int
+
+  """All values that are contained in given list."""
+  id_in: [Int!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [Int!]
+
+  """All values less than the given value."""
+  id_lt: Int
+
+  """All values less than or equal the given value."""
+  id_lte: Int
+
+  """All values greater than the given value."""
+  id_gt: Int
+
+  """All values greater than or equal the given value."""
+  id_gte: Int
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  league: LeagueWhereInput
+  team_players_every: Team_playerWhereInput
+  team_players_some: Team_playerWhereInput
+  team_players_none: Team_playerWhereInput
+}
+
+input TeamWhereUniqueInput {
+  id: Int
+}

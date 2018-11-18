@@ -1,0 +1,19 @@
+{
+  "name": "fantasy-football",
+  "version": "0.1.0",
+  "main": "src/index.ts",
+  "author": "Matthew Albert",
+  "license": "MIT",
+  "dependencies": {
+    "lerna": "^3.0.0-alpha.1"
+  },
+  "scripts": {
+    "start-api": "cd packages/api && ts-node ./src/index.ts",
+    "start-prisma": "cd packages/prisma && docker-compose up",
+    "generate-prisma-client": "cd packages/prisma && prisma generate && yarn build"
+  },
+  "devDependencies": {
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.6"
+  }
+}

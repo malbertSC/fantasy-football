@@ -1,0 +1,9 @@
+endpoint: http://localhost:4466
+datamodel: datamodel.prisma
+hooks:
+  post-deploy:
+    - graphql get-schema --project default
+
+generate:
+  - generator: typescript-client
+    output: ./src/generated/prisma-client/
