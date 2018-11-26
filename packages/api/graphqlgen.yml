@@ -1,6 +1,6 @@
 language: typescript
 
-schema: schema.graphql
+schema: api-schema.graphql
 context: ./src/types.ts:Context
 models:
   files:

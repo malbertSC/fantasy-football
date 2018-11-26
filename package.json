@@ -9,8 +9,12 @@
   },
   "scripts": {
     "start-api": "cd packages/api && ts-node ./src/index.ts",
+    "debug-api": "cd packages/api && node --inspect -r ts-node/register ./src/index.ts",
     "start-prisma": "cd packages/prisma && docker-compose up",
-    "generate-prisma-client": "cd packages/prisma && prisma generate && yarn build"
+    "generate-prisma-client": "cd packages/prisma && prisma generate && yarn build",
+    "generate-api-schema": "cd packages/devops && ts-node ./src/build-exposable-schema.ts",
+    "generate-api-types": "cd packages/api && graphqlgen",
+    "update-api-schema": "yarn generate-api-schema && yarn generate-api-types"
   },
   "devDependencies": {
     "ts-node": "^7.0.1",

@@ -8,7 +8,7 @@ async function main() {
     try {
         // await seed();
         const server = new GraphQLServer({
-            typeDefs: "./schema.graphql",
+            typeDefs: "./api-schema.graphql",
             resolvers,
             context: {
                 db: prisma,
