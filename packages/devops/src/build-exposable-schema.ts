@@ -16,19 +16,19 @@ function getAPISafeSchema(introspectionResult) {
     const apiTypes = introspectionResult.__schema.types
         .filter(type => !["Subscription", "PageInfo"].includes(type.name))
         .filter(type => !(
-                type.name.includes("Connection")
-                || type.name.includes("Aggregate")
-                || type.name.includes("Edge")
-                || type.name.includes("SubscriptionPayload")
-                || type.name.includes("PreviousValues")
-            )
+            type.name.includes("Connection")
+            || type.name.includes("Aggregate")
+            || type.name.includes("Edge")
+            || type.name.includes("SubscriptionPayload")
+            || type.name.includes("PreviousValues")
+        )
         );
     const queryType = apiTypes.find(type => type.name === "Query");
     queryType.fields = queryType.fields.filter(type => !type.name.includes("Connection"));
     const mutationType = apiTypes.find(type => type.name === "Mutation");
     mutationType.fields = mutationType.fields.filter(type => !(
-            type.name.includes("Nfl_") || type.name === "executeRaw"
-        )
+        type.name.includes("Nfl_") || type.name === "executeRaw"
+    )
     );
     return {
         ...introspectionResult,
