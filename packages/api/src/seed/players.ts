@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { prisma, Nfl_playerCreateInput } from "@ffb/prisma";
+import { prisma, NflPlayerCreateInput } from "@ffb/prisma";
 
 const fantasyPositions = ["WR", "RB", "TE", "QB", "K"];
 
@@ -17,14 +17,14 @@ interface NFLFeedPlayer {
 }
 
 export async function loadPlayers() {
-    const teams = await prisma.nfl_teams();
+    const teams = await prisma.nflTeams();
     const teamNFLIDs = teams.map(team => team.nfl_feed_id);
     for (const teamNFLID of teamNFLIDs) {
         const playerResponse = await Axios.get(`https://feeds.nfl.com/feeds-rs/roster/${teamNFLID}.json`);
         const allPlayers: NFLFeedPlayer[] = playerResponse.data.teamPlayers;
         const fantasyPlayers = allPlayers.filter(player => fantasyPositions.includes(player.position));
         const players = fantasyPlayers.map(fantasyPlayer => {
-            const player: Nfl_playerCreateInput = {
+            const player: NflPlayerCreateInput = {
                 first_name: fantasyPlayer.firstName,
                 last_name: fantasyPlayer.lastName,
                 display_name: fantasyPlayer.displayName,
@@ -42,7 +42,7 @@ export async function loadPlayers() {
             };
             return player;
         })
-        await Promise.all(players.map(player => prisma.upsertNfl_player({
+        await Promise.all(players.map(player => prisma.upsertNflPlayer({
             where: {
                 nfl_feed_id: player.nfl_feed_id
             },

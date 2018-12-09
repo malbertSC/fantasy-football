@@ -2,11 +2,11 @@ export const typeDefs = /* GraphQL */ `type AggregateLeague {
   count: Int!
 }
 
-type AggregateNfl_player {
+type AggregateNflPlayer {
   count: Int!
 }
 
-type AggregateNfl_team {
+type AggregateNflTeam {
   count: Int!
 }
 
@@ -14,7 +14,7 @@ type AggregateTeam {
   count: Int!
 }
 
-type AggregateTeam_player {
+type AggregateTeamPlayer {
   count: Int!
 }
 
@@ -24,7 +24,7 @@ type BatchPayload {
 
 type League {
   id: Int!
-  name: String
+  name: String!
   teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
 }
 
@@ -35,7 +35,7 @@ type LeagueConnection {
 }
 
 input LeagueCreateInput {
-  name: String
+  name: String!
   teams: TeamCreateManyWithoutLeagueInput
 }
 
@@ -45,7 +45,7 @@ input LeagueCreateOneWithoutTeamsInput {
 }
 
 input LeagueCreateWithoutTeamsInput {
-  name: String
+  name: String!
 }
 
 type LeagueEdge {
@@ -66,7 +66,7 @@ enum LeagueOrderByInput {
 
 type LeaguePreviousValues {
   id: Int!
-  name: String
+  name: String!
 }
 
 type LeagueSubscriptionPayload {
@@ -96,12 +96,10 @@ input LeagueUpdateManyMutationInput {
   name: String
 }
 
-input LeagueUpdateOneWithoutTeamsInput {
+input LeagueUpdateOneRequiredWithoutTeamsInput {
   create: LeagueCreateWithoutTeamsInput
   update: LeagueUpdateWithoutTeamsDataInput
   upsert: LeagueUpsertWithoutTeamsInput
-  delete: Boolean
-  disconnect: Boolean
   connect: LeagueWhereUniqueInput
 }
 
@@ -158,29 +156,29 @@ type Mutation {
   upsertLeague(where: LeagueWhereUniqueInput!, create: LeagueCreateInput!, update: LeagueUpdateInput!): League!
   deleteLeague(where: LeagueWhereUniqueInput!): League
   deleteManyLeagues(where: LeagueWhereInput): BatchPayload!
-  createNfl_player(data: Nfl_playerCreateInput!): Nfl_player!
-  updateNfl_player(data: Nfl_playerUpdateInput!, where: Nfl_playerWhereUniqueInput!): Nfl_player
-  updateManyNfl_players(data: Nfl_playerUpdateManyMutationInput!, where: Nfl_playerWhereInput): BatchPayload!
-  upsertNfl_player(where: Nfl_playerWhereUniqueInput!, create: Nfl_playerCreateInput!, update: Nfl_playerUpdateInput!): Nfl_player!
-  deleteNfl_player(where: Nfl_playerWhereUniqueInput!): Nfl_player
-  deleteManyNfl_players(where: Nfl_playerWhereInput): BatchPayload!
-  createNfl_team(data: Nfl_teamCreateInput!): Nfl_team!
-  updateNfl_team(data: Nfl_teamUpdateInput!, where: Nfl_teamWhereUniqueInput!): Nfl_team
-  updateManyNfl_teams(data: Nfl_teamUpdateManyMutationInput!, where: Nfl_teamWhereInput): BatchPayload!
-  upsertNfl_team(where: Nfl_teamWhereUniqueInput!, create: Nfl_teamCreateInput!, update: Nfl_teamUpdateInput!): Nfl_team!
-  deleteNfl_team(where: Nfl_teamWhereUniqueInput!): Nfl_team
-  deleteManyNfl_teams(where: Nfl_teamWhereInput): BatchPayload!
+  createNflPlayer(data: NflPlayerCreateInput!): NflPlayer!
+  updateNflPlayer(data: NflPlayerUpdateInput!, where: NflPlayerWhereUniqueInput!): NflPlayer
+  updateManyNflPlayers(data: NflPlayerUpdateManyMutationInput!, where: NflPlayerWhereInput): BatchPayload!
+  upsertNflPlayer(where: NflPlayerWhereUniqueInput!, create: NflPlayerCreateInput!, update: NflPlayerUpdateInput!): NflPlayer!
+  deleteNflPlayer(where: NflPlayerWhereUniqueInput!): NflPlayer
+  deleteManyNflPlayers(where: NflPlayerWhereInput): BatchPayload!
+  createNflTeam(data: NflTeamCreateInput!): NflTeam!
+  updateNflTeam(data: NflTeamUpdateInput!, where: NflTeamWhereUniqueInput!): NflTeam
+  updateManyNflTeams(data: NflTeamUpdateManyMutationInput!, where: NflTeamWhereInput): BatchPayload!
+  upsertNflTeam(where: NflTeamWhereUniqueInput!, create: NflTeamCreateInput!, update: NflTeamUpdateInput!): NflTeam!
+  deleteNflTeam(where: NflTeamWhereUniqueInput!): NflTeam
+  deleteManyNflTeams(where: NflTeamWhereInput): BatchPayload!
   createTeam(data: TeamCreateInput!): Team!
   updateTeam(data: TeamUpdateInput!, where: TeamWhereUniqueInput!): Team
   updateManyTeams(data: TeamUpdateManyMutationInput!, where: TeamWhereInput): BatchPayload!
   upsertTeam(where: TeamWhereUniqueInput!, create: TeamCreateInput!, update: TeamUpdateInput!): Team!
   deleteTeam(where: TeamWhereUniqueInput!): Team
   deleteManyTeams(where: TeamWhereInput): BatchPayload!
-  createTeam_player(data: Team_playerCreateInput!): Team_player!
-  updateTeam_player(data: Team_playerUpdateInput!, where: Team_playerWhereUniqueInput!): Team_player
-  upsertTeam_player(where: Team_playerWhereUniqueInput!, create: Team_playerCreateInput!, update: Team_playerUpdateInput!): Team_player!
-  deleteTeam_player(where: Team_playerWhereUniqueInput!): Team_player
-  deleteManyTeam_players(where: Team_playerWhereInput): BatchPayload!
+  createTeamPlayer(data: TeamPlayerCreateInput!): TeamPlayer!
+  updateTeamPlayer(data: TeamPlayerUpdateInput!, where: TeamPlayerWhereUniqueInput!): TeamPlayer
+  upsertTeamPlayer(where: TeamPlayerWhereUniqueInput!, create: TeamPlayerCreateInput!, update: TeamPlayerUpdateInput!): TeamPlayer!
+  deleteTeamPlayer(where: TeamPlayerWhereUniqueInput!): TeamPlayer
+  deleteManyTeamPlayers(where: TeamPlayerWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -189,83 +187,83 @@ enum MutationType {
   DELETED
 }
 
-type Nfl_player {
+type NflPlayer {
   id: Int!
-  display_name: String
-  esb_id: String
-  first_name: String
+  display_name: String!
+  esb_id: String!
+  first_name: String!
   gsis_id: String
-  last_name: String
-  nfl_feed_id: String
-  nfl_team: Nfl_team
-  position: String
-  position_group: String
-  status: String
-  team_players(where: Team_playerWhereInput, orderBy: Team_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team_player!]
+  last_name: String!
+  nfl_feed_id: String!
+  nfl_team: NflTeam!
+  position: String!
+  position_group: String!
+  status: String!
+  team_players(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TeamPlayer!]
 }
 
-type Nfl_playerConnection {
+type NflPlayerConnection {
   pageInfo: PageInfo!
-  edges: [Nfl_playerEdge]!
-  aggregate: AggregateNfl_player!
+  edges: [NflPlayerEdge]!
+  aggregate: AggregateNflPlayer!
 }
 
-input Nfl_playerCreateInput {
-  display_name: String
-  esb_id: String
-  first_name: String
+input NflPlayerCreateInput {
+  display_name: String!
+  esb_id: String!
+  first_name: String!
   gsis_id: String
-  last_name: String
-  nfl_feed_id: String
-  nfl_team: Nfl_teamCreateOneWithoutNfl_playersInput
-  position: String
-  position_group: String
-  status: String
-  team_players: Team_playerCreateManyWithoutNfl_playerInput
+  last_name: String!
+  nfl_feed_id: String!
+  nfl_team: NflTeamCreateOneWithoutNfl_playersInput!
+  position: String!
+  position_group: String!
+  status: String!
+  team_players: TeamPlayerCreateManyWithoutNfl_playerInput
 }
 
-input Nfl_playerCreateManyWithoutNfl_teamInput {
-  create: [Nfl_playerCreateWithoutNfl_teamInput!]
-  connect: [Nfl_playerWhereUniqueInput!]
+input NflPlayerCreateManyWithoutNfl_teamInput {
+  create: [NflPlayerCreateWithoutNfl_teamInput!]
+  connect: [NflPlayerWhereUniqueInput!]
 }
 
-input Nfl_playerCreateOneWithoutTeam_playersInput {
-  create: Nfl_playerCreateWithoutTeam_playersInput
-  connect: Nfl_playerWhereUniqueInput
+input NflPlayerCreateOneWithoutTeam_playersInput {
+  create: NflPlayerCreateWithoutTeam_playersInput
+  connect: NflPlayerWhereUniqueInput
 }
 
-input Nfl_playerCreateWithoutNfl_teamInput {
-  display_name: String
-  esb_id: String
-  first_name: String
+input NflPlayerCreateWithoutNfl_teamInput {
+  display_name: String!
+  esb_id: String!
+  first_name: String!
   gsis_id: String
-  last_name: String
-  nfl_feed_id: String
-  position: String
-  position_group: String
-  status: String
-  team_players: Team_playerCreateManyWithoutNfl_playerInput
+  last_name: String!
+  nfl_feed_id: String!
+  position: String!
+  position_group: String!
+  status: String!
+  team_players: TeamPlayerCreateManyWithoutNfl_playerInput
 }
 
-input Nfl_playerCreateWithoutTeam_playersInput {
-  display_name: String
-  esb_id: String
-  first_name: String
+input NflPlayerCreateWithoutTeam_playersInput {
+  display_name: String!
+  esb_id: String!
+  first_name: String!
   gsis_id: String
-  last_name: String
-  nfl_feed_id: String
-  nfl_team: Nfl_teamCreateOneWithoutNfl_playersInput
-  position: String
-  position_group: String
-  status: String
+  last_name: String!
+  nfl_feed_id: String!
+  nfl_team: NflTeamCreateOneWithoutNfl_playersInput!
+  position: String!
+  position_group: String!
+  status: String!
 }
 
-type Nfl_playerEdge {
-  node: Nfl_player!
+type NflPlayerEdge {
+  node: NflPlayer!
   cursor: String!
 }
 
-enum Nfl_playerOrderByInput {
+enum NflPlayerOrderByInput {
   id_ASC
   id_DESC
   display_name_ASC
@@ -292,124 +290,20 @@ enum Nfl_playerOrderByInput {
   updatedAt_DESC
 }
 
-type Nfl_playerPreviousValues {
+type NflPlayerPreviousValues {
   id: Int!
-  display_name: String
-  esb_id: String
-  first_name: String
+  display_name: String!
+  esb_id: String!
+  first_name: String!
   gsis_id: String
-  last_name: String
-  nfl_feed_id: String
-  position: String
-  position_group: String
-  status: String
+  last_name: String!
+  nfl_feed_id: String!
+  position: String!
+  position_group: String!
+  status: String!
 }
 
-type Nfl_playerSubscriptionPayload {
-  mutation: MutationType!
-  node: Nfl_player
-  updatedFields: [String!]
-  previousValues: Nfl_playerPreviousValues
-}
-
-input Nfl_playerSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: Nfl_playerWhereInput
-  AND: [Nfl_playerSubscriptionWhereInput!]
-  OR: [Nfl_playerSubscriptionWhereInput!]
-  NOT: [Nfl_playerSubscriptionWhereInput!]
-}
-
-input Nfl_playerUpdateInput {
-  display_name: String
-  esb_id: String
-  first_name: String
-  gsis_id: String
-  last_name: String
-  nfl_feed_id: String
-  nfl_team: Nfl_teamUpdateOneWithoutNfl_playersInput
-  position: String
-  position_group: String
-  status: String
-  team_players: Team_playerUpdateManyWithoutNfl_playerInput
-}
-
-input Nfl_playerUpdateManyMutationInput {
-  display_name: String
-  esb_id: String
-  first_name: String
-  gsis_id: String
-  last_name: String
-  nfl_feed_id: String
-  position: String
-  position_group: String
-  status: String
-}
-
-input Nfl_playerUpdateManyWithoutNfl_teamInput {
-  create: [Nfl_playerCreateWithoutNfl_teamInput!]
-  delete: [Nfl_playerWhereUniqueInput!]
-  connect: [Nfl_playerWhereUniqueInput!]
-  disconnect: [Nfl_playerWhereUniqueInput!]
-  update: [Nfl_playerUpdateWithWhereUniqueWithoutNfl_teamInput!]
-  upsert: [Nfl_playerUpsertWithWhereUniqueWithoutNfl_teamInput!]
-}
-
-input Nfl_playerUpdateOneWithoutTeam_playersInput {
-  create: Nfl_playerCreateWithoutTeam_playersInput
-  update: Nfl_playerUpdateWithoutTeam_playersDataInput
-  upsert: Nfl_playerUpsertWithoutTeam_playersInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: Nfl_playerWhereUniqueInput
-}
-
-input Nfl_playerUpdateWithoutNfl_teamDataInput {
-  display_name: String
-  esb_id: String
-  first_name: String
-  gsis_id: String
-  last_name: String
-  nfl_feed_id: String
-  position: String
-  position_group: String
-  status: String
-  team_players: Team_playerUpdateManyWithoutNfl_playerInput
-}
-
-input Nfl_playerUpdateWithoutTeam_playersDataInput {
-  display_name: String
-  esb_id: String
-  first_name: String
-  gsis_id: String
-  last_name: String
-  nfl_feed_id: String
-  nfl_team: Nfl_teamUpdateOneWithoutNfl_playersInput
-  position: String
-  position_group: String
-  status: String
-}
-
-input Nfl_playerUpdateWithWhereUniqueWithoutNfl_teamInput {
-  where: Nfl_playerWhereUniqueInput!
-  data: Nfl_playerUpdateWithoutNfl_teamDataInput!
-}
-
-input Nfl_playerUpsertWithoutTeam_playersInput {
-  update: Nfl_playerUpdateWithoutTeam_playersDataInput!
-  create: Nfl_playerCreateWithoutTeam_playersInput!
-}
-
-input Nfl_playerUpsertWithWhereUniqueWithoutNfl_teamInput {
-  where: Nfl_playerWhereUniqueInput!
-  update: Nfl_playerUpdateWithoutNfl_teamDataInput!
-  create: Nfl_playerCreateWithoutNfl_teamInput!
-}
-
-input Nfl_playerWhereInput {
+input NflPlayerScalarWhereInput {
   id: Int
   id_not: Int
   id_in: [Int!]
@@ -502,7 +396,6 @@ input Nfl_playerWhereInput {
   nfl_feed_id_not_starts_with: String
   nfl_feed_id_ends_with: String
   nfl_feed_id_not_ends_with: String
-  nfl_team: Nfl_teamWhereInput
   position: String
   position_not: String
   position_in: [String!]
@@ -545,63 +438,325 @@ input Nfl_playerWhereInput {
   status_not_starts_with: String
   status_ends_with: String
   status_not_ends_with: String
-  team_players_every: Team_playerWhereInput
-  team_players_some: Team_playerWhereInput
-  team_players_none: Team_playerWhereInput
-  AND: [Nfl_playerWhereInput!]
-  OR: [Nfl_playerWhereInput!]
-  NOT: [Nfl_playerWhereInput!]
+  AND: [NflPlayerScalarWhereInput!]
+  OR: [NflPlayerScalarWhereInput!]
+  NOT: [NflPlayerScalarWhereInput!]
 }
 
-input Nfl_playerWhereUniqueInput {
+type NflPlayerSubscriptionPayload {
+  mutation: MutationType!
+  node: NflPlayer
+  updatedFields: [String!]
+  previousValues: NflPlayerPreviousValues
+}
+
+input NflPlayerSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: NflPlayerWhereInput
+  AND: [NflPlayerSubscriptionWhereInput!]
+  OR: [NflPlayerSubscriptionWhereInput!]
+  NOT: [NflPlayerSubscriptionWhereInput!]
+}
+
+input NflPlayerUpdateInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  nfl_team: NflTeamUpdateOneRequiredWithoutNfl_playersInput
+  position: String
+  position_group: String
+  status: String
+  team_players: TeamPlayerUpdateManyWithoutNfl_playerInput
+}
+
+input NflPlayerUpdateManyDataInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  position: String
+  position_group: String
+  status: String
+}
+
+input NflPlayerUpdateManyMutationInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  position: String
+  position_group: String
+  status: String
+}
+
+input NflPlayerUpdateManyWithoutNfl_teamInput {
+  create: [NflPlayerCreateWithoutNfl_teamInput!]
+  delete: [NflPlayerWhereUniqueInput!]
+  connect: [NflPlayerWhereUniqueInput!]
+  disconnect: [NflPlayerWhereUniqueInput!]
+  update: [NflPlayerUpdateWithWhereUniqueWithoutNfl_teamInput!]
+  upsert: [NflPlayerUpsertWithWhereUniqueWithoutNfl_teamInput!]
+  deleteMany: [NflPlayerScalarWhereInput!]
+  updateMany: [NflPlayerUpdateManyWithWhereNestedInput!]
+}
+
+input NflPlayerUpdateManyWithWhereNestedInput {
+  where: NflPlayerScalarWhereInput!
+  data: NflPlayerUpdateManyDataInput!
+}
+
+input NflPlayerUpdateOneRequiredWithoutTeam_playersInput {
+  create: NflPlayerCreateWithoutTeam_playersInput
+  update: NflPlayerUpdateWithoutTeam_playersDataInput
+  upsert: NflPlayerUpsertWithoutTeam_playersInput
+  connect: NflPlayerWhereUniqueInput
+}
+
+input NflPlayerUpdateWithoutNfl_teamDataInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  position: String
+  position_group: String
+  status: String
+  team_players: TeamPlayerUpdateManyWithoutNfl_playerInput
+}
+
+input NflPlayerUpdateWithoutTeam_playersDataInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: String
+  nfl_team: NflTeamUpdateOneRequiredWithoutNfl_playersInput
+  position: String
+  position_group: String
+  status: String
+}
+
+input NflPlayerUpdateWithWhereUniqueWithoutNfl_teamInput {
+  where: NflPlayerWhereUniqueInput!
+  data: NflPlayerUpdateWithoutNfl_teamDataInput!
+}
+
+input NflPlayerUpsertWithoutTeam_playersInput {
+  update: NflPlayerUpdateWithoutTeam_playersDataInput!
+  create: NflPlayerCreateWithoutTeam_playersInput!
+}
+
+input NflPlayerUpsertWithWhereUniqueWithoutNfl_teamInput {
+  where: NflPlayerWhereUniqueInput!
+  update: NflPlayerUpdateWithoutNfl_teamDataInput!
+  create: NflPlayerCreateWithoutNfl_teamInput!
+}
+
+input NflPlayerWhereInput {
+  id: Int
+  id_not: Int
+  id_in: [Int!]
+  id_not_in: [Int!]
+  id_lt: Int
+  id_lte: Int
+  id_gt: Int
+  id_gte: Int
+  display_name: String
+  display_name_not: String
+  display_name_in: [String!]
+  display_name_not_in: [String!]
+  display_name_lt: String
+  display_name_lte: String
+  display_name_gt: String
+  display_name_gte: String
+  display_name_contains: String
+  display_name_not_contains: String
+  display_name_starts_with: String
+  display_name_not_starts_with: String
+  display_name_ends_with: String
+  display_name_not_ends_with: String
+  esb_id: String
+  esb_id_not: String
+  esb_id_in: [String!]
+  esb_id_not_in: [String!]
+  esb_id_lt: String
+  esb_id_lte: String
+  esb_id_gt: String
+  esb_id_gte: String
+  esb_id_contains: String
+  esb_id_not_contains: String
+  esb_id_starts_with: String
+  esb_id_not_starts_with: String
+  esb_id_ends_with: String
+  esb_id_not_ends_with: String
+  first_name: String
+  first_name_not: String
+  first_name_in: [String!]
+  first_name_not_in: [String!]
+  first_name_lt: String
+  first_name_lte: String
+  first_name_gt: String
+  first_name_gte: String
+  first_name_contains: String
+  first_name_not_contains: String
+  first_name_starts_with: String
+  first_name_not_starts_with: String
+  first_name_ends_with: String
+  first_name_not_ends_with: String
+  gsis_id: String
+  gsis_id_not: String
+  gsis_id_in: [String!]
+  gsis_id_not_in: [String!]
+  gsis_id_lt: String
+  gsis_id_lte: String
+  gsis_id_gt: String
+  gsis_id_gte: String
+  gsis_id_contains: String
+  gsis_id_not_contains: String
+  gsis_id_starts_with: String
+  gsis_id_not_starts_with: String
+  gsis_id_ends_with: String
+  gsis_id_not_ends_with: String
+  last_name: String
+  last_name_not: String
+  last_name_in: [String!]
+  last_name_not_in: [String!]
+  last_name_lt: String
+  last_name_lte: String
+  last_name_gt: String
+  last_name_gte: String
+  last_name_contains: String
+  last_name_not_contains: String
+  last_name_starts_with: String
+  last_name_not_starts_with: String
+  last_name_ends_with: String
+  last_name_not_ends_with: String
+  nfl_feed_id: String
+  nfl_feed_id_not: String
+  nfl_feed_id_in: [String!]
+  nfl_feed_id_not_in: [String!]
+  nfl_feed_id_lt: String
+  nfl_feed_id_lte: String
+  nfl_feed_id_gt: String
+  nfl_feed_id_gte: String
+  nfl_feed_id_contains: String
+  nfl_feed_id_not_contains: String
+  nfl_feed_id_starts_with: String
+  nfl_feed_id_not_starts_with: String
+  nfl_feed_id_ends_with: String
+  nfl_feed_id_not_ends_with: String
+  nfl_team: NflTeamWhereInput
+  position: String
+  position_not: String
+  position_in: [String!]
+  position_not_in: [String!]
+  position_lt: String
+  position_lte: String
+  position_gt: String
+  position_gte: String
+  position_contains: String
+  position_not_contains: String
+  position_starts_with: String
+  position_not_starts_with: String
+  position_ends_with: String
+  position_not_ends_with: String
+  position_group: String
+  position_group_not: String
+  position_group_in: [String!]
+  position_group_not_in: [String!]
+  position_group_lt: String
+  position_group_lte: String
+  position_group_gt: String
+  position_group_gte: String
+  position_group_contains: String
+  position_group_not_contains: String
+  position_group_starts_with: String
+  position_group_not_starts_with: String
+  position_group_ends_with: String
+  position_group_not_ends_with: String
+  status: String
+  status_not: String
+  status_in: [String!]
+  status_not_in: [String!]
+  status_lt: String
+  status_lte: String
+  status_gt: String
+  status_gte: String
+  status_contains: String
+  status_not_contains: String
+  status_starts_with: String
+  status_not_starts_with: String
+  status_ends_with: String
+  status_not_ends_with: String
+  team_players_every: TeamPlayerWhereInput
+  team_players_some: TeamPlayerWhereInput
+  team_players_none: TeamPlayerWhereInput
+  AND: [NflPlayerWhereInput!]
+  OR: [NflPlayerWhereInput!]
+  NOT: [NflPlayerWhereInput!]
+}
+
+input NflPlayerWhereUniqueInput {
   id: Int
   nfl_feed_id: String
 }
 
-type Nfl_team {
+type NflTeam {
   id: Int!
-  city: String
-  code: String
-  full_name: String
-  name: String
-  nfl_feed_id: String
-  nfl_players(where: Nfl_playerWhereInput, orderBy: Nfl_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Nfl_player!]
+  city: String!
+  code: String!
+  full_name: String!
+  name: String!
+  nfl_feed_id: String!
+  nfl_players(where: NflPlayerWhereInput, orderBy: NflPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflPlayer!]
 }
 
-type Nfl_teamConnection {
+type NflTeamConnection {
   pageInfo: PageInfo!
-  edges: [Nfl_teamEdge]!
-  aggregate: AggregateNfl_team!
+  edges: [NflTeamEdge]!
+  aggregate: AggregateNflTeam!
 }
 
-input Nfl_teamCreateInput {
-  city: String
-  code: String
-  full_name: String
-  name: String
-  nfl_feed_id: String
-  nfl_players: Nfl_playerCreateManyWithoutNfl_teamInput
+input NflTeamCreateInput {
+  city: String!
+  code: String!
+  full_name: String!
+  name: String!
+  nfl_feed_id: String!
+  nfl_players: NflPlayerCreateManyWithoutNfl_teamInput
 }
 
-input Nfl_teamCreateOneWithoutNfl_playersInput {
-  create: Nfl_teamCreateWithoutNfl_playersInput
-  connect: Nfl_teamWhereUniqueInput
+input NflTeamCreateOneWithoutNfl_playersInput {
+  create: NflTeamCreateWithoutNfl_playersInput
+  connect: NflTeamWhereUniqueInput
 }
 
-input Nfl_teamCreateWithoutNfl_playersInput {
-  city: String
-  code: String
-  full_name: String
-  name: String
-  nfl_feed_id: String
+input NflTeamCreateWithoutNfl_playersInput {
+  city: String!
+  code: String!
+  full_name: String!
+  name: String!
+  nfl_feed_id: String!
 }
 
-type Nfl_teamEdge {
-  node: Nfl_team!
+type NflTeamEdge {
+  node: NflTeam!
   cursor: String!
 }
 
-enum Nfl_teamOrderByInput {
+enum NflTeamOrderByInput {
   id_ASC
   id_DESC
   city_ASC
@@ -620,60 +775,43 @@ enum Nfl_teamOrderByInput {
   updatedAt_DESC
 }
 
-type Nfl_teamPreviousValues {
+type NflTeamPreviousValues {
   id: Int!
-  city: String
-  code: String
-  full_name: String
-  name: String
-  nfl_feed_id: String
+  city: String!
+  code: String!
+  full_name: String!
+  name: String!
+  nfl_feed_id: String!
 }
 
-type Nfl_teamSubscriptionPayload {
+type NflTeamSubscriptionPayload {
   mutation: MutationType!
-  node: Nfl_team
+  node: NflTeam
   updatedFields: [String!]
-  previousValues: Nfl_teamPreviousValues
+  previousValues: NflTeamPreviousValues
 }
 
-input Nfl_teamSubscriptionWhereInput {
+input NflTeamSubscriptionWhereInput {
   mutation_in: [MutationType!]
   updatedFields_contains: String
   updatedFields_contains_every: [String!]
   updatedFields_contains_some: [String!]
-  node: Nfl_teamWhereInput
-  AND: [Nfl_teamSubscriptionWhereInput!]
-  OR: [Nfl_teamSubscriptionWhereInput!]
-  NOT: [Nfl_teamSubscriptionWhereInput!]
+  node: NflTeamWhereInput
+  AND: [NflTeamSubscriptionWhereInput!]
+  OR: [NflTeamSubscriptionWhereInput!]
+  NOT: [NflTeamSubscriptionWhereInput!]
 }
 
-input Nfl_teamUpdateInput {
+input NflTeamUpdateInput {
   city: String
   code: String
   full_name: String
   name: String
   nfl_feed_id: String
-  nfl_players: Nfl_playerUpdateManyWithoutNfl_teamInput
+  nfl_players: NflPlayerUpdateManyWithoutNfl_teamInput
 }
 
-input Nfl_teamUpdateManyMutationInput {
-  city: String
-  code: String
-  full_name: String
-  name: String
-  nfl_feed_id: String
-}
-
-input Nfl_teamUpdateOneWithoutNfl_playersInput {
-  create: Nfl_teamCreateWithoutNfl_playersInput
-  update: Nfl_teamUpdateWithoutNfl_playersDataInput
-  upsert: Nfl_teamUpsertWithoutNfl_playersInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: Nfl_teamWhereUniqueInput
-}
-
-input Nfl_teamUpdateWithoutNfl_playersDataInput {
+input NflTeamUpdateManyMutationInput {
   city: String
   code: String
   full_name: String
@@ -681,12 +819,27 @@ input Nfl_teamUpdateWithoutNfl_playersDataInput {
   nfl_feed_id: String
 }
 
-input Nfl_teamUpsertWithoutNfl_playersInput {
-  update: Nfl_teamUpdateWithoutNfl_playersDataInput!
-  create: Nfl_teamCreateWithoutNfl_playersInput!
+input NflTeamUpdateOneRequiredWithoutNfl_playersInput {
+  create: NflTeamCreateWithoutNfl_playersInput
+  update: NflTeamUpdateWithoutNfl_playersDataInput
+  upsert: NflTeamUpsertWithoutNfl_playersInput
+  connect: NflTeamWhereUniqueInput
 }
 
-input Nfl_teamWhereInput {
+input NflTeamUpdateWithoutNfl_playersDataInput {
+  city: String
+  code: String
+  full_name: String
+  name: String
+  nfl_feed_id: String
+}
+
+input NflTeamUpsertWithoutNfl_playersInput {
+  update: NflTeamUpdateWithoutNfl_playersDataInput!
+  create: NflTeamCreateWithoutNfl_playersInput!
+}
+
+input NflTeamWhereInput {
   id: Int
   id_not: Int
   id_in: [Int!]
@@ -765,15 +918,15 @@ input Nfl_teamWhereInput {
   nfl_feed_id_not_starts_with: String
   nfl_feed_id_ends_with: String
   nfl_feed_id_not_ends_with: String
-  nfl_players_every: Nfl_playerWhereInput
-  nfl_players_some: Nfl_playerWhereInput
-  nfl_players_none: Nfl_playerWhereInput
-  AND: [Nfl_teamWhereInput!]
-  OR: [Nfl_teamWhereInput!]
-  NOT: [Nfl_teamWhereInput!]
+  nfl_players_every: NflPlayerWhereInput
+  nfl_players_some: NflPlayerWhereInput
+  nfl_players_none: NflPlayerWhereInput
+  AND: [NflTeamWhereInput!]
+  OR: [NflTeamWhereInput!]
+  NOT: [NflTeamWhereInput!]
 }
 
-input Nfl_teamWhereUniqueInput {
+input NflTeamWhereUniqueInput {
   id: Int
   nfl_feed_id: String
 }
@@ -793,178 +946,34 @@ type Query {
   league(where: LeagueWhereUniqueInput!): League
   leagues(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [League]!
   leaguesConnection(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LeagueConnection!
-  nfl_player(where: Nfl_playerWhereUniqueInput!): Nfl_player
-  nfl_players(where: Nfl_playerWhereInput, orderBy: Nfl_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Nfl_player]!
-  nfl_playersConnection(where: Nfl_playerWhereInput, orderBy: Nfl_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): Nfl_playerConnection!
-  nfl_team(where: Nfl_teamWhereUniqueInput!): Nfl_team
-  nfl_teams(where: Nfl_teamWhereInput, orderBy: Nfl_teamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Nfl_team]!
-  nfl_teamsConnection(where: Nfl_teamWhereInput, orderBy: Nfl_teamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): Nfl_teamConnection!
+  nflPlayer(where: NflPlayerWhereUniqueInput!): NflPlayer
+  nflPlayers(where: NflPlayerWhereInput, orderBy: NflPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflPlayer]!
+  nflPlayersConnection(where: NflPlayerWhereInput, orderBy: NflPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NflPlayerConnection!
+  nflTeam(where: NflTeamWhereUniqueInput!): NflTeam
+  nflTeams(where: NflTeamWhereInput, orderBy: NflTeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflTeam]!
+  nflTeamsConnection(where: NflTeamWhereInput, orderBy: NflTeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NflTeamConnection!
   team(where: TeamWhereUniqueInput!): Team
   teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team]!
   teamsConnection(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamConnection!
-  team_player(where: Team_playerWhereUniqueInput!): Team_player
-  team_players(where: Team_playerWhereInput, orderBy: Team_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team_player]!
-  team_playersConnection(where: Team_playerWhereInput, orderBy: Team_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): Team_playerConnection!
+  teamPlayer(where: TeamPlayerWhereUniqueInput!): TeamPlayer
+  teamPlayers(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TeamPlayer]!
+  teamPlayersConnection(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamPlayerConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
   league(where: LeagueSubscriptionWhereInput): LeagueSubscriptionPayload
-  nfl_player(where: Nfl_playerSubscriptionWhereInput): Nfl_playerSubscriptionPayload
-  nfl_team(where: Nfl_teamSubscriptionWhereInput): Nfl_teamSubscriptionPayload
+  nflPlayer(where: NflPlayerSubscriptionWhereInput): NflPlayerSubscriptionPayload
+  nflTeam(where: NflTeamSubscriptionWhereInput): NflTeamSubscriptionPayload
   team(where: TeamSubscriptionWhereInput): TeamSubscriptionPayload
-  team_player(where: Team_playerSubscriptionWhereInput): Team_playerSubscriptionPayload
+  teamPlayer(where: TeamPlayerSubscriptionWhereInput): TeamPlayerSubscriptionPayload
 }
 
 type Team {
   id: Int!
-  league: League
+  league: League!
   name: String!
-  team_players(where: Team_playerWhereInput, orderBy: Team_playerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team_player!]
-}
-
-type Team_player {
-  id: Int!
-  nfl_player: Nfl_player
-  team: Team
-}
-
-type Team_playerConnection {
-  pageInfo: PageInfo!
-  edges: [Team_playerEdge]!
-  aggregate: AggregateTeam_player!
-}
-
-input Team_playerCreateInput {
-  nfl_player: Nfl_playerCreateOneWithoutTeam_playersInput
-  team: TeamCreateOneWithoutTeam_playersInput
-}
-
-input Team_playerCreateManyWithoutNfl_playerInput {
-  create: [Team_playerCreateWithoutNfl_playerInput!]
-  connect: [Team_playerWhereUniqueInput!]
-}
-
-input Team_playerCreateManyWithoutTeamInput {
-  create: [Team_playerCreateWithoutTeamInput!]
-  connect: [Team_playerWhereUniqueInput!]
-}
-
-input Team_playerCreateWithoutNfl_playerInput {
-  team: TeamCreateOneWithoutTeam_playersInput
-}
-
-input Team_playerCreateWithoutTeamInput {
-  nfl_player: Nfl_playerCreateOneWithoutTeam_playersInput
-}
-
-type Team_playerEdge {
-  node: Team_player!
-  cursor: String!
-}
-
-enum Team_playerOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type Team_playerPreviousValues {
-  id: Int!
-}
-
-type Team_playerSubscriptionPayload {
-  mutation: MutationType!
-  node: Team_player
-  updatedFields: [String!]
-  previousValues: Team_playerPreviousValues
-}
-
-input Team_playerSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: Team_playerWhereInput
-  AND: [Team_playerSubscriptionWhereInput!]
-  OR: [Team_playerSubscriptionWhereInput!]
-  NOT: [Team_playerSubscriptionWhereInput!]
-}
-
-input Team_playerUpdateInput {
-  nfl_player: Nfl_playerUpdateOneWithoutTeam_playersInput
-  team: TeamUpdateOneWithoutTeam_playersInput
-}
-
-input Team_playerUpdateManyWithoutNfl_playerInput {
-  create: [Team_playerCreateWithoutNfl_playerInput!]
-  delete: [Team_playerWhereUniqueInput!]
-  connect: [Team_playerWhereUniqueInput!]
-  disconnect: [Team_playerWhereUniqueInput!]
-  update: [Team_playerUpdateWithWhereUniqueWithoutNfl_playerInput!]
-  upsert: [Team_playerUpsertWithWhereUniqueWithoutNfl_playerInput!]
-}
-
-input Team_playerUpdateManyWithoutTeamInput {
-  create: [Team_playerCreateWithoutTeamInput!]
-  delete: [Team_playerWhereUniqueInput!]
-  connect: [Team_playerWhereUniqueInput!]
-  disconnect: [Team_playerWhereUniqueInput!]
-  update: [Team_playerUpdateWithWhereUniqueWithoutTeamInput!]
-  upsert: [Team_playerUpsertWithWhereUniqueWithoutTeamInput!]
-}
-
-input Team_playerUpdateWithoutNfl_playerDataInput {
-  team: TeamUpdateOneWithoutTeam_playersInput
-}
-
-input Team_playerUpdateWithoutTeamDataInput {
-  nfl_player: Nfl_playerUpdateOneWithoutTeam_playersInput
-}
-
-input Team_playerUpdateWithWhereUniqueWithoutNfl_playerInput {
-  where: Team_playerWhereUniqueInput!
-  data: Team_playerUpdateWithoutNfl_playerDataInput!
-}
-
-input Team_playerUpdateWithWhereUniqueWithoutTeamInput {
-  where: Team_playerWhereUniqueInput!
-  data: Team_playerUpdateWithoutTeamDataInput!
-}
-
-input Team_playerUpsertWithWhereUniqueWithoutNfl_playerInput {
-  where: Team_playerWhereUniqueInput!
-  update: Team_playerUpdateWithoutNfl_playerDataInput!
-  create: Team_playerCreateWithoutNfl_playerInput!
-}
-
-input Team_playerUpsertWithWhereUniqueWithoutTeamInput {
-  where: Team_playerWhereUniqueInput!
-  update: Team_playerUpdateWithoutTeamDataInput!
-  create: Team_playerCreateWithoutTeamInput!
-}
-
-input Team_playerWhereInput {
-  id: Int
-  id_not: Int
-  id_in: [Int!]
-  id_not_in: [Int!]
-  id_lt: Int
-  id_lte: Int
-  id_gt: Int
-  id_gte: Int
-  nfl_player: Nfl_playerWhereInput
-  team: TeamWhereInput
-  AND: [Team_playerWhereInput!]
-  OR: [Team_playerWhereInput!]
-  NOT: [Team_playerWhereInput!]
-}
-
-input Team_playerWhereUniqueInput {
-  id: Int
+  team_players(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TeamPlayer!]
 }
 
 type TeamConnection {
@@ -974,9 +983,9 @@ type TeamConnection {
 }
 
 input TeamCreateInput {
-  league: LeagueCreateOneWithoutTeamsInput
+  league: LeagueCreateOneWithoutTeamsInput!
   name: String!
-  team_players: Team_playerCreateManyWithoutTeamInput
+  team_players: TeamPlayerCreateManyWithoutTeamInput
 }
 
 input TeamCreateManyWithoutLeagueInput {
@@ -991,11 +1000,11 @@ input TeamCreateOneWithoutTeam_playersInput {
 
 input TeamCreateWithoutLeagueInput {
   name: String!
-  team_players: Team_playerCreateManyWithoutTeamInput
+  team_players: TeamPlayerCreateManyWithoutTeamInput
 }
 
 input TeamCreateWithoutTeam_playersInput {
-  league: LeagueCreateOneWithoutTeamsInput
+  league: LeagueCreateOneWithoutTeamsInput!
   name: String!
 }
 
@@ -1015,9 +1024,197 @@ enum TeamOrderByInput {
   updatedAt_DESC
 }
 
+type TeamPlayer {
+  id: Int!
+  nfl_player: NflPlayer!
+  team: Team!
+}
+
+type TeamPlayerConnection {
+  pageInfo: PageInfo!
+  edges: [TeamPlayerEdge]!
+  aggregate: AggregateTeamPlayer!
+}
+
+input TeamPlayerCreateInput {
+  nfl_player: NflPlayerCreateOneWithoutTeam_playersInput!
+  team: TeamCreateOneWithoutTeam_playersInput!
+}
+
+input TeamPlayerCreateManyWithoutNfl_playerInput {
+  create: [TeamPlayerCreateWithoutNfl_playerInput!]
+  connect: [TeamPlayerWhereUniqueInput!]
+}
+
+input TeamPlayerCreateManyWithoutTeamInput {
+  create: [TeamPlayerCreateWithoutTeamInput!]
+  connect: [TeamPlayerWhereUniqueInput!]
+}
+
+input TeamPlayerCreateWithoutNfl_playerInput {
+  team: TeamCreateOneWithoutTeam_playersInput!
+}
+
+input TeamPlayerCreateWithoutTeamInput {
+  nfl_player: NflPlayerCreateOneWithoutTeam_playersInput!
+}
+
+type TeamPlayerEdge {
+  node: TeamPlayer!
+  cursor: String!
+}
+
+enum TeamPlayerOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type TeamPlayerPreviousValues {
+  id: Int!
+}
+
+input TeamPlayerScalarWhereInput {
+  id: Int
+  id_not: Int
+  id_in: [Int!]
+  id_not_in: [Int!]
+  id_lt: Int
+  id_lte: Int
+  id_gt: Int
+  id_gte: Int
+  AND: [TeamPlayerScalarWhereInput!]
+  OR: [TeamPlayerScalarWhereInput!]
+  NOT: [TeamPlayerScalarWhereInput!]
+}
+
+type TeamPlayerSubscriptionPayload {
+  mutation: MutationType!
+  node: TeamPlayer
+  updatedFields: [String!]
+  previousValues: TeamPlayerPreviousValues
+}
+
+input TeamPlayerSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: TeamPlayerWhereInput
+  AND: [TeamPlayerSubscriptionWhereInput!]
+  OR: [TeamPlayerSubscriptionWhereInput!]
+  NOT: [TeamPlayerSubscriptionWhereInput!]
+}
+
+input TeamPlayerUpdateInput {
+  nfl_player: NflPlayerUpdateOneRequiredWithoutTeam_playersInput
+  team: TeamUpdateOneRequiredWithoutTeam_playersInput
+}
+
+input TeamPlayerUpdateManyWithoutNfl_playerInput {
+  create: [TeamPlayerCreateWithoutNfl_playerInput!]
+  delete: [TeamPlayerWhereUniqueInput!]
+  connect: [TeamPlayerWhereUniqueInput!]
+  disconnect: [TeamPlayerWhereUniqueInput!]
+  update: [TeamPlayerUpdateWithWhereUniqueWithoutNfl_playerInput!]
+  upsert: [TeamPlayerUpsertWithWhereUniqueWithoutNfl_playerInput!]
+  deleteMany: [TeamPlayerScalarWhereInput!]
+}
+
+input TeamPlayerUpdateManyWithoutTeamInput {
+  create: [TeamPlayerCreateWithoutTeamInput!]
+  delete: [TeamPlayerWhereUniqueInput!]
+  connect: [TeamPlayerWhereUniqueInput!]
+  disconnect: [TeamPlayerWhereUniqueInput!]
+  update: [TeamPlayerUpdateWithWhereUniqueWithoutTeamInput!]
+  upsert: [TeamPlayerUpsertWithWhereUniqueWithoutTeamInput!]
+  deleteMany: [TeamPlayerScalarWhereInput!]
+}
+
+input TeamPlayerUpdateWithoutNfl_playerDataInput {
+  team: TeamUpdateOneRequiredWithoutTeam_playersInput
+}
+
+input TeamPlayerUpdateWithoutTeamDataInput {
+  nfl_player: NflPlayerUpdateOneRequiredWithoutTeam_playersInput
+}
+
+input TeamPlayerUpdateWithWhereUniqueWithoutNfl_playerInput {
+  where: TeamPlayerWhereUniqueInput!
+  data: TeamPlayerUpdateWithoutNfl_playerDataInput!
+}
+
+input TeamPlayerUpdateWithWhereUniqueWithoutTeamInput {
+  where: TeamPlayerWhereUniqueInput!
+  data: TeamPlayerUpdateWithoutTeamDataInput!
+}
+
+input TeamPlayerUpsertWithWhereUniqueWithoutNfl_playerInput {
+  where: TeamPlayerWhereUniqueInput!
+  update: TeamPlayerUpdateWithoutNfl_playerDataInput!
+  create: TeamPlayerCreateWithoutNfl_playerInput!
+}
+
+input TeamPlayerUpsertWithWhereUniqueWithoutTeamInput {
+  where: TeamPlayerWhereUniqueInput!
+  update: TeamPlayerUpdateWithoutTeamDataInput!
+  create: TeamPlayerCreateWithoutTeamInput!
+}
+
+input TeamPlayerWhereInput {
+  id: Int
+  id_not: Int
+  id_in: [Int!]
+  id_not_in: [Int!]
+  id_lt: Int
+  id_lte: Int
+  id_gt: Int
+  id_gte: Int
+  nfl_player: NflPlayerWhereInput
+  team: TeamWhereInput
+  AND: [TeamPlayerWhereInput!]
+  OR: [TeamPlayerWhereInput!]
+  NOT: [TeamPlayerWhereInput!]
+}
+
+input TeamPlayerWhereUniqueInput {
+  id: Int
+}
+
 type TeamPreviousValues {
   id: Int!
   name: String!
+}
+
+input TeamScalarWhereInput {
+  id: Int
+  id_not: Int
+  id_in: [Int!]
+  id_not_in: [Int!]
+  id_lt: Int
+  id_lte: Int
+  id_gt: Int
+  id_gte: Int
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  AND: [TeamScalarWhereInput!]
+  OR: [TeamScalarWhereInput!]
+  NOT: [TeamScalarWhereInput!]
 }
 
 type TeamSubscriptionPayload {
@@ -1039,9 +1236,13 @@ input TeamSubscriptionWhereInput {
 }
 
 input TeamUpdateInput {
-  league: LeagueUpdateOneWithoutTeamsInput
+  league: LeagueUpdateOneRequiredWithoutTeamsInput
   name: String
-  team_players: Team_playerUpdateManyWithoutTeamInput
+  team_players: TeamPlayerUpdateManyWithoutTeamInput
+}
+
+input TeamUpdateManyDataInput {
+  name: String
 }
 
 input TeamUpdateManyMutationInput {
@@ -1055,24 +1256,29 @@ input TeamUpdateManyWithoutLeagueInput {
   disconnect: [TeamWhereUniqueInput!]
   update: [TeamUpdateWithWhereUniqueWithoutLeagueInput!]
   upsert: [TeamUpsertWithWhereUniqueWithoutLeagueInput!]
+  deleteMany: [TeamScalarWhereInput!]
+  updateMany: [TeamUpdateManyWithWhereNestedInput!]
 }
 
-input TeamUpdateOneWithoutTeam_playersInput {
+input TeamUpdateManyWithWhereNestedInput {
+  where: TeamScalarWhereInput!
+  data: TeamUpdateManyDataInput!
+}
+
+input TeamUpdateOneRequiredWithoutTeam_playersInput {
   create: TeamCreateWithoutTeam_playersInput
   update: TeamUpdateWithoutTeam_playersDataInput
   upsert: TeamUpsertWithoutTeam_playersInput
-  delete: Boolean
-  disconnect: Boolean
   connect: TeamWhereUniqueInput
 }
 
 input TeamUpdateWithoutLeagueDataInput {
   name: String
-  team_players: Team_playerUpdateManyWithoutTeamInput
+  team_players: TeamPlayerUpdateManyWithoutTeamInput
 }
 
 input TeamUpdateWithoutTeam_playersDataInput {
-  league: LeagueUpdateOneWithoutTeamsInput
+  league: LeagueUpdateOneRequiredWithoutTeamsInput
   name: String
 }
 
@@ -1116,9 +1322,9 @@ input TeamWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  team_players_every: Team_playerWhereInput
-  team_players_some: Team_playerWhereInput
-  team_players_none: Team_playerWhereInput
+  team_players_every: TeamPlayerWhereInput
+  team_players_some: TeamPlayerWhereInput
+  team_players_none: TeamPlayerWhereInput
   AND: [TeamWhereInput!]
   OR: [TeamWhereInput!]
   NOT: [TeamWhereInput!]

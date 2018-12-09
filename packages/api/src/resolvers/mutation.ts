@@ -8,8 +8,8 @@ export const Mutation: MutationResolvers.Type = {
     createTeam: (parent, args, ctx) => {
         return ctx.db.createTeam(args.data);
     },
-    createTeam_player: (parent, args, ctx) => {
-        return ctx.db.createTeam_player(args.data);
+    createTeamPlayer: (parent, args, ctx) => {
+        return ctx.db.createTeamPlayer(args.data);
     },
     updateLeague: (parent, args, ctx) => {
         return ctx.db.updateLeague(args);
@@ -17,8 +17,8 @@ export const Mutation: MutationResolvers.Type = {
     updateTeam: (parent, args, ctx) => {
         return ctx.db.updateTeam(args);
     },
-    updateTeam_player: (parent, args, ctx) => {
-        return ctx.db.updateTeam_player(args);
+    updateTeamPlayer: (parent, args, ctx) => {
+        return ctx.db.updateTeamPlayer(args);
     },
     deleteLeague: (parent, args, ctx) => {
         return ctx.db.deleteLeague(args.where);
@@ -26,8 +26,8 @@ export const Mutation: MutationResolvers.Type = {
     deleteTeam: (parent, args, ctx) => {
         return ctx.db.deleteTeam(args.where);
     },
-    deleteTeam_player: (parent, args, ctx) => {
-        return ctx.db.deleteTeam_player(args.where);
+    deleteTeamPlayer: (parent, args, ctx) => {
+        return ctx.db.deleteTeamPlayer(args.where);
     },
     upsertLeague: (parent, args, ctx) => {
         throw new Error("Resolver not implemented");
@@ -35,7 +35,7 @@ export const Mutation: MutationResolvers.Type = {
     upsertTeam: (parent, args, ctx) => {
         throw new Error("Resolver not implemented");
     },
-    upsertTeam_player: (parent, args, ctx) => {
+    upsertTeamPlayer: (parent, args, ctx) => {
         throw new Error("Resolver not implemented");
     },
     updateManyLeagues: (parent, args, ctx) => {
@@ -50,7 +50,7 @@ export const Mutation: MutationResolvers.Type = {
     deleteManyTeams: (parent, args, ctx) => {
         throw new Error("Resolver not implemented");
     },
-    deleteManyTeam_players: (parent, args, ctx) => {
+    deleteManyTeamPlayers: (parent, args, ctx) => {
         throw new Error("Resolver not implemented");
     }
 };

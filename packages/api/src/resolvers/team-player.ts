@@ -1,12 +1,12 @@
-import { Team_playerResolvers } from "../generated/graphqlgen";
+import { TeamPlayerResolvers } from "../generated/graphqlgen";
 
-export const Team_player: Team_playerResolvers.Type = {
-    ...Team_playerResolvers.defaultResolvers,
+export const TeamPlayer: TeamPlayerResolvers.Type = {
+    ...TeamPlayerResolvers.defaultResolvers,
 
     nfl_player: (parent, args, ctx) => {
-        return ctx.db.team_player({id: parent.id}).nfl_player();
+        return ctx.db.teamPlayer({id: parent.id}).nfl_player();
     },
     team: (parent, args, ctx) => {
-        return ctx.db.team_player({id: parent.id}).team();
+        return ctx.db.teamPlayer({id: parent.id}).team();
     }
 };

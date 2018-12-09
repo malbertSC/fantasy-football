@@ -2,7 +2,7 @@ endpoint: http://localhost:4466
 datamodel: datamodel.prisma
 hooks:
   post-deploy:
-    - graphql get-schema --project default
+    - yarn get-schema
 
 generate:
   - generator: typescript-client

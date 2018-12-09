@@ -1,10 +1,10 @@
-import { Nfl_teamResolvers } from "../generated/graphqlgen";
+import { NflTeamResolvers } from "../generated/graphqlgen";
 
-export const Nfl_team: Nfl_teamResolvers.Type = {
-    ...Nfl_teamResolvers.defaultResolvers,
+export const NflTeam: NflTeamResolvers.Type = {
+    ...NflTeamResolvers.defaultResolvers,
 
     nfl_players: (parent, args, ctx) => {
-        return ctx.db.nfl_players({where: {
+        return ctx.db.nflPlayers({where: {
             nfl_team: {
                 id: parent.id
             }

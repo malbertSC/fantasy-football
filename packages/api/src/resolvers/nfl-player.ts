@@ -1,12 +1,12 @@
-import { Nfl_playerResolvers } from "../generated/graphqlgen";
+import { NflPlayerResolvers } from "../generated/graphqlgen";
 
-export const Nfl_player: Nfl_playerResolvers.Type = {
-    ...Nfl_playerResolvers.defaultResolvers,
+export const NflPlayer: NflPlayerResolvers.Type = {
+    ...NflPlayerResolvers.defaultResolvers,
 
     nfl_team: (parent, args, ctx) => {
-        return ctx.db.nfl_player({id: parent.id}).nfl_team();
+        return ctx.db.nflPlayer({id: parent.id}).nfl_team();
     },
     team_players: (parent, args, ctx) => {
-        return ctx.db.nfl_player({id: parent.id}).team_players();
+        return ctx.db.nflPlayer({id: parent.id}).team_players();
     }
 };

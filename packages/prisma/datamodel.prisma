@@ -1,43 +1,46 @@
+# todo: snake_case to camelcase for column names if we can rename columns in a directive
+# see: https://github.com/prisma/prisma/issues/3408
+
 type League @pgTable(name: "league") {
   id: Int! @unique
-  name: String
+  name: String!
   teams: [Team!]!
 }
 
-type Nfl_player @pgTable(name: "nfl_player") {
+type NflPlayer @pgTable(name: "nfl_player") {
   id: Int! @unique
-  display_name: String
-  esb_id: String
-  first_name: String
+  display_name: String!
+  esb_id: String!
+  first_name: String!
   gsis_id: String
-  last_name: String
-  nfl_feed_id: String @unique
-  nfl_team: Nfl_team @pgRelation(column: "nfl_team_id")
-  position: String
-  position_group: String
-  status: String
-  team_players: [Team_player!]!
+  last_name: String!
+  nfl_feed_id: String! @unique
+  nfl_team: NflTeam! @pgRelation(column: "nfl_team_id")
+  position: String!
+  position_group: String!
+  status: String!
+  team_players: [TeamPlayer!]!
 }
 
-type Nfl_team @pgTable(name: "nfl_team") {
+type NflTeam @pgTable(name: "nfl_team") {
   id: Int! @unique
-  city: String
-  code: String
-  full_name: String
-  name: String
-  nfl_feed_id: String @unique
-  nfl_players: [Nfl_player!]!
+  city: String!
+  code: String!
+  full_name: String!
+  name: String!
+  nfl_feed_id: String! @unique
+  nfl_players: [NflPlayer!]!
 }
 
 type Team @pgTable(name: "team") {
   id: Int! @unique
-  league: League @pgRelation(column: "league_id")
+  league: League! @pgRelation(column: "league_id")
   name: String!
-  team_players: [Team_player!]!
+  team_players: [TeamPlayer!]!
 }
 
-type Team_player @pgTable(name: "team_player") {
+type TeamPlayer @pgTable(name: "team_player") {
   id: Int! @unique
-  nfl_player: Nfl_player @pgRelation(column: "nfl_player_id")
-  team: Team @pgRelation(column: "team_id")
+  nfl_player: NflPlayer! @pgRelation(column: "nfl_player_id")
+  team: Team! @pgRelation(column: "team_id")
 }

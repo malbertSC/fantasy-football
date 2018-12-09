@@ -9,6 +9,7 @@ function main() {
     const newGraphqlSchemaObj = buildClientSchema(newSchema);
     const sdlString = printSchema(newGraphqlSchemaObj);
     fs.writeFileSync("../api/api-schema.graphql", sdlString);
+    // tslint:disable-next-line:no-console
     console.log("api-schema.graphql built")
 }
 
@@ -27,7 +28,7 @@ function getAPISafeSchema(introspectionResult) {
     queryType.fields = queryType.fields.filter(type => !type.name.includes("Connection"));
     const mutationType = apiTypes.find(type => type.name === "Mutation");
     mutationType.fields = mutationType.fields.filter(type => !(
-        type.name.includes("Nfl_") || type.name === "executeRaw"
+        type.name.includes("Nfl") || type.name === "executeRaw"
     )
     );
     return {

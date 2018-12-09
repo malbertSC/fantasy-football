@@ -1,14 +1,14 @@
 import { QueryResolvers } from "../generated/graphqlgen"
 
 export const Query: QueryResolvers.Type = {
-    nfl_team: (parent, {where}, ctx) => ctx.db.nfl_team(where),
-    nfl_teams: (parent, args, ctx) => ctx.db.nfl_teams(),
-    nfl_players: (parent, args, ctx) => ctx.db.nfl_players(),
-    nfl_player: (parent, {where}, ctx) => ctx.db.nfl_player(where),
+    nflTeam: (parent, {where}, ctx) => ctx.db.nflTeam(where),
+    nflTeams: (parent, args, ctx) => ctx.db.nflTeams(),
+    nflPlayers: (parent, args, ctx) => ctx.db.nflPlayers(),
+    nflPlayer: (parent, {where}, ctx) => ctx.db.nflPlayer(where),
     leagues: (parent, args, ctx) => ctx.db.leagues(),
     league: (parent, { where }, ctx) => ctx.db.league(where),
     teams: (parent, args, ctx) => ctx.db.teams(),
     team: (parent, { where }, ctx) => ctx.db.team(where),
-    team_players: (parent, args, ctx) => ctx.db.team_players(),
-    team_player: (parent,  { where }, ctx) => ctx.db.team_player(where),
+    teamPlayers: (parent, args, ctx) => ctx.db.teamPlayers(),
+    teamPlayer: (parent,  { where }, ctx) => ctx.db.teamPlayer(where),
 }

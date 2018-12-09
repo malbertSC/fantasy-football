@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import { prisma, Nfl_teamCreateInput } from "@ffb/prisma"
+import { prisma, NflTeamCreateInput } from "@ffb/prisma"
 
 interface NFLFeedTeam {
     teamId: string;
@@ -17,7 +17,7 @@ export async function loadTeams(year: number) {
     const nflFeedTeams: NFLFeedTeam[] = teamsResponse.data.teams;
     const filteredTeams = nflFeedTeams.filter(team => !team.fullName.includes(excludeTeamString));
     const teams = filteredTeams.map((nflFeedTeam) => {
-        const team: Nfl_teamCreateInput = {
+        const team: NflTeamCreateInput = {
             code: nflFeedTeam.abbr,
             city: nflFeedTeam.cityState,
             name: nflFeedTeam.nick,
@@ -26,7 +26,7 @@ export async function loadTeams(year: number) {
         }
         return team;
     })
-    return Promise.all(teams.map(team => prisma.upsertNfl_team({
+    return Promise.all(teams.map(team => prisma.upsertNflTeam({
         where: {
             nfl_feed_id: team.nfl_feed_id
         },
