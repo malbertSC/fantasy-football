@@ -1,6 +1,6 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "@ffb/frontend",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@types/graphql": "^14.0.3",
