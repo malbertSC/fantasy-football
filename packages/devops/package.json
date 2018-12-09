@@ -1,6 +1,7 @@
 {
   "name": "@ffb/devops",
   "version": "0.1.0",
+  "private": true,
   "author": "Matthew Albert",
   "license": "MIT",
   "dependencies": {
