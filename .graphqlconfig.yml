@@ -1,0 +1,7 @@
+projects:
+  frontend:
+    schemaPath: packages/api/api-schema.graphql
+    includes: ["**/*.graphql"]
+    extensions:
+      endpoints:
+        default: 'http://localhost:4000'

@@ -1,5 +1,9 @@
 {
   "name": "fantasy-football",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "version": "0.1.0",
   "main": "src/index.ts",
   "author": "Matthew Albert",

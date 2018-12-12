@@ -105,7 +105,7 @@
             "deprecationReason": null
           },
           {
-            "name": "nfl_players",
+            "name": "nflPlayers",
             "description": "",
             "args": [
               {
@@ -113,7 +113,7 @@
                 "description": "",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerWhereInput",
+                  "name": "NflPlayerWhereInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -123,7 +123,7 @@
                 "description": "",
                 "type": {
                   "kind": "ENUM",
-                  "name": "Nfl_playerOrderByInput",
+                  "name": "NflPlayerOrderByInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -187,7 +187,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "Nfl_player",
+                  "name": "NflPlayer",
                   "ofType": null
                 }
               }
@@ -196,7 +196,7 @@
             "deprecationReason": null
           },
           {
-            "name": "nfl_teams",
+            "name": "nflTeams",
             "description": "",
             "args": [
               {
@@ -204,7 +204,7 @@
                 "description": "",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_teamWhereInput",
+                  "name": "NflTeamWhereInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -214,7 +214,7 @@
                 "description": "",
                 "type": {
                   "kind": "ENUM",
-                  "name": "Nfl_teamOrderByInput",
+                  "name": "NflTeamOrderByInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -278,7 +278,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "Nfl_team",
+                  "name": "NflTeam",
                   "ofType": null
                 }
               }
@@ -378,7 +378,7 @@
             "deprecationReason": null
           },
           {
-            "name": "team_players",
+            "name": "teamPlayers",
             "description": "",
             "args": [
               {
@@ -386,7 +386,7 @@
                 "description": "",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereInput",
+                  "name": "TeamPlayerWhereInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -396,7 +396,7 @@
                 "description": "",
                 "type": {
                   "kind": "ENUM",
-                  "name": "Team_playerOrderByInput",
+                  "name": "TeamPlayerOrderByInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -460,7 +460,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "Team_player",
+                  "name": "TeamPlayer",
                   "ofType": null
                 }
               }
@@ -496,7 +496,7 @@
             "deprecationReason": null
           },
           {
-            "name": "nfl_player",
+            "name": "nflPlayer",
             "description": "",
             "args": [
               {
@@ -507,7 +507,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "Nfl_playerWhereUniqueInput",
+                    "name": "NflPlayerWhereUniqueInput",
                     "ofType": null
                   }
                 },
@@ -516,14 +516,14 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "Nfl_player",
+              "name": "NflPlayer",
               "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "nfl_team",
+            "name": "nflTeam",
             "description": "",
             "args": [
               {
@@ -534,7 +534,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "Nfl_teamWhereUniqueInput",
+                    "name": "NflTeamWhereUniqueInput",
                     "ofType": null
                   }
                 },
@@ -543,7 +543,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "Nfl_team",
+              "name": "NflTeam",
               "ofType": null
             },
             "isDeprecated": false,
@@ -577,7 +577,7 @@
             "deprecationReason": null
           },
           {
-            "name": "team_player",
+            "name": "teamPlayer",
             "description": "",
             "args": [
               {
@@ -588,7 +588,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "Team_playerWhereUniqueInput",
+                    "name": "TeamPlayerWhereUniqueInput",
                     "ofType": null
                   }
                 },
@@ -597,7 +597,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "Team_player",
+              "name": "TeamPlayer",
               "ofType": null
             },
             "isDeprecated": false,
@@ -1303,7 +1303,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerWhereInput",
+              "name": "TeamPlayerWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -1313,7 +1313,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerWhereInput",
+              "name": "TeamPlayerWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -1323,7 +1323,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerWhereInput",
+              "name": "TeamPlayerWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -1335,7 +1335,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerWhereInput",
+        "name": "TeamPlayerWhereInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -1350,7 +1350,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereInput",
+                  "name": "TeamPlayerWhereInput",
                   "ofType": null
                 }
               }
@@ -1368,7 +1368,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereInput",
+                  "name": "TeamPlayerWhereInput",
                   "ofType": null
                 }
               }
@@ -1386,7 +1386,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereInput",
+                  "name": "TeamPlayerWhereInput",
                   "ofType": null
                 }
               }
@@ -1494,7 +1494,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerWhereInput",
+              "name": "NflPlayerWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -1516,7 +1516,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerWhereInput",
+        "name": "NflPlayerWhereInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -1531,7 +1531,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerWhereInput",
+                  "name": "NflPlayerWhereInput",
                   "ofType": null
                 }
               }
@@ -1549,7 +1549,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerWhereInput",
+                  "name": "NflPlayerWhereInput",
                   "ofType": null
                 }
               }
@@ -1567,7 +1567,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerWhereInput",
+                  "name": "NflPlayerWhereInput",
                   "ofType": null
                 }
               }
@@ -3079,7 +3079,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_teamWhereInput",
+              "name": "NflTeamWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -3089,7 +3089,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerWhereInput",
+              "name": "TeamPlayerWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -3099,7 +3099,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerWhereInput",
+              "name": "TeamPlayerWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -3109,7 +3109,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerWhereInput",
+              "name": "TeamPlayerWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -3121,7 +3121,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_teamWhereInput",
+        "name": "NflTeamWhereInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -3136,7 +3136,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_teamWhereInput",
+                  "name": "NflTeamWhereInput",
                   "ofType": null
                 }
               }
@@ -3154,7 +3154,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_teamWhereInput",
+                  "name": "NflTeamWhereInput",
                   "ofType": null
                 }
               }
@@ -3172,7 +3172,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_teamWhereInput",
+                  "name": "NflTeamWhereInput",
                   "ofType": null
                 }
               }
@@ -4060,7 +4060,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerWhereInput",
+              "name": "NflPlayerWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -4070,7 +4070,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerWhereInput",
+              "name": "NflPlayerWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -4080,7 +4080,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerWhereInput",
+              "name": "NflPlayerWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -4151,9 +4151,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4316,9 +4320,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "League",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "League",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4348,7 +4356,7 @@
                 "description": "",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereInput",
+                  "name": "TeamPlayerWhereInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -4358,7 +4366,7 @@
                 "description": "",
                 "type": {
                   "kind": "ENUM",
-                  "name": "Team_playerOrderByInput",
+                  "name": "TeamPlayerOrderByInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -4422,7 +4430,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "Team_player",
+                  "name": "TeamPlayer",
                   "ofType": null
                 }
               }
@@ -4438,7 +4446,7 @@
       },
       {
         "kind": "ENUM",
-        "name": "Team_playerOrderByInput",
+        "name": "TeamPlayerOrderByInput",
         "description": "",
         "fields": null,
         "inputFields": null,
@@ -4461,7 +4469,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "Team_player",
+        "name": "TeamPlayer",
         "description": "",
         "fields": [
           {
@@ -4485,9 +4493,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "Nfl_player",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "NflPlayer",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4497,9 +4509,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "Team",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Team",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4512,7 +4528,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "Nfl_player",
+        "name": "NflPlayer",
         "description": "",
         "fields": [
           {
@@ -4536,9 +4552,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4548,9 +4568,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4560,9 +4584,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4584,9 +4612,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4596,9 +4628,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4608,9 +4644,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "OBJECT",
-              "name": "Nfl_team",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "NflTeam",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4620,9 +4660,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4632,9 +4676,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4644,9 +4692,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4660,7 +4712,7 @@
                 "description": "",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereInput",
+                  "name": "TeamPlayerWhereInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -4670,7 +4722,7 @@
                 "description": "",
                 "type": {
                   "kind": "ENUM",
-                  "name": "Team_playerOrderByInput",
+                  "name": "TeamPlayerOrderByInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -4734,7 +4786,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "Team_player",
+                  "name": "TeamPlayer",
                   "ofType": null
                 }
               }
@@ -4750,7 +4802,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "Nfl_team",
+        "name": "NflTeam",
         "description": "",
         "fields": [
           {
@@ -4774,9 +4826,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4786,9 +4842,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4798,9 +4858,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4810,9 +4874,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4822,9 +4890,13 @@
             "description": "",
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -4838,7 +4910,7 @@
                 "description": "",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerWhereInput",
+                  "name": "NflPlayerWhereInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -4848,7 +4920,7 @@
                 "description": "",
                 "type": {
                   "kind": "ENUM",
-                  "name": "Nfl_playerOrderByInput",
+                  "name": "NflPlayerOrderByInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -4912,7 +4984,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "Nfl_player",
+                  "name": "NflPlayer",
                   "ofType": null
                 }
               }
@@ -4928,7 +5000,7 @@
       },
       {
         "kind": "ENUM",
-        "name": "Nfl_playerOrderByInput",
+        "name": "NflPlayerOrderByInput",
         "description": "",
         "fields": null,
         "inputFields": null,
@@ -5059,7 +5131,7 @@
       },
       {
         "kind": "ENUM",
-        "name": "Nfl_teamOrderByInput",
+        "name": "NflTeamOrderByInput",
         "description": "",
         "fields": null,
         "inputFields": null,
@@ -5163,7 +5235,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerWhereUniqueInput",
+        "name": "NflPlayerWhereUniqueInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -5194,7 +5266,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_teamWhereUniqueInput",
+        "name": "NflTeamWhereUniqueInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -5246,7 +5318,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerWhereUniqueInput",
+        "name": "TeamPlayerWhereUniqueInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -5333,7 +5405,7 @@
             "deprecationReason": null
           },
           {
-            "name": "createTeam_player",
+            "name": "createTeamPlayer",
             "description": "",
             "args": [
               {
@@ -5344,7 +5416,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "Team_playerCreateInput",
+                    "name": "TeamPlayerCreateInput",
                     "ofType": null
                   }
                 },
@@ -5356,7 +5428,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Team_player",
+                "name": "TeamPlayer",
                 "ofType": null
               }
             },
@@ -5446,7 +5518,7 @@
             "deprecationReason": null
           },
           {
-            "name": "updateTeam_player",
+            "name": "updateTeamPlayer",
             "description": "",
             "args": [
               {
@@ -5457,7 +5529,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "Team_playerUpdateInput",
+                    "name": "TeamPlayerUpdateInput",
                     "ofType": null
                   }
                 },
@@ -5471,7 +5543,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "Team_playerWhereUniqueInput",
+                    "name": "TeamPlayerWhereUniqueInput",
                     "ofType": null
                   }
                 },
@@ -5480,7 +5552,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "Team_player",
+              "name": "TeamPlayer",
               "ofType": null
             },
             "isDeprecated": false,
@@ -5541,7 +5613,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deleteTeam_player",
+            "name": "deleteTeamPlayer",
             "description": "",
             "args": [
               {
@@ -5552,7 +5624,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "Team_playerWhereUniqueInput",
+                    "name": "TeamPlayerWhereUniqueInput",
                     "ofType": null
                   }
                 },
@@ -5561,7 +5633,7 @@
             ],
             "type": {
               "kind": "OBJECT",
-              "name": "Team_player",
+              "name": "TeamPlayer",
               "ofType": null
             },
             "isDeprecated": false,
@@ -5686,7 +5758,7 @@
             "deprecationReason": null
           },
           {
-            "name": "upsertTeam_player",
+            "name": "upsertTeamPlayer",
             "description": "",
             "args": [
               {
@@ -5697,7 +5769,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "Team_playerWhereUniqueInput",
+                    "name": "TeamPlayerWhereUniqueInput",
                     "ofType": null
                   }
                 },
@@ -5711,7 +5783,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "Team_playerCreateInput",
+                    "name": "TeamPlayerCreateInput",
                     "ofType": null
                   }
                 },
@@ -5725,7 +5797,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "Team_playerUpdateInput",
+                    "name": "TeamPlayerUpdateInput",
                     "ofType": null
                   }
                 },
@@ -5737,7 +5809,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Team_player",
+                "name": "TeamPlayer",
                 "ofType": null
               }
             },
@@ -5881,7 +5953,7 @@
             "deprecationReason": null
           },
           {
-            "name": "deleteManyTeam_players",
+            "name": "deleteManyTeamPlayers",
             "description": "",
             "args": [
               {
@@ -5889,7 +5961,7 @@
                 "description": "",
                 "type": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereInput",
+                  "name": "TeamPlayerWhereInput",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -5923,9 +5995,13 @@
             "name": "name",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6016,7 +6092,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerCreateManyWithoutTeamInput",
+              "name": "TeamPlayerCreateManyWithoutTeamInput",
               "ofType": null
             },
             "defaultValue": null
@@ -6028,7 +6104,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerCreateManyWithoutTeamInput",
+        "name": "TeamPlayerCreateManyWithoutTeamInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -6043,7 +6119,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerCreateWithoutTeamInput",
+                  "name": "TeamPlayerCreateWithoutTeamInput",
                   "ofType": null
                 }
               }
@@ -6061,7 +6137,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereUniqueInput",
+                  "name": "TeamPlayerWhereUniqueInput",
                   "ofType": null
                 }
               }
@@ -6075,7 +6151,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerCreateWithoutTeamInput",
+        "name": "TeamPlayerCreateWithoutTeamInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -6083,9 +6159,13 @@
             "name": "nfl_player",
             "description": "",
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerCreateOneWithoutTeam_playersInput",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "NflPlayerCreateOneWithoutTeam_playersInput",
+                "ofType": null
+              }
             },
             "defaultValue": null
           }
@@ -6096,7 +6176,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerCreateOneWithoutTeam_playersInput",
+        "name": "NflPlayerCreateOneWithoutTeam_playersInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -6105,7 +6185,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerCreateWithoutTeam_playersInput",
+              "name": "NflPlayerCreateWithoutTeam_playersInput",
               "ofType": null
             },
             "defaultValue": null
@@ -6115,7 +6195,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerWhereUniqueInput",
+              "name": "NflPlayerWhereUniqueInput",
               "ofType": null
             },
             "defaultValue": null
@@ -6127,7 +6207,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerCreateWithoutTeam_playersInput",
+        "name": "NflPlayerCreateWithoutTeam_playersInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -6135,9 +6215,13 @@
             "name": "display_name",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6145,9 +6229,13 @@
             "name": "esb_id",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6155,9 +6243,13 @@
             "name": "first_name",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6175,9 +6267,13 @@
             "name": "last_name",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6185,9 +6281,13 @@
             "name": "nfl_feed_id",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6195,9 +6295,13 @@
             "name": "position",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6205,9 +6309,13 @@
             "name": "position_group",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6215,9 +6323,13 @@
             "name": "status",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6225,9 +6337,13 @@
             "name": "nfl_team",
             "description": "",
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Nfl_teamCreateOneWithoutNfl_playersInput",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "NflTeamCreateOneWithoutNfl_playersInput",
+                "ofType": null
+              }
             },
             "defaultValue": null
           }
@@ -6238,7 +6354,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_teamCreateOneWithoutNfl_playersInput",
+        "name": "NflTeamCreateOneWithoutNfl_playersInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -6247,7 +6363,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_teamCreateWithoutNfl_playersInput",
+              "name": "NflTeamCreateWithoutNfl_playersInput",
               "ofType": null
             },
             "defaultValue": null
@@ -6257,7 +6373,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_teamWhereUniqueInput",
+              "name": "NflTeamWhereUniqueInput",
               "ofType": null
             },
             "defaultValue": null
@@ -6269,7 +6385,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_teamCreateWithoutNfl_playersInput",
+        "name": "NflTeamCreateWithoutNfl_playersInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -6277,9 +6393,13 @@
             "name": "city",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6287,9 +6407,13 @@
             "name": "code",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6297,9 +6421,13 @@
             "name": "full_name",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6307,9 +6435,13 @@
             "name": "name",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6317,9 +6449,13 @@
             "name": "nfl_feed_id",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           }
@@ -6352,9 +6488,13 @@
             "name": "league",
             "description": "",
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "LeagueCreateOneWithoutTeamsInput",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "LeagueCreateOneWithoutTeamsInput",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6363,7 +6503,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerCreateManyWithoutTeamInput",
+              "name": "TeamPlayerCreateManyWithoutTeamInput",
               "ofType": null
             },
             "defaultValue": null
@@ -6414,9 +6554,13 @@
             "name": "name",
             "description": "",
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "defaultValue": null
           }
@@ -6427,7 +6571,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerCreateInput",
+        "name": "TeamPlayerCreateInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -6435,9 +6579,13 @@
             "name": "nfl_player",
             "description": "",
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerCreateOneWithoutTeam_playersInput",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "NflPlayerCreateOneWithoutTeam_playersInput",
+                "ofType": null
+              }
             },
             "defaultValue": null
           },
@@ -6445,9 +6593,13 @@
             "name": "team",
             "description": "",
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "TeamCreateOneWithoutTeam_playersInput",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TeamCreateOneWithoutTeam_playersInput",
+                "ofType": null
+              }
             },
             "defaultValue": null
           }
@@ -6511,9 +6663,13 @@
             "name": "league",
             "description": "",
             "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "LeagueCreateOneWithoutTeamsInput",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "LeagueCreateOneWithoutTeamsInput",
+                "ofType": null
+              }
             },
             "defaultValue": null
           }
@@ -6732,7 +6888,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerUpdateManyWithoutTeamInput",
+              "name": "TeamPlayerUpdateManyWithoutTeamInput",
               "ofType": null
             },
             "defaultValue": null
@@ -6744,7 +6900,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerUpdateManyWithoutTeamInput",
+        "name": "TeamPlayerUpdateManyWithoutTeamInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -6759,7 +6915,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerCreateWithoutTeamInput",
+                  "name": "TeamPlayerCreateWithoutTeamInput",
                   "ofType": null
                 }
               }
@@ -6777,7 +6933,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereUniqueInput",
+                  "name": "TeamPlayerWhereUniqueInput",
                   "ofType": null
                 }
               }
@@ -6795,7 +6951,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereUniqueInput",
+                  "name": "TeamPlayerWhereUniqueInput",
                   "ofType": null
                 }
               }
@@ -6813,7 +6969,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereUniqueInput",
+                  "name": "TeamPlayerWhereUniqueInput",
                   "ofType": null
                 }
               }
@@ -6831,7 +6987,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerUpdateWithWhereUniqueWithoutTeamInput",
+                  "name": "TeamPlayerUpdateWithWhereUniqueWithoutTeamInput",
                   "ofType": null
                 }
               }
@@ -6849,7 +7005,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerUpsertWithWhereUniqueWithoutTeamInput",
+                  "name": "TeamPlayerUpsertWithWhereUniqueWithoutTeamInput",
                   "ofType": null
                 }
               }
@@ -6863,7 +7019,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerUpdateWithWhereUniqueWithoutTeamInput",
+        "name": "TeamPlayerUpdateWithWhereUniqueWithoutTeamInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -6875,7 +7031,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "Team_playerWhereUniqueInput",
+                "name": "TeamPlayerWhereUniqueInput",
                 "ofType": null
               }
             },
@@ -6889,7 +7045,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "Team_playerUpdateWithoutTeamDataInput",
+                "name": "TeamPlayerUpdateWithoutTeamDataInput",
                 "ofType": null
               }
             },
@@ -6902,7 +7058,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerUpdateWithoutTeamDataInput",
+        "name": "TeamPlayerUpdateWithoutTeamDataInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -6911,7 +7067,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerUpdateOneWithoutTeam_playersInput",
+              "name": "NflPlayerUpdateOneRequiredWithoutTeam_playersInput",
               "ofType": null
             },
             "defaultValue": null
@@ -6923,7 +7079,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerUpdateOneWithoutTeam_playersInput",
+        "name": "NflPlayerUpdateOneRequiredWithoutTeam_playersInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -6932,7 +7088,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerCreateWithoutTeam_playersInput",
+              "name": "NflPlayerCreateWithoutTeam_playersInput",
               "ofType": null
             },
             "defaultValue": null
@@ -6942,27 +7098,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerWhereUniqueInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "disconnect",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "delete",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
+              "name": "NflPlayerWhereUniqueInput",
               "ofType": null
             },
             "defaultValue": null
@@ -6972,7 +7108,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerUpdateWithoutTeam_playersDataInput",
+              "name": "NflPlayerUpdateWithoutTeam_playersDataInput",
               "ofType": null
             },
             "defaultValue": null
@@ -6982,7 +7118,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerUpsertWithoutTeam_playersInput",
+              "name": "NflPlayerUpsertWithoutTeam_playersInput",
               "ofType": null
             },
             "defaultValue": null
@@ -6993,18 +7129,8 @@
         "possibleTypes": null
       },
       {
-        "kind": "SCALAR",
-        "name": "Boolean",
-        "description": "The `Boolean` scalar type represents `true` or `false`.",
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerUpdateWithoutTeam_playersDataInput",
+        "name": "NflPlayerUpdateWithoutTeam_playersDataInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -7103,7 +7229,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_teamUpdateOneWithoutNfl_playersInput",
+              "name": "NflTeamUpdateOneRequiredWithoutNfl_playersInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7115,7 +7241,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_teamUpdateOneWithoutNfl_playersInput",
+        "name": "NflTeamUpdateOneRequiredWithoutNfl_playersInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -7124,7 +7250,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_teamCreateWithoutNfl_playersInput",
+              "name": "NflTeamCreateWithoutNfl_playersInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7134,27 +7260,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_teamWhereUniqueInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "disconnect",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "delete",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
+              "name": "NflTeamWhereUniqueInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7164,7 +7270,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_teamUpdateWithoutNfl_playersDataInput",
+              "name": "NflTeamUpdateWithoutNfl_playersDataInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7174,7 +7280,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_teamUpsertWithoutNfl_playersInput",
+              "name": "NflTeamUpsertWithoutNfl_playersInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7186,7 +7292,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_teamUpdateWithoutNfl_playersDataInput",
+        "name": "NflTeamUpdateWithoutNfl_playersDataInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -7247,7 +7353,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_teamUpsertWithoutNfl_playersInput",
+        "name": "NflTeamUpsertWithoutNfl_playersInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -7259,7 +7365,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "Nfl_teamUpdateWithoutNfl_playersDataInput",
+                "name": "NflTeamUpdateWithoutNfl_playersDataInput",
                 "ofType": null
               }
             },
@@ -7273,7 +7379,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "Nfl_teamCreateWithoutNfl_playersInput",
+                "name": "NflTeamCreateWithoutNfl_playersInput",
                 "ofType": null
               }
             },
@@ -7286,7 +7392,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerUpsertWithoutTeam_playersInput",
+        "name": "NflPlayerUpsertWithoutTeam_playersInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -7298,7 +7404,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "Nfl_playerUpdateWithoutTeam_playersDataInput",
+                "name": "NflPlayerUpdateWithoutTeam_playersDataInput",
                 "ofType": null
               }
             },
@@ -7312,7 +7418,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "Nfl_playerCreateWithoutTeam_playersInput",
+                "name": "NflPlayerCreateWithoutTeam_playersInput",
                 "ofType": null
               }
             },
@@ -7325,7 +7431,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerUpsertWithWhereUniqueWithoutTeamInput",
+        "name": "TeamPlayerUpsertWithWhereUniqueWithoutTeamInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -7337,7 +7443,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "Team_playerWhereUniqueInput",
+                "name": "TeamPlayerWhereUniqueInput",
                 "ofType": null
               }
             },
@@ -7351,7 +7457,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "Team_playerUpdateWithoutTeamDataInput",
+                "name": "TeamPlayerUpdateWithoutTeamDataInput",
                 "ofType": null
               }
             },
@@ -7365,7 +7471,7 @@
               "name": null,
               "ofType": {
                 "kind": "INPUT_OBJECT",
-                "name": "Team_playerCreateWithoutTeamInput",
+                "name": "TeamPlayerCreateWithoutTeamInput",
                 "ofType": null
               }
             },
@@ -7450,7 +7556,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "LeagueUpdateOneWithoutTeamsInput",
+              "name": "LeagueUpdateOneRequiredWithoutTeamsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7460,7 +7566,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerUpdateManyWithoutTeamInput",
+              "name": "TeamPlayerUpdateManyWithoutTeamInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7472,7 +7578,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "LeagueUpdateOneWithoutTeamsInput",
+        "name": "LeagueUpdateOneRequiredWithoutTeamsInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -7492,26 +7598,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "LeagueWhereUniqueInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "disconnect",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "delete",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null
@@ -7603,7 +7689,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerUpdateInput",
+        "name": "TeamPlayerUpdateInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -7612,7 +7698,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerUpdateOneWithoutTeam_playersInput",
+              "name": "NflPlayerUpdateOneRequiredWithoutTeam_playersInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7622,7 +7708,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamUpdateOneWithoutTeam_playersInput",
+              "name": "TeamUpdateOneRequiredWithoutTeam_playersInput",
               "ofType": null
             },
             "defaultValue": null
@@ -7634,7 +7720,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "TeamUpdateOneWithoutTeam_playersInput",
+        "name": "TeamUpdateOneRequiredWithoutTeam_playersInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -7654,26 +7740,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "TeamWhereUniqueInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "disconnect",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "delete",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
               "ofType": null
             },
             "defaultValue": null
@@ -7724,7 +7790,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "LeagueUpdateOneWithoutTeamsInput",
+              "name": "LeagueUpdateOneRequiredWithoutTeamsInput",
               "ofType": null
             },
             "defaultValue": null
@@ -8193,6 +8259,16 @@
             "deprecationReason": null
           }
         ],
+        "possibleTypes": null
+      },
+      {
+        "kind": "SCALAR",
+        "name": "Boolean",
+        "description": "The `Boolean` scalar type represents `true` or `false`.",
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
         "possibleTypes": null
       },
       {
@@ -8828,7 +8904,565 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerCreateInput",
+        "name": "NflPlayerCreateInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "display_name",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "esb_id",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "first_name",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gsis_id",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "last_name",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nfl_feed_id",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "position",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "position_group",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "status",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nfl_team",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "NflTeamCreateOneWithoutNfl_playersInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "team_players",
+            "description": "",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TeamPlayerCreateManyWithoutNfl_playerInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TeamPlayerCreateManyWithoutNfl_playerInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TeamPlayerCreateWithoutNfl_playerInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connect",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TeamPlayerWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TeamPlayerCreateWithoutNfl_playerInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "team",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TeamCreateOneWithoutTeam_playersInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NflPlayerCreateManyWithoutNfl_teamInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "create",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "NflPlayerCreateWithoutNfl_teamInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "connect",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "NflPlayerWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NflPlayerCreateWithoutNfl_teamInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "display_name",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "esb_id",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "first_name",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gsis_id",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "last_name",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nfl_feed_id",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "position",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "position_group",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "status",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "team_players",
+            "description": "",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "TeamPlayerCreateManyWithoutNfl_playerInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NflPlayerSubscriptionWhereInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "AND",
+            "description": "Logical AND on all given filters.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "NflPlayerSubscriptionWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "OR",
+            "description": "Logical OR on all given filters.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "NflPlayerSubscriptionWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "NOT",
+            "description": "Logical NOT on all given filters combined by AND.",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "NflPlayerSubscriptionWhereInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "mutation_in",
+            "description": "The subscription event gets dispatched when it's listed in mutation_in",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "MutationType",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "updatedFields_contains",
+            "description": "The subscription event gets only dispatched when one of the updated fields names is included in this list",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "updatedFields_contains_every",
+            "description": "The subscription event gets only dispatched when all of the field names included in this list have been updated",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "updatedFields_contains_some",
+            "description": "The subscription event gets only dispatched when some of the field names included in this list have been updated",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "node",
+            "description": "",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NflPlayerWhereInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NflPlayerUpdateInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -8927,7 +9561,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_teamCreateOneWithoutNfl_playersInput",
+              "name": "NflTeamUpdateOneRequiredWithoutNfl_playersInput",
               "ofType": null
             },
             "defaultValue": null
@@ -8937,7 +9571,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerCreateManyWithoutNfl_playerInput",
+              "name": "TeamPlayerUpdateManyWithoutNfl_playerInput",
               "ofType": null
             },
             "defaultValue": null
@@ -8949,7 +9583,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerCreateManyWithoutNfl_playerInput",
+        "name": "TeamPlayerUpdateManyWithoutNfl_playerInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -8964,7 +9598,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerCreateWithoutNfl_playerInput",
+                  "name": "TeamPlayerCreateWithoutNfl_playerInput",
                   "ofType": null
                 }
               }
@@ -8982,7 +9616,79 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereUniqueInput",
+                  "name": "TeamPlayerWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "disconnect",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TeamPlayerWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "delete",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TeamPlayerWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "update",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TeamPlayerUpdateWithWhereUniqueWithoutNfl_playerInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "upsert",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "TeamPlayerUpsertWithWhereUniqueWithoutNfl_playerInput",
                   "ofType": null
                 }
               }
@@ -8996,7 +9702,46 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerCreateWithoutNfl_playerInput",
+        "name": "TeamPlayerUpdateWithWhereUniqueWithoutNfl_playerInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TeamPlayerWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "data",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TeamPlayerUpdateWithoutNfl_playerDataInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "TeamPlayerUpdateWithoutNfl_playerDataInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -9005,7 +9750,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "TeamCreateOneWithoutTeam_playersInput",
+              "name": "TeamUpdateOneRequiredWithoutTeam_playersInput",
               "ofType": null
             },
             "defaultValue": null
@@ -9017,7 +9762,161 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerCreateManyWithoutNfl_teamInput",
+        "name": "TeamPlayerUpsertWithWhereUniqueWithoutNfl_playerInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TeamPlayerWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "update",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TeamPlayerUpdateWithoutNfl_playerDataInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "create",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "TeamPlayerCreateWithoutNfl_playerInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NflPlayerUpdateManyMutationInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "display_name",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "esb_id",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "first_name",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "gsis_id",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "last_name",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nfl_feed_id",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "position",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "position_group",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "status",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NflPlayerUpdateManyWithoutNfl_teamInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -9032,7 +9931,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerCreateWithoutNfl_teamInput",
+                  "name": "NflPlayerCreateWithoutNfl_teamInput",
                   "ofType": null
                 }
               }
@@ -9050,7 +9949,79 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerWhereUniqueInput",
+                  "name": "NflPlayerWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "disconnect",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "NflPlayerWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "delete",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "NflPlayerWhereUniqueInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "update",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "NflPlayerUpdateWithWhereUniqueWithoutNfl_teamInput",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "upsert",
+            "description": "",
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "NflPlayerUpsertWithWhereUniqueWithoutNfl_teamInput",
                   "ofType": null
                 }
               }
@@ -9064,7 +10035,46 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerCreateWithoutNfl_teamInput",
+        "name": "NflPlayerUpdateWithWhereUniqueWithoutNfl_teamInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "NflPlayerWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "data",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "NflPlayerUpdateWithoutNfl_teamDataInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NflPlayerUpdateWithoutNfl_teamDataInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -9163,7 +10173,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerCreateManyWithoutNfl_playerInput",
+              "name": "TeamPlayerUpdateManyWithoutNfl_playerInput",
               "ofType": null
             },
             "defaultValue": null
@@ -9175,7 +10185,151 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerSubscriptionWhereInput",
+        "name": "NflPlayerUpsertWithWhereUniqueWithoutNfl_teamInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "where",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "NflPlayerWhereUniqueInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "update",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "NflPlayerUpdateWithoutNfl_teamDataInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "create",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "INPUT_OBJECT",
+                "name": "NflPlayerCreateWithoutNfl_teamInput",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NflTeamCreateInput",
+        "description": "",
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "city",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "code",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "full_name",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "name",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nfl_feed_id",
+            "description": "",
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "nfl_players",
+            "description": "",
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "NflPlayerCreateManyWithoutNfl_teamInput",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "NflTeamSubscriptionWhereInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -9190,7 +10344,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerSubscriptionWhereInput",
+                  "name": "NflTeamSubscriptionWhereInput",
                   "ofType": null
                 }
               }
@@ -9208,7 +10362,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerSubscriptionWhereInput",
+                  "name": "NflTeamSubscriptionWhereInput",
                   "ofType": null
                 }
               }
@@ -9226,7 +10380,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerSubscriptionWhereInput",
+                  "name": "NflTeamSubscriptionWhereInput",
                   "ofType": null
                 }
               }
@@ -9302,7 +10456,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerWhereInput",
+              "name": "NflTeamWhereInput",
               "ofType": null
             },
             "defaultValue": null
@@ -9314,783 +10468,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerUpdateInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "display_name",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "esb_id",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "first_name",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "gsis_id",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "last_name",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "nfl_feed_id",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "position",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "position_group",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "status",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "nfl_team",
-            "description": "",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Nfl_teamUpdateOneWithoutNfl_playersInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "team_players",
-            "description": "",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Team_playerUpdateManyWithoutNfl_playerInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Team_playerUpdateManyWithoutNfl_playerInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "create",
-            "description": "",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Team_playerCreateWithoutNfl_playerInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "connect",
-            "description": "",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "disconnect",
-            "description": "",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "delete",
-            "description": "",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Team_playerWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "update",
-            "description": "",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Team_playerUpdateWithWhereUniqueWithoutNfl_playerInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "upsert",
-            "description": "",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Team_playerUpsertWithWhereUniqueWithoutNfl_playerInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Team_playerUpdateWithWhereUniqueWithoutNfl_playerInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": "",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Team_playerWhereUniqueInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "data",
-            "description": "",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Team_playerUpdateWithoutNfl_playerDataInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Team_playerUpdateWithoutNfl_playerDataInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "team",
-            "description": "",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "TeamUpdateOneWithoutTeam_playersInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Team_playerUpsertWithWhereUniqueWithoutNfl_playerInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": "",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Team_playerWhereUniqueInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "update",
-            "description": "",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Team_playerUpdateWithoutNfl_playerDataInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "create",
-            "description": "",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Team_playerCreateWithoutNfl_playerInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerUpdateManyMutationInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "display_name",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "esb_id",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "first_name",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "gsis_id",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "last_name",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "nfl_feed_id",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "position",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "position_group",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "status",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerUpdateManyWithoutNfl_teamInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "create",
-            "description": "",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerCreateWithoutNfl_teamInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "connect",
-            "description": "",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "disconnect",
-            "description": "",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "delete",
-            "description": "",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerWhereUniqueInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "update",
-            "description": "",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerUpdateWithWhereUniqueWithoutNfl_teamInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "upsert",
-            "description": "",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Nfl_playerUpsertWithWhereUniqueWithoutNfl_teamInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerUpdateWithWhereUniqueWithoutNfl_teamInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": "",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Nfl_playerWhereUniqueInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "data",
-            "description": "",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Nfl_playerUpdateWithoutNfl_teamDataInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerUpdateWithoutNfl_teamDataInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "display_name",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "esb_id",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "first_name",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "gsis_id",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "last_name",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "nfl_feed_id",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "position",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "position_group",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "status",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "team_players",
-            "description": "",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Team_playerUpdateManyWithoutNfl_playerInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Nfl_playerUpsertWithWhereUniqueWithoutNfl_teamInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "where",
-            "description": "",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Nfl_playerWhereUniqueInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "update",
-            "description": "",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Nfl_playerUpdateWithoutNfl_teamDataInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "create",
-            "description": "",
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "INPUT_OBJECT",
-                "name": "Nfl_playerCreateWithoutNfl_teamInput",
-                "ofType": null
-              }
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Nfl_teamCreateInput",
+        "name": "NflTeamUpdateInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -10149,7 +10527,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerCreateManyWithoutNfl_teamInput",
+              "name": "NflPlayerUpdateManyWithoutNfl_teamInput",
               "ofType": null
             },
             "defaultValue": null
@@ -10161,217 +10539,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Nfl_teamSubscriptionWhereInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "AND",
-            "description": "Logical AND on all given filters.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Nfl_teamSubscriptionWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "OR",
-            "description": "Logical OR on all given filters.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Nfl_teamSubscriptionWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "NOT",
-            "description": "Logical NOT on all given filters combined by AND.",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "INPUT_OBJECT",
-                  "name": "Nfl_teamSubscriptionWhereInput",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "mutation_in",
-            "description": "The subscription event gets dispatched when it's listed in mutation_in",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "MutationType",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "updatedFields_contains",
-            "description": "The subscription event gets only dispatched when one of the updated fields names is included in this list",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "updatedFields_contains_every",
-            "description": "The subscription event gets only dispatched when all of the field names included in this list have been updated",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "updatedFields_contains_some",
-            "description": "The subscription event gets only dispatched when some of the field names included in this list have been updated",
-            "type": {
-              "kind": "LIST",
-              "name": null,
-              "ofType": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "node",
-            "description": "",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Nfl_teamWhereInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Nfl_teamUpdateInput",
-        "description": "",
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "city",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "code",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "full_name",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "name",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "nfl_feed_id",
-            "description": "",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null
-          },
-          {
-            "name": "nfl_players",
-            "description": "",
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "Nfl_playerUpdateManyWithoutNfl_teamInput",
-              "ofType": null
-            },
-            "defaultValue": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
-        "kind": "INPUT_OBJECT",
-        "name": "Nfl_teamUpdateManyMutationInput",
+        "name": "NflTeamUpdateManyMutationInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -10449,7 +10617,7 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "Team_playerSubscriptionWhereInput",
+        "name": "TeamPlayerSubscriptionWhereInput",
         "description": "",
         "fields": null,
         "inputFields": [
@@ -10464,7 +10632,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerSubscriptionWhereInput",
+                  "name": "TeamPlayerSubscriptionWhereInput",
                   "ofType": null
                 }
               }
@@ -10482,7 +10650,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerSubscriptionWhereInput",
+                  "name": "TeamPlayerSubscriptionWhereInput",
                   "ofType": null
                 }
               }
@@ -10500,7 +10668,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "Team_playerSubscriptionWhereInput",
+                  "name": "TeamPlayerSubscriptionWhereInput",
                   "ofType": null
                 }
               }
@@ -10576,7 +10744,7 @@
             "description": "",
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "Team_playerWhereInput",
+              "name": "TeamPlayerWhereInput",
               "ofType": null
             },
             "defaultValue": null
