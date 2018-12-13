@@ -1,3 +1,27 @@
+type AggregateLeague {
+  count: Int!
+}
+
+type AggregateNflGame {
+  count: Int!
+}
+
+type AggregateNflPlayer {
+  count: Int!
+}
+
+type AggregateNflTeam {
+  count: Int!
+}
+
+type AggregateTeam {
+  count: Int!
+}
+
+type AggregateTeamPlayer {
+  count: Int!
+}
+
 type BatchPayload {
   count: Long!
 }
@@ -15,6 +39,12 @@ type League {
   teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
 }
 
+type LeagueConnection {
+  pageInfo: PageInfo!
+  edges: [LeagueEdge]!
+  aggregate: AggregateLeague!
+}
+
 input LeagueCreateInput {
   name: String!
   teams: TeamCreateManyWithoutLeagueInput
@@ -29,6 +59,11 @@ input LeagueCreateWithoutTeamsInput {
   name: String!
 }
 
+type LeagueEdge {
+  node: League!
+  cursor: String!
+}
+
 enum LeagueOrderByInput {
   id_ASC
   id_DESC
@@ -38,6 +73,18 @@ enum LeagueOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+}
+
+type LeaguePreviousValues {
+  id: Int!
+  name: String!
+}
+
+type LeagueSubscriptionPayload {
+  mutation: MutationType!
+  node: League
+  updatedFields: [String!]
+  previousValues: LeaguePreviousValues
 }
 
 input LeagueSubscriptionWhereInput {
@@ -120,6 +167,24 @@ type Mutation {
   upsertLeague(where: LeagueWhereUniqueInput!, create: LeagueCreateInput!, update: LeagueUpdateInput!): League!
   deleteLeague(where: LeagueWhereUniqueInput!): League
   deleteManyLeagues(where: LeagueWhereInput): BatchPayload!
+  createNflGame(data: NflGameCreateInput!): NflGame!
+  updateNflGame(data: NflGameUpdateInput!, where: NflGameWhereUniqueInput!): NflGame
+  updateManyNflGames(data: NflGameUpdateManyMutationInput!, where: NflGameWhereInput): BatchPayload!
+  upsertNflGame(where: NflGameWhereUniqueInput!, create: NflGameCreateInput!, update: NflGameUpdateInput!): NflGame!
+  deleteNflGame(where: NflGameWhereUniqueInput!): NflGame
+  deleteManyNflGames(where: NflGameWhereInput): BatchPayload!
+  createNflPlayer(data: NflPlayerCreateInput!): NflPlayer!
+  updateNflPlayer(data: NflPlayerUpdateInput!, where: NflPlayerWhereUniqueInput!): NflPlayer
+  updateManyNflPlayers(data: NflPlayerUpdateManyMutationInput!, where: NflPlayerWhereInput): BatchPayload!
+  upsertNflPlayer(where: NflPlayerWhereUniqueInput!, create: NflPlayerCreateInput!, update: NflPlayerUpdateInput!): NflPlayer!
+  deleteNflPlayer(where: NflPlayerWhereUniqueInput!): NflPlayer
+  deleteManyNflPlayers(where: NflPlayerWhereInput): BatchPayload!
+  createNflTeam(data: NflTeamCreateInput!): NflTeam!
+  updateNflTeam(data: NflTeamUpdateInput!, where: NflTeamWhereUniqueInput!): NflTeam
+  updateManyNflTeams(data: NflTeamUpdateManyMutationInput!, where: NflTeamWhereInput): BatchPayload!
+  upsertNflTeam(where: NflTeamWhereUniqueInput!, create: NflTeamCreateInput!, update: NflTeamUpdateInput!): NflTeam!
+  deleteNflTeam(where: NflTeamWhereUniqueInput!): NflTeam
+  deleteManyNflTeams(where: NflTeamWhereInput): BatchPayload!
   createTeam(data: TeamCreateInput!): Team!
   updateTeam(data: TeamUpdateInput!, where: TeamWhereUniqueInput!): Team
   updateManyTeams(data: TeamUpdateManyMutationInput!, where: TeamWhereInput): BatchPayload!
@@ -151,6 +216,12 @@ type NflGame {
   season_type: GameSeasonType!
 }
 
+type NflGameConnection {
+  pageInfo: PageInfo!
+  edges: [NflGameEdge]!
+  aggregate: AggregateNflGame!
+}
+
 input NflGameCreateInput {
   away_team: NflTeamCreateOneInput!
   home_team: NflTeamCreateOneInput!
@@ -160,6 +231,11 @@ input NflGameCreateInput {
   nfl_feed_key: Int!
   start: DateTime!
   season_type: GameSeasonType!
+}
+
+type NflGameEdge {
+  node: NflGame!
+  cursor: String!
 }
 
 enum NflGameOrderByInput {
@@ -181,6 +257,23 @@ enum NflGameOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+}
+
+type NflGamePreviousValues {
+  id: Int!
+  week: Int!
+  season: Int!
+  nfl_feed_id: Int!
+  nfl_feed_key: Int!
+  start: DateTime!
+  season_type: GameSeasonType!
+}
+
+type NflGameSubscriptionPayload {
+  mutation: MutationType!
+  node: NflGame
+  updatedFields: [String!]
+  previousValues: NflGamePreviousValues
 }
 
 input NflGameSubscriptionWhereInput {
@@ -295,6 +388,12 @@ type NflPlayer {
   team_players(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TeamPlayer!]
 }
 
+type NflPlayerConnection {
+  pageInfo: PageInfo!
+  edges: [NflPlayerEdge]!
+  aggregate: AggregateNflPlayer!
+}
+
 input NflPlayerCreateInput {
   display_name: String!
   esb_id: String!
@@ -345,6 +444,11 @@ input NflPlayerCreateWithoutTeam_playersInput {
   status: String!
 }
 
+type NflPlayerEdge {
+  node: NflPlayer!
+  cursor: String!
+}
+
 enum NflPlayerOrderByInput {
   id_ASC
   id_DESC
@@ -370,6 +474,19 @@ enum NflPlayerOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+}
+
+type NflPlayerPreviousValues {
+  id: Int!
+  display_name: String!
+  esb_id: String!
+  first_name: String!
+  gsis_id: String
+  last_name: String!
+  nfl_feed_id: Int!
+  position: String!
+  position_group: String!
+  status: String!
 }
 
 input NflPlayerScalarWhereInput {
@@ -504,6 +621,13 @@ input NflPlayerScalarWhereInput {
   AND: [NflPlayerScalarWhereInput!]
   OR: [NflPlayerScalarWhereInput!]
   NOT: [NflPlayerScalarWhereInput!]
+}
+
+type NflPlayerSubscriptionPayload {
+  mutation: MutationType!
+  node: NflPlayer
+  updatedFields: [String!]
+  previousValues: NflPlayerPreviousValues
 }
 
 input NflPlayerSubscriptionWhereInput {
@@ -773,6 +897,12 @@ type NflTeam {
   nfl_players(where: NflPlayerWhereInput, orderBy: NflPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflPlayer!]
 }
 
+type NflTeamConnection {
+  pageInfo: PageInfo!
+  edges: [NflTeamEdge]!
+  aggregate: AggregateNflTeam!
+}
+
 input NflTeamCreateInput {
   city: String!
   code: String!
@@ -800,6 +930,11 @@ input NflTeamCreateWithoutNfl_playersInput {
   nfl_feed_id: Int!
 }
 
+type NflTeamEdge {
+  node: NflTeam!
+  cursor: String!
+}
+
 enum NflTeamOrderByInput {
   id_ASC
   id_DESC
@@ -817,6 +952,22 @@ enum NflTeamOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+}
+
+type NflTeamPreviousValues {
+  id: Int!
+  city: String!
+  code: String!
+  full_name: String!
+  name: String!
+  nfl_feed_id: Int!
+}
+
+type NflTeamSubscriptionPayload {
+  mutation: MutationType!
+  node: NflTeam
+  updatedFields: [String!]
+  previousValues: NflTeamPreviousValues
 }
 
 input NflTeamSubscriptionWhereInput {
@@ -978,19 +1129,42 @@ interface Node {
   id: ID!
 }
 
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
 type Query {
   league(where: LeagueWhereUniqueInput!): League
   leagues(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [League]!
+  leaguesConnection(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LeagueConnection!
   nflGame(where: NflGameWhereUniqueInput!): NflGame
   nflGames(where: NflGameWhereInput, orderBy: NflGameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflGame]!
+  nflGamesConnection(where: NflGameWhereInput, orderBy: NflGameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NflGameConnection!
   nflPlayer(where: NflPlayerWhereUniqueInput!): NflPlayer
   nflPlayers(where: NflPlayerWhereInput, orderBy: NflPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflPlayer]!
+  nflPlayersConnection(where: NflPlayerWhereInput, orderBy: NflPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NflPlayerConnection!
   nflTeam(where: NflTeamWhereUniqueInput!): NflTeam
   nflTeams(where: NflTeamWhereInput, orderBy: NflTeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflTeam]!
+  nflTeamsConnection(where: NflTeamWhereInput, orderBy: NflTeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NflTeamConnection!
   team(where: TeamWhereUniqueInput!): Team
   teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team]!
+  teamsConnection(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamConnection!
   teamPlayer(where: TeamPlayerWhereUniqueInput!): TeamPlayer
   teamPlayers(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TeamPlayer]!
+  teamPlayersConnection(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamPlayerConnection!
+  node(id: ID!): Node
+}
+
+type Subscription {
+  league(where: LeagueSubscriptionWhereInput): LeagueSubscriptionPayload
+  nflGame(where: NflGameSubscriptionWhereInput): NflGameSubscriptionPayload
+  nflPlayer(where: NflPlayerSubscriptionWhereInput): NflPlayerSubscriptionPayload
+  nflTeam(where: NflTeamSubscriptionWhereInput): NflTeamSubscriptionPayload
+  team(where: TeamSubscriptionWhereInput): TeamSubscriptionPayload
+  teamPlayer(where: TeamPlayerSubscriptionWhereInput): TeamPlayerSubscriptionPayload
 }
 
 type Team {
@@ -998,6 +1172,12 @@ type Team {
   league: League!
   name: String!
   team_players(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TeamPlayer!]
+}
+
+type TeamConnection {
+  pageInfo: PageInfo!
+  edges: [TeamEdge]!
+  aggregate: AggregateTeam!
 }
 
 input TeamCreateInput {
@@ -1026,6 +1206,11 @@ input TeamCreateWithoutTeam_playersInput {
   name: String!
 }
 
+type TeamEdge {
+  node: Team!
+  cursor: String!
+}
+
 enum TeamOrderByInput {
   id_ASC
   id_DESC
@@ -1041,6 +1226,12 @@ type TeamPlayer {
   id: Int!
   nfl_player: NflPlayer!
   team: Team!
+}
+
+type TeamPlayerConnection {
+  pageInfo: PageInfo!
+  edges: [TeamPlayerEdge]!
+  aggregate: AggregateTeamPlayer!
 }
 
 input TeamPlayerCreateInput {
@@ -1066,6 +1257,11 @@ input TeamPlayerCreateWithoutTeamInput {
   nfl_player: NflPlayerCreateOneWithoutTeam_playersInput!
 }
 
+type TeamPlayerEdge {
+  node: TeamPlayer!
+  cursor: String!
+}
+
 enum TeamPlayerOrderByInput {
   id_ASC
   id_DESC
@@ -1073,6 +1269,10 @@ enum TeamPlayerOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
+}
+
+type TeamPlayerPreviousValues {
+  id: Int!
 }
 
 input TeamPlayerScalarWhereInput {
@@ -1087,6 +1287,13 @@ input TeamPlayerScalarWhereInput {
   AND: [TeamPlayerScalarWhereInput!]
   OR: [TeamPlayerScalarWhereInput!]
   NOT: [TeamPlayerScalarWhereInput!]
+}
+
+type TeamPlayerSubscriptionPayload {
+  mutation: MutationType!
+  node: TeamPlayer
+  updatedFields: [String!]
+  previousValues: TeamPlayerPreviousValues
 }
 
 input TeamPlayerSubscriptionWhereInput {
@@ -1175,6 +1382,11 @@ input TeamPlayerWhereUniqueInput {
   id: Int
 }
 
+type TeamPreviousValues {
+  id: Int!
+  name: String!
+}
+
 input TeamScalarWhereInput {
   id: Int
   id_not: Int
@@ -1201,6 +1413,13 @@ input TeamScalarWhereInput {
   AND: [TeamScalarWhereInput!]
   OR: [TeamScalarWhereInput!]
   NOT: [TeamScalarWhereInput!]
+}
+
+type TeamSubscriptionPayload {
+  mutation: MutationType!
+  node: Team
+  updatedFields: [String!]
+  previousValues: TeamPreviousValues
 }
 
 input TeamSubscriptionWhereInput {

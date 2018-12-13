@@ -6,7 +6,7 @@ import { resolvers } from "./resolvers";
 
 async function main() {
     try {
-        // await seed();
+        await seed();
         const server = new GraphQLServer({
             typeDefs: "./api-schema.graphql",
             resolvers,

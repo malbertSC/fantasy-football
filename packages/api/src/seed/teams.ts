@@ -22,7 +22,7 @@ export async function loadTeams(year: number) {
             city: nflFeedTeam.cityState,
             name: nflFeedTeam.nick,
             full_name: nflFeedTeam.fullName,
-            nfl_feed_id: nflFeedTeam.teamId
+            nfl_feed_id: Number(nflFeedTeam.teamId)
         }
         return team;
     })

@@ -12,14 +12,12 @@
         "ts-node": "^7.0.1"
     },
     "devDependencies": {
-        "graphql-cli": "^2.17.0",
         "typescript": "^3.1.6"
     },
     "scripts": {
         "build": "tsc",
         "prepublish": "yarn build",
         "deploy": "prisma deploy",
-        "generate": "prisma generate",
-        "get-schema": "graphql get-schema --project default"
+        "generate": "prisma generate && yarn build"
     }
 }

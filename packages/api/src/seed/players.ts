@@ -28,10 +28,10 @@ export async function loadPlayers() {
                 first_name: fantasyPlayer.firstName,
                 last_name: fantasyPlayer.lastName,
                 display_name: fantasyPlayer.displayName,
-                nfl_feed_id: fantasyPlayer.nflId.toString(),
+                nfl_feed_id: fantasyPlayer.nflId,
                 nfl_team: {
                     connect: {
-                        nfl_feed_id: fantasyPlayer.teamId
+                        nfl_feed_id: Number(fantasyPlayer.teamId)
                     }
                 },
                 esb_id: fantasyPlayer.esbId,

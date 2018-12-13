@@ -14,7 +14,7 @@ type NflPlayer @pgTable(name: "nfl_player") {
   first_name: String!
   gsis_id: String
   last_name: String!
-  nfl_feed_id: String! @unique
+  nfl_feed_id: Int! @unique
   nfl_team: NflTeam! @pgRelation(column: "nfl_team_id")
   position: String!
   position_group: String!
@@ -28,7 +28,7 @@ type NflTeam @pgTable(name: "nfl_team") {
   code: String!
   full_name: String!
   name: String!
-  nfl_feed_id: String! @unique
+  nfl_feed_id: Int! @unique
   nfl_players: [NflPlayer!]!
 }
 
@@ -43,4 +43,19 @@ type TeamPlayer @pgTable(name: "team_player") {
   id: Int! @unique
   nfl_player: NflPlayer! @pgRelation(column: "nfl_player_id")
   team: Team! @pgRelation(column: "team_id")
+}
+enum GameSeasonType {
+  PRE,
+  REG,
+}
+type NflGame @pgTable(name: "nfl_game") {
+  id: Int! @unique
+  away_team: NflTeam! @pgRelation(column: "away_team_id") @relation(name: "NflGamesAwayTeams")
+  home_team: NflTeam! @pgRelation(column: "home_team_id") @relation(name: "NflGamesHomeTeams")
+  week: Int!
+  season: Int!
+  nfl_feed_id: Int! @unique
+  nfl_feed_key: Int! @unique
+  start: DateTime!
+  season_type: GameSeasonType!
 }

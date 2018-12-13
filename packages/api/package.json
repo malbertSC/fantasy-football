@@ -14,8 +14,7 @@
         "passport-local": "^1.0.0",
         "pg": "^7.6.1",
         "reflect-metadata": "^0.1.12",
-        "type-zoo": "^3.2.1",
-        "xml-js": "^1.6.8"
+        "type-zoo": "^3.2.1"
     },
     "devDependencies": {
         "graphqlgen": "^0.4.0",
