@@ -7,12 +7,16 @@
     "private": true,
     "dependencies": {
         "@ffb/prisma": "^0.1.1",
-        "@types/node": "^10.12.6",
+        "@types/node": "^10.12.14",
+        "@types/puppeteer": "^1.11.1",
         "axios": "^0.18.0",
+        "csvtojson": "^2.0.8",
+        "dotenv": "^6.2.0",
         "graphql-yoga": "^1.16.7",
         "passport": "^0.4.0",
         "passport-local": "^1.0.0",
         "pg": "^7.6.1",
+        "puppeteer": "^1.11.0",
         "reflect-metadata": "^0.1.12",
         "type-zoo": "^3.2.1"
     },

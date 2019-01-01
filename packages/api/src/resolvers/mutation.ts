@@ -11,6 +11,9 @@ export const Mutation: MutationResolvers.Type = {
     createTeamPlayer: (parent, args, ctx) => {
         return ctx.db.createTeamPlayer(args.data);
     },
+    createFlipGamePlayer: (parent, args, ctx) => {
+        return ctx.db.createFlipGamePlayer(args.data);
+    },
     updateLeague: (parent, args, ctx) => {
         return ctx.db.updateLeague(args);
     },
@@ -19,6 +22,9 @@ export const Mutation: MutationResolvers.Type = {
     },
     updateTeamPlayer: (parent, args, ctx) => {
         return ctx.db.updateTeamPlayer(args);
+    },
+    updateFlipGamePlayer: (parent, args, ctx) => {
+        return ctx.db.updateFlipGamePlayer(args);
     },
     deleteLeague: (parent, args, ctx) => {
         return ctx.db.deleteLeague(args.where);
@@ -29,6 +35,9 @@ export const Mutation: MutationResolvers.Type = {
     deleteTeamPlayer: (parent, args, ctx) => {
         return ctx.db.deleteTeamPlayer(args.where);
     },
+    deleteFlipGamePlayer: (parent, args, ctx) => {
+        return ctx.db.deleteFlipGamePlayer(args.where);
+    },
     upsertLeague: (parent, args, ctx) => {
         throw new Error("Resolver not implemented");
     },
@@ -38,10 +47,16 @@ export const Mutation: MutationResolvers.Type = {
     upsertTeamPlayer: (parent, args, ctx) => {
         throw new Error("Resolver not implemented");
     },
+    upsertFlipGamePlayer: (parent, args, ctx) => {
+        throw new Error("Resolver not implemented");
+    },
     updateManyLeagues: (parent, args, ctx) => {
         throw new Error("Resolver not implemented");
     },
     updateManyTeams: (parent, args, ctx) => {
+        throw new Error("Resolver not implemented");
+    },
+    updateManyFlipGamePlayers: (parent, args, ctx) => {
         throw new Error("Resolver not implemented");
     },
     deleteManyLeagues: (parent, args, ctx) => {
@@ -51,6 +66,9 @@ export const Mutation: MutationResolvers.Type = {
         throw new Error("Resolver not implemented");
     },
     deleteManyTeamPlayers: (parent, args, ctx) => {
+        throw new Error("Resolver not implemented");
+    },
+    deleteManyFlipGamePlayers: (parent, args, ctx) => {
         throw new Error("Resolver not implemented");
     }
 };

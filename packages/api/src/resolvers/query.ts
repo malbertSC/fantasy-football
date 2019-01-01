@@ -12,5 +12,7 @@ export const Query: QueryResolvers.Type = {
     teams: (parent, args, ctx) => ctx.db.teams(),
     team: (parent, { where }, ctx) => ctx.db.team(where),
     teamPlayers: (parent, args, ctx) => ctx.db.teamPlayers(),
-    teamPlayer: (parent,  { where }, ctx) => ctx.db.teamPlayer(where)
+    teamPlayer: (parent,  { where }, ctx) => ctx.db.teamPlayer(where),
+    flipGamePlayers: (parent, args, ctx) => ctx.db.flipGamePlayers(),
+    flipGamePlayer: (parent, { where }, ctx) => ctx.db.flipGamePlayer(where),
 }

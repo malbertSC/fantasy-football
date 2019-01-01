@@ -7,6 +7,8 @@ import { Team } from "./team";
 import { League } from "./league";
 import { Mutation } from "./mutation";
 import { BatchPayload } from "./batch-payload";
+import { NflGame } from "./nfl-game";
+import { FlipGamePlayer } from "./flip-game-players";
 
 export const resolvers: Resolvers = {
     Query,
@@ -16,5 +18,7 @@ export const resolvers: Resolvers = {
     TeamPlayer,
     Team,
     League,
-    BatchPayload
+    BatchPayload,
+    NflGame,
+    FlipGamePlayer
 }

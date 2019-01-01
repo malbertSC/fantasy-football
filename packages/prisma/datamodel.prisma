@@ -28,7 +28,7 @@ type NflTeam @pgTable(name: "nfl_team") {
   code: String!
   full_name: String!
   name: String!
-  nfl_feed_id: Int! @unique
+  nfl_feed_id: String! @unique
   nfl_players: [NflPlayer!]!
 }
 
@@ -58,4 +58,20 @@ type NflGame @pgTable(name: "nfl_game") {
   nfl_feed_key: Int! @unique
   start: DateTime!
   season_type: GameSeasonType!
+}
+
+enum FlipPosition {
+  QB,
+  WR1,
+  WR2,
+  RB,
+  TE
+}
+
+type FlipGamePlayer @pgTable(name: "flip_game_players") {
+  id: Int! @unique
+  game: NflGame! @pgRelation(column: "nfl_game_id")
+  team: NflTeam! @pgRelation(column: "nfl_team_id")
+  position: FlipPosition!
+  player: NflPlayer! @pgRelation(column: "nfl_player_id")
 }

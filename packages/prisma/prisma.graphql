@@ -1,3 +1,7 @@
+type AggregateFlipGamePlayer {
+  count: Int!
+}
+
 type AggregateLeague {
   count: Int!
 }
@@ -27,6 +31,110 @@ type BatchPayload {
 }
 
 scalar DateTime
+
+type FlipGamePlayer {
+  id: Int!
+  game: NflGame!
+  team: NflTeam!
+  position: FlipPosition!
+  player: NflPlayer!
+}
+
+type FlipGamePlayerConnection {
+  pageInfo: PageInfo!
+  edges: [FlipGamePlayerEdge]!
+  aggregate: AggregateFlipGamePlayer!
+}
+
+input FlipGamePlayerCreateInput {
+  game: NflGameCreateOneInput!
+  team: NflTeamCreateOneInput!
+  position: FlipPosition!
+  player: NflPlayerCreateOneInput!
+}
+
+type FlipGamePlayerEdge {
+  node: FlipGamePlayer!
+  cursor: String!
+}
+
+enum FlipGamePlayerOrderByInput {
+  id_ASC
+  id_DESC
+  position_ASC
+  position_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type FlipGamePlayerPreviousValues {
+  id: Int!
+  position: FlipPosition!
+}
+
+type FlipGamePlayerSubscriptionPayload {
+  mutation: MutationType!
+  node: FlipGamePlayer
+  updatedFields: [String!]
+  previousValues: FlipGamePlayerPreviousValues
+}
+
+input FlipGamePlayerSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: FlipGamePlayerWhereInput
+  AND: [FlipGamePlayerSubscriptionWhereInput!]
+  OR: [FlipGamePlayerSubscriptionWhereInput!]
+  NOT: [FlipGamePlayerSubscriptionWhereInput!]
+}
+
+input FlipGamePlayerUpdateInput {
+  game: NflGameUpdateOneRequiredInput
+  team: NflTeamUpdateOneRequiredInput
+  position: FlipPosition
+  player: NflPlayerUpdateOneRequiredInput
+}
+
+input FlipGamePlayerUpdateManyMutationInput {
+  position: FlipPosition
+}
+
+input FlipGamePlayerWhereInput {
+  id: Int
+  id_not: Int
+  id_in: [Int!]
+  id_not_in: [Int!]
+  id_lt: Int
+  id_lte: Int
+  id_gt: Int
+  id_gte: Int
+  game: NflGameWhereInput
+  team: NflTeamWhereInput
+  position: FlipPosition
+  position_not: FlipPosition
+  position_in: [FlipPosition!]
+  position_not_in: [FlipPosition!]
+  player: NflPlayerWhereInput
+  AND: [FlipGamePlayerWhereInput!]
+  OR: [FlipGamePlayerWhereInput!]
+  NOT: [FlipGamePlayerWhereInput!]
+}
+
+input FlipGamePlayerWhereUniqueInput {
+  id: Int
+}
+
+enum FlipPosition {
+  QB
+  WR1
+  WR2
+  RB
+  TE
+}
 
 enum GameSeasonType {
   PRE
@@ -161,6 +269,12 @@ input LeagueWhereUniqueInput {
 scalar Long
 
 type Mutation {
+  createFlipGamePlayer(data: FlipGamePlayerCreateInput!): FlipGamePlayer!
+  updateFlipGamePlayer(data: FlipGamePlayerUpdateInput!, where: FlipGamePlayerWhereUniqueInput!): FlipGamePlayer
+  updateManyFlipGamePlayers(data: FlipGamePlayerUpdateManyMutationInput!, where: FlipGamePlayerWhereInput): BatchPayload!
+  upsertFlipGamePlayer(where: FlipGamePlayerWhereUniqueInput!, create: FlipGamePlayerCreateInput!, update: FlipGamePlayerUpdateInput!): FlipGamePlayer!
+  deleteFlipGamePlayer(where: FlipGamePlayerWhereUniqueInput!): FlipGamePlayer
+  deleteManyFlipGamePlayers(where: FlipGamePlayerWhereInput): BatchPayload!
   createLeague(data: LeagueCreateInput!): League!
   updateLeague(data: LeagueUpdateInput!, where: LeagueWhereUniqueInput!): League
   updateManyLeagues(data: LeagueUpdateManyMutationInput!, where: LeagueWhereInput): BatchPayload!
@@ -233,6 +347,11 @@ input NflGameCreateInput {
   season_type: GameSeasonType!
 }
 
+input NflGameCreateOneInput {
+  create: NflGameCreateInput
+  connect: NflGameWhereUniqueInput
+}
+
 type NflGameEdge {
   node: NflGame!
   cursor: String!
@@ -287,6 +406,17 @@ input NflGameSubscriptionWhereInput {
   NOT: [NflGameSubscriptionWhereInput!]
 }
 
+input NflGameUpdateDataInput {
+  away_team: NflTeamUpdateOneRequiredInput
+  home_team: NflTeamUpdateOneRequiredInput
+  week: Int
+  season: Int
+  nfl_feed_id: Int
+  nfl_feed_key: Int
+  start: DateTime
+  season_type: GameSeasonType
+}
+
 input NflGameUpdateInput {
   away_team: NflTeamUpdateOneRequiredInput
   home_team: NflTeamUpdateOneRequiredInput
@@ -305,6 +435,18 @@ input NflGameUpdateManyMutationInput {
   nfl_feed_key: Int
   start: DateTime
   season_type: GameSeasonType
+}
+
+input NflGameUpdateOneRequiredInput {
+  create: NflGameCreateInput
+  update: NflGameUpdateDataInput
+  upsert: NflGameUpsertNestedInput
+  connect: NflGameWhereUniqueInput
+}
+
+input NflGameUpsertNestedInput {
+  update: NflGameUpdateDataInput!
+  create: NflGameCreateInput!
 }
 
 input NflGameWhereInput {
@@ -411,6 +553,11 @@ input NflPlayerCreateInput {
 input NflPlayerCreateManyWithoutNfl_teamInput {
   create: [NflPlayerCreateWithoutNfl_teamInput!]
   connect: [NflPlayerWhereUniqueInput!]
+}
+
+input NflPlayerCreateOneInput {
+  create: NflPlayerCreateInput
+  connect: NflPlayerWhereUniqueInput
 }
 
 input NflPlayerCreateOneWithoutTeam_playersInput {
@@ -641,6 +788,20 @@ input NflPlayerSubscriptionWhereInput {
   NOT: [NflPlayerSubscriptionWhereInput!]
 }
 
+input NflPlayerUpdateDataInput {
+  display_name: String
+  esb_id: String
+  first_name: String
+  gsis_id: String
+  last_name: String
+  nfl_feed_id: Int
+  nfl_team: NflTeamUpdateOneRequiredWithoutNfl_playersInput
+  position: String
+  position_group: String
+  status: String
+  team_players: TeamPlayerUpdateManyWithoutNfl_playerInput
+}
+
 input NflPlayerUpdateInput {
   display_name: String
   esb_id: String
@@ -695,6 +856,13 @@ input NflPlayerUpdateManyWithWhereNestedInput {
   data: NflPlayerUpdateManyDataInput!
 }
 
+input NflPlayerUpdateOneRequiredInput {
+  create: NflPlayerCreateInput
+  update: NflPlayerUpdateDataInput
+  upsert: NflPlayerUpsertNestedInput
+  connect: NflPlayerWhereUniqueInput
+}
+
 input NflPlayerUpdateOneRequiredWithoutTeam_playersInput {
   create: NflPlayerCreateWithoutTeam_playersInput
   update: NflPlayerUpdateWithoutTeam_playersDataInput
@@ -731,6 +899,11 @@ input NflPlayerUpdateWithoutTeam_playersDataInput {
 input NflPlayerUpdateWithWhereUniqueWithoutNfl_teamInput {
   where: NflPlayerWhereUniqueInput!
   data: NflPlayerUpdateWithoutNfl_teamDataInput!
+}
+
+input NflPlayerUpsertNestedInput {
+  update: NflPlayerUpdateDataInput!
+  create: NflPlayerCreateInput!
 }
 
 input NflPlayerUpsertWithoutTeam_playersInput {
@@ -893,7 +1066,7 @@ type NflTeam {
   code: String!
   full_name: String!
   name: String!
-  nfl_feed_id: Int!
+  nfl_feed_id: String!
   nfl_players(where: NflPlayerWhereInput, orderBy: NflPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflPlayer!]
 }
 
@@ -908,7 +1081,7 @@ input NflTeamCreateInput {
   code: String!
   full_name: String!
   name: String!
-  nfl_feed_id: Int!
+  nfl_feed_id: String!
   nfl_players: NflPlayerCreateManyWithoutNfl_teamInput
 }
 
@@ -927,7 +1100,7 @@ input NflTeamCreateWithoutNfl_playersInput {
   code: String!
   full_name: String!
   name: String!
-  nfl_feed_id: Int!
+  nfl_feed_id: String!
 }
 
 type NflTeamEdge {
@@ -960,7 +1133,7 @@ type NflTeamPreviousValues {
   code: String!
   full_name: String!
   name: String!
-  nfl_feed_id: Int!
+  nfl_feed_id: String!
 }
 
 type NflTeamSubscriptionPayload {
@@ -986,7 +1159,7 @@ input NflTeamUpdateDataInput {
   code: String
   full_name: String
   name: String
-  nfl_feed_id: Int
+  nfl_feed_id: String
   nfl_players: NflPlayerUpdateManyWithoutNfl_teamInput
 }
 
@@ -995,7 +1168,7 @@ input NflTeamUpdateInput {
   code: String
   full_name: String
   name: String
-  nfl_feed_id: Int
+  nfl_feed_id: String
   nfl_players: NflPlayerUpdateManyWithoutNfl_teamInput
 }
 
@@ -1004,7 +1177,7 @@ input NflTeamUpdateManyMutationInput {
   code: String
   full_name: String
   name: String
-  nfl_feed_id: Int
+  nfl_feed_id: String
 }
 
 input NflTeamUpdateOneRequiredInput {
@@ -1026,7 +1199,7 @@ input NflTeamUpdateWithoutNfl_playersDataInput {
   code: String
   full_name: String
   name: String
-  nfl_feed_id: Int
+  nfl_feed_id: String
 }
 
 input NflTeamUpsertNestedInput {
@@ -1104,14 +1277,20 @@ input NflTeamWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  nfl_feed_id: Int
-  nfl_feed_id_not: Int
-  nfl_feed_id_in: [Int!]
-  nfl_feed_id_not_in: [Int!]
-  nfl_feed_id_lt: Int
-  nfl_feed_id_lte: Int
-  nfl_feed_id_gt: Int
-  nfl_feed_id_gte: Int
+  nfl_feed_id: String
+  nfl_feed_id_not: String
+  nfl_feed_id_in: [String!]
+  nfl_feed_id_not_in: [String!]
+  nfl_feed_id_lt: String
+  nfl_feed_id_lte: String
+  nfl_feed_id_gt: String
+  nfl_feed_id_gte: String
+  nfl_feed_id_contains: String
+  nfl_feed_id_not_contains: String
+  nfl_feed_id_starts_with: String
+  nfl_feed_id_not_starts_with: String
+  nfl_feed_id_ends_with: String
+  nfl_feed_id_not_ends_with: String
   nfl_players_every: NflPlayerWhereInput
   nfl_players_some: NflPlayerWhereInput
   nfl_players_none: NflPlayerWhereInput
@@ -1122,7 +1301,7 @@ input NflTeamWhereInput {
 
 input NflTeamWhereUniqueInput {
   id: Int
-  nfl_feed_id: Int
+  nfl_feed_id: String
 }
 
 interface Node {
@@ -1137,6 +1316,9 @@ type PageInfo {
 }
 
 type Query {
+  flipGamePlayer(where: FlipGamePlayerWhereUniqueInput!): FlipGamePlayer
+  flipGamePlayers(where: FlipGamePlayerWhereInput, orderBy: FlipGamePlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlipGamePlayer]!
+  flipGamePlayersConnection(where: FlipGamePlayerWhereInput, orderBy: FlipGamePlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FlipGamePlayerConnection!
   league(where: LeagueWhereUniqueInput!): League
   leagues(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [League]!
   leaguesConnection(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LeagueConnection!
@@ -1159,6 +1341,7 @@ type Query {
 }
 
 type Subscription {
+  flipGamePlayer(where: FlipGamePlayerSubscriptionWhereInput): FlipGamePlayerSubscriptionPayload
   league(where: LeagueSubscriptionWhereInput): LeagueSubscriptionPayload
   nflGame(where: NflGameSubscriptionWhereInput): NflGameSubscriptionPayload
   nflPlayer(where: NflPlayerSubscriptionWhereInput): NflPlayerSubscriptionPayload

@@ -31,7 +31,7 @@ export async function loadPlayers() {
                 nfl_feed_id: fantasyPlayer.nflId,
                 nfl_team: {
                     connect: {
-                        nfl_feed_id: Number(fantasyPlayer.teamId)
+                        nfl_feed_id: fantasyPlayer.teamId
                     }
                 },
                 esb_id: fantasyPlayer.esbId,

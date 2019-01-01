@@ -1,6 +1,6 @@
 import { NflGameResolvers } from "../generated/graphqlgen";
 
-export const NflPlayer: NflGameResolvers.Type = {
+export const NflGame: NflGameResolvers.Type = {
     ...NflGameResolvers.defaultResolvers,
 
     away_team: (parent, args, ctx) => {

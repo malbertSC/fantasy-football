@@ -23,12 +23,12 @@ export async function loadGames() {
         const newGame: NflGameCreateInput = {
             home_team: {
                 connect: {
-                    nfl_feed_id: Number(game.homeTeamId)
+                    nfl_feed_id: game.homeTeamId
                 }
             },
             away_team: {
                 connect: {
-                    nfl_feed_id: Number(game.visitorTeamId)
+                    nfl_feed_id: game.visitorTeamId
                 }
             },
             week: game.week,

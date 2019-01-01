@@ -1,4 +1,5 @@
 import "reflect-metadata";
+import "dotenv";
 import { seed } from "./seed";
 import { GraphQLServer } from "graphql-yoga";
 import { prisma } from "@ffb/prisma";
