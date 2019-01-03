@@ -1,15 +1,15 @@
 import { MatchupResolvers } from "../generated/graphqlgen";
 import { Matchup as MatchupModel } from "models";
 import { prisma, FlipPosition } from "@ffb/prisma";
-
+import gql from "graphql-tag";
 export const Matchup: MatchupResolvers.Type = {
     ...MatchupResolvers.defaultResolvers
 };
 
 export async function getMatchups(gameID: number): Promise<MatchupModel[]> {
     const query = `
-        query {
-            flipGamePlayers(where:{game:{id:4792}}) {
+        query GetFlipGamePlayers($id: Int!) {
+            flipGamePlayers(where:{game:{id:$id}}) {
                 id,
                 team {
                     id
@@ -23,7 +23,7 @@ export async function getMatchups(gameID: number): Promise<MatchupModel[]> {
 
     const homeTeamID = (await prisma.nflGame({ id: gameID }).home_team()).id;
     const awayTeamID = (await prisma.nflGame({ id: gameID }).away_team()).id;
-    const flipGamePlayers = (await prisma.$graphql(query)).flipGamePlayers;
+    const flipGamePlayers = (await prisma.$graphql(query, {id: gameID})).flipGamePlayers;
     const positions: FlipPosition[] = flipGamePlayers.map(player => player.position);
     const uniquePositions = [...new Set(positions)];
     const matchups = uniquePositions.map(uniquePosition => {

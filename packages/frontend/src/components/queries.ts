@@ -37,18 +37,25 @@ export const GetWeekGames = gql`
     }
 `;
 
-export const GetFlipGameMatchup = gql`
-    query GetFlipGameMatchup($id:Int) {
-        flipGamePlayers(where: {game: {id: $id}}) {
-            id,
-                position,
-                player {
+export const GetMatchups = gql`
+    query GetMatchups($id:Int!) {
+        matchups(where:{gameID: $id}) {
+            position,
+            homePlayer{
                 id,
-                display_name
+                display_name,
+                nfl_team {
+                    id,
+                    full_name
+                }
             },
-                team {
+            awayPlayer{
                 id,
-                full_name
+                display_name,
+                nfl_team {
+                    id,
+                    full_name
+                }
             }
         }
     }

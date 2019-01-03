@@ -6,7 +6,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { FlipGameList } from "./components/flip_games/flip_game_list";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { FlipGame } from "./components/flip_matchups/flip_game";
+import { Matchups } from "./components/flip_matchups/matchups";
 
 const client = new ApolloClient({
     uri: "http://localhost:4000"
@@ -30,7 +30,7 @@ class App extends Component {
                                 </nav>
 
                                 <Route path="/" exact component={FlipGameList} />
-                                <Route path="/game/:id" component={FlipGame} />
+                                <Route path="/game/:gameId" component={Matchups} />
                             </div>
                         </Router>
                     </header>
