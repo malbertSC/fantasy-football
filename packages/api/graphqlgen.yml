@@ -5,6 +5,7 @@ context: ./src/types.ts:Context
 models:
   files:
     - ../../node_modules/@ffb/prisma/dist/index.d.ts
+    - ./src/models/Matchup.ts
 
 output: ./src/generated/graphqlgen.ts
 

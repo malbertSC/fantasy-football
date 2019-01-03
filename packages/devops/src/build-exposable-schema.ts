@@ -7,7 +7,7 @@ function main() {
     const result = graphqlSync(graphqlSchemaObj, introspectionQuery).data;
     const newSchema = getAPISafeSchema(result);
     const newGraphqlSchemaObj = buildClientSchema(newSchema);
-    const sdlString = printSchema(newGraphqlSchemaObj);
+    const sdlString = `# import *, Query.* from './custom.graphql'\n` + printSchema(newGraphqlSchemaObj);
     fs.writeFileSync("../api/api-schema.graphql", sdlString);
     // tslint:disable-next-line:no-console
     console.log("api-schema.graphql built")

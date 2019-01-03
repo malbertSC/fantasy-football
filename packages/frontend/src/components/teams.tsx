@@ -2,6 +2,7 @@ import { GetTeams, GetTeams_teams } from "./__generated__/GetTeams";
 import { GetTeams as QUERY } from "./queries";
 import { Query } from "react-apollo";
 import React, { Component } from "react";
+import { GetTeam_team } from "./__generated__/GetTeam";
 
 class GetTeamsQuery extends Query<GetTeams> { }
 
@@ -16,7 +17,8 @@ export class Teams extends Component {
                     const { teams } = data;
                     return (
                         <ul>
-                            {teams.map(team => <li>{team.id}</li>)
+                            {/* https://github.com/prisma/prisma/issues/2999 */}
+                            {teams.map(team => <li>{(team as GetTeam_team).id}</li>)
                             }
                         </ul>
                     );

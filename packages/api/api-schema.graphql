@@ -1,3 +1,4 @@
+# import *, Query.* from './custom.graphql'
 type BatchPayload {
   count: Long!
 }

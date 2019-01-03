@@ -20,7 +20,8 @@
         "outDir": "./dist",
         "baseUrl": "./src",
         "resolveJsonModule": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "downlevelIteration": true
     },
     "include": [
         "src/**/*"
