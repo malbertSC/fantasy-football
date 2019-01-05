@@ -2,6 +2,7 @@ import { MatchupResolvers } from "../generated/graphqlgen";
 import { Matchup as MatchupModel } from "models";
 import { prisma, FlipPosition } from "@ffb/prisma";
 import gql from "graphql-tag";
+
 export const Matchup: MatchupResolvers.Type = {
     ...MatchupResolvers.defaultResolvers
 };
