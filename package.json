@@ -15,7 +15,7 @@
     "start-api": "cd packages/api && ts-node ./src/index.ts",
     "debug-api": "cd packages/api && node --inspect -r ts-node/register ./src/index.ts",
     "start-prisma": "cd packages/prisma && docker-compose up -d",
-    "update-prisma": "yarn deploy-prisma && yarn generate-api-types",
+    "update-prisma": "yarn deploy-prisma && yarn generate-prisma-client && yarn generate-api-types",
     "generate-prisma-client": "cd packages/prisma && prisma generate && yarn build",
     "deploy-prisma": "cd packages/prisma && yarn deploy",
     "generate-api-types": "cd packages/api && yarn graphqlgen"

@@ -26,6 +26,10 @@ type AggregateTeamPlayer {
   count: Int!
 }
 
+type AggregateUser {
+  count: Int!
+}
+
 type BatchPayload {
   count: Long!
 }
@@ -310,6 +314,12 @@ type Mutation {
   upsertTeamPlayer(where: TeamPlayerWhereUniqueInput!, create: TeamPlayerCreateInput!, update: TeamPlayerUpdateInput!): TeamPlayer!
   deleteTeamPlayer(where: TeamPlayerWhereUniqueInput!): TeamPlayer
   deleteManyTeamPlayers(where: TeamPlayerWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1337,6 +1347,9 @@ type Query {
   teamPlayer(where: TeamPlayerWhereUniqueInput!): TeamPlayer
   teamPlayers(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TeamPlayer]!
   teamPlayersConnection(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamPlayerConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   node(id: ID!): Node
 }
 
@@ -1348,6 +1361,7 @@ type Subscription {
   nflTeam(where: NflTeamSubscriptionWhereInput): NflTeamSubscriptionPayload
   team(where: TeamSubscriptionWhereInput): TeamSubscriptionPayload
   teamPlayer(where: TeamPlayerSubscriptionWhereInput): TeamPlayerSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type Team {
@@ -1355,6 +1369,7 @@ type Team {
   league: League!
   name: String!
   team_players(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TeamPlayer!]
+  owner_user: User!
 }
 
 type TeamConnection {
@@ -1367,6 +1382,7 @@ input TeamCreateInput {
   league: LeagueCreateOneWithoutTeamsInput!
   name: String!
   team_players: TeamPlayerCreateManyWithoutTeamInput
+  owner_user: UserCreateOneInput!
 }
 
 input TeamCreateManyWithoutLeagueInput {
@@ -1382,11 +1398,13 @@ input TeamCreateOneWithoutTeam_playersInput {
 input TeamCreateWithoutLeagueInput {
   name: String!
   team_players: TeamPlayerCreateManyWithoutTeamInput
+  owner_user: UserCreateOneInput!
 }
 
 input TeamCreateWithoutTeam_playersInput {
   league: LeagueCreateOneWithoutTeamsInput!
   name: String!
+  owner_user: UserCreateOneInput!
 }
 
 type TeamEdge {
@@ -1620,6 +1638,7 @@ input TeamUpdateInput {
   league: LeagueUpdateOneRequiredWithoutTeamsInput
   name: String
   team_players: TeamPlayerUpdateManyWithoutTeamInput
+  owner_user: UserUpdateOneRequiredInput
 }
 
 input TeamUpdateManyDataInput {
@@ -1656,11 +1675,13 @@ input TeamUpdateOneRequiredWithoutTeam_playersInput {
 input TeamUpdateWithoutLeagueDataInput {
   name: String
   team_players: TeamPlayerUpdateManyWithoutTeamInput
+  owner_user: UserUpdateOneRequiredInput
 }
 
 input TeamUpdateWithoutTeam_playersDataInput {
   league: LeagueUpdateOneRequiredWithoutTeamsInput
   name: String
+  owner_user: UserUpdateOneRequiredInput
 }
 
 input TeamUpdateWithWhereUniqueWithoutLeagueInput {
@@ -1706,6 +1727,7 @@ input TeamWhereInput {
   team_players_every: TeamPlayerWhereInput
   team_players_some: TeamPlayerWhereInput
   team_players_none: TeamPlayerWhereInput
+  owner_user: UserWhereInput
   AND: [TeamWhereInput!]
   OR: [TeamWhereInput!]
   NOT: [TeamWhereInput!]
@@ -1713,4 +1735,142 @@ input TeamWhereInput {
 
 input TeamWhereUniqueInput {
   id: Int
+}
+
+type User {
+  id: Int!
+  username: String!
+  passwordHash: String!
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  username: String!
+  passwordHash: String!
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  username_ASC
+  username_DESC
+  passwordHash_ASC
+  passwordHash_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type UserPreviousValues {
+  id: Int!
+  username: String!
+  passwordHash: String!
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
+}
+
+input UserUpdateDataInput {
+  username: String
+  passwordHash: String
+}
+
+input UserUpdateInput {
+  username: String
+  passwordHash: String
+}
+
+input UserUpdateManyMutationInput {
+  username: String
+  passwordHash: String
+}
+
+input UserUpdateOneRequiredInput {
+  create: UserCreateInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserWhereInput {
+  id: Int
+  id_not: Int
+  id_in: [Int!]
+  id_not_in: [Int!]
+  id_lt: Int
+  id_lte: Int
+  id_gt: Int
+  id_gte: Int
+  username: String
+  username_not: String
+  username_in: [String!]
+  username_not_in: [String!]
+  username_lt: String
+  username_lte: String
+  username_gt: String
+  username_gte: String
+  username_contains: String
+  username_not_contains: String
+  username_starts_with: String
+  username_not_starts_with: String
+  username_ends_with: String
+  username_not_ends_with: String
+  passwordHash: String
+  passwordHash_not: String
+  passwordHash_in: [String!]
+  passwordHash_not_in: [String!]
+  passwordHash_lt: String
+  passwordHash_lte: String
+  passwordHash_gt: String
+  passwordHash_gte: String
+  passwordHash_contains: String
+  passwordHash_not_contains: String
+  passwordHash_starts_with: String
+  passwordHash_not_starts_with: String
+  passwordHash_ends_with: String
+  passwordHash_not_ends_with: String
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input UserWhereUniqueInput {
+  id: Int
+  username: String
 }

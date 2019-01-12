@@ -1,5 +1,5 @@
 import { QueryResolvers } from "../generated/graphqlgen"
-import { getMatchups } from "./matchup";
+import { getMatchups } from "../models/Matchup";
 
 export const Query: QueryResolvers.Type = {
     nflTeam: (parent, {where}, ctx) => ctx.db.nflTeam(where),

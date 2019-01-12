@@ -1,10 +1,29 @@
-# import Query.*, FlipPosition, NflPlayer from '../prisma/prisma.graphql'
+# import FlipGamePlayerWhereUniqueInput, FlipGamePlayerWhereInput, FlipGamePlayer from '../prisma/prisma.graphql'
+# import LeagueWhereUniqueInput, LeagueWhereInput, League from '../prisma/prisma.graphql'
+# import NflGameWhereUniqueInput, NflPlayerWhereInput, NflPlayer from '../prisma/prisma.graphql'
+# import NflTeamWUniqueInput, NflTeamWWhereInput, NflTeamW from '../prisma/prisma.graphql'
+# import TeameWhereUniqueInput, TeamWhereInput, Team from '../prisma/prisma.graphql'
+# import TeamPlayerWhereUniqueInput, TeamPlayerWhereInput, TeamPlayer from '../prisma/prisma.graphql'
 
 type Query {
     matchups(where: MatchupWhereInput!): [Matchup]!
+    flipGamePlayer(where: FlipGamePlayerWhereUniqueInput!): FlipGamePlayer
+    flipGamePlayers(where: FlipGamePlayerWhereInput, orderBy: FlipGamePlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlipGamePlayer]!
+    league(where: LeagueWhereUniqueInput!): League
+    leagues(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [League]!
+    nflGame(where: NflGameWhereUniqueInput!): NflGame
+    nflGames(where: NflGameWhereInput, orderBy: NflGameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflGame]!
+    nflPlayer(where: NflPlayerWhereUniqueInput!): NflPlayer
+    nflPlayers(where: NflPlayerWhereInput, orderBy: NflPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflPlayer]!
+    nflTeam(where: NflTeamWhereUniqueInput!): NflTeam
+    nflTeams(where: NflTeamWhereInput, orderBy: NflTeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflTeam]!
+    team(where: TeamWhereUniqueInput!): Team
+    teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team]!
+    teamPlayer(where: TeamPlayerWhereUniqueInput!): TeamPlayer
+    teamPlayers(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TeamPlayer]!
 }
 type Mutation {
-    doSomething(data: Int): Int
+    signup(username: String, password:String): SafeUser
 }
 input MatchupWhereInput {
     gameID: Int!
@@ -13,4 +32,12 @@ type Matchup {
     position: FlipPosition!
     homePlayer: NflPlayer!
     awayPlayer: NflPlayer!
+}
+type User {
+    id: Int!
+    username: String!
+}
+type SafeUser {
+    id: Int!
+    username: String!
 }

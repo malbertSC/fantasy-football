@@ -17,6 +17,7 @@ export interface Exists {
   nflTeam: (where?: NflTeamWhereInput) => Promise<boolean>;
   team: (where?: TeamWhereInput) => Promise<boolean>;
   teamPlayer: (where?: TeamPlayerWhereInput) => Promise<boolean>;
+  user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
 export interface Node {}
@@ -201,6 +202,29 @@ export interface Prisma {
       last?: Int;
     }
   ) => TeamPlayerConnectionPromise;
+  user: (where: UserWhereUniqueInput) => UserPromise;
+  users: (
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<User>;
+  usersConnection: (
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => UserConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
@@ -331,6 +355,22 @@ export interface Prisma {
   ) => TeamPlayerPromise;
   deleteTeamPlayer: (where: TeamPlayerWhereUniqueInput) => TeamPlayerPromise;
   deleteManyTeamPlayers: (where?: TeamPlayerWhereInput) => BatchPayloadPromise;
+  createUser: (data: UserCreateInput) => UserPromise;
+  updateUser: (
+    args: { data: UserUpdateInput; where: UserWhereUniqueInput }
+  ) => UserPromise;
+  updateManyUsers: (
+    args: { data: UserUpdateManyMutationInput; where?: UserWhereInput }
+  ) => BatchPayloadPromise;
+  upsertUser: (
+    args: {
+      where: UserWhereUniqueInput;
+      create: UserCreateInput;
+      update: UserUpdateInput;
+    }
+  ) => UserPromise;
+  deleteUser: (where: UserWhereUniqueInput) => UserPromise;
+  deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
 
   /**
    * Subscriptions
@@ -361,6 +401,9 @@ export interface Subscription {
   teamPlayer: (
     where?: TeamPlayerSubscriptionWhereInput
   ) => TeamPlayerSubscriptionPayloadSubscription;
+  user: (
+    where?: UserSubscriptionWhereInput
+  ) => UserSubscriptionPayloadSubscription;
 }
 
 export interface ClientConstructor<T> {
@@ -479,6 +522,18 @@ export type NflTeamOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
+export type UserOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "username_ASC"
+  | "username_DESC"
+  | "passwordHash_ASC"
+  | "passwordHash_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
 export interface NflPlayerUpdateWithoutNfl_teamDataInput {
   display_name?: String;
   esb_id?: String;
@@ -496,6 +551,18 @@ export type FlipGamePlayerWhereUniqueInput = AtLeastOne<{
   id: Int;
 }>;
 
+export interface NflPlayerCreateManyWithoutNfl_teamInput {
+  create?:
+    | NflPlayerCreateWithoutNfl_teamInput[]
+    | NflPlayerCreateWithoutNfl_teamInput;
+  connect?: NflPlayerWhereUniqueInput[] | NflPlayerWhereUniqueInput;
+}
+
+export interface NflPlayerCreateOneWithoutTeam_playersInput {
+  create?: NflPlayerCreateWithoutTeam_playersInput;
+  connect?: NflPlayerWhereUniqueInput;
+}
+
 export interface NflPlayerCreateWithoutNfl_teamInput {
   display_name: String;
   esb_id: String;
@@ -509,17 +576,11 @@ export interface NflPlayerCreateWithoutNfl_teamInput {
   team_players?: TeamPlayerCreateManyWithoutNfl_playerInput;
 }
 
-export interface NflPlayerCreateWithoutTeam_playersInput {
-  display_name: String;
-  esb_id: String;
-  first_name: String;
-  gsis_id?: String;
-  last_name: String;
-  nfl_feed_id: Int;
-  nfl_team: NflTeamCreateOneWithoutNfl_playersInput;
-  position: String;
-  position_group: String;
-  status: String;
+export interface LeagueUpdateOneRequiredWithoutTeamsInput {
+  create?: LeagueCreateWithoutTeamsInput;
+  update?: LeagueUpdateWithoutTeamsDataInput;
+  upsert?: LeagueUpsertWithoutTeamsInput;
+  connect?: LeagueWhereUniqueInput;
 }
 
 export interface TeamPlayerCreateManyWithoutNfl_playerInput {
@@ -529,34 +590,22 @@ export interface TeamPlayerCreateManyWithoutNfl_playerInput {
   connect?: TeamPlayerWhereUniqueInput[] | TeamPlayerWhereUniqueInput;
 }
 
-export interface LeagueUpdateOneRequiredWithoutTeamsInput {
-  create?: LeagueCreateWithoutTeamsInput;
-  update?: LeagueUpdateWithoutTeamsDataInput;
-  upsert?: LeagueUpsertWithoutTeamsInput;
-  connect?: LeagueWhereUniqueInput;
+export interface TeamPlayerSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: TeamPlayerWhereInput;
+  AND?: TeamPlayerSubscriptionWhereInput[] | TeamPlayerSubscriptionWhereInput;
+  OR?: TeamPlayerSubscriptionWhereInput[] | TeamPlayerSubscriptionWhereInput;
+  NOT?: TeamPlayerSubscriptionWhereInput[] | TeamPlayerSubscriptionWhereInput;
 }
 
 export interface TeamPlayerCreateWithoutNfl_playerInput {
   team: TeamCreateOneWithoutTeam_playersInput;
 }
 
-export interface TeamSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: TeamWhereInput;
-  AND?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput;
-  OR?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput;
-  NOT?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput;
-}
-
-export interface TeamCreateOneWithoutTeam_playersInput {
-  create?: TeamCreateWithoutTeam_playersInput;
-  connect?: TeamWhereUniqueInput;
-}
-
-export interface TeamWhereInput {
+export interface LeagueWhereInput {
   id?: Int;
   id_not?: Int;
   id_in?: Int[] | Int;
@@ -565,7 +614,6 @@ export interface TeamWhereInput {
   id_lte?: Int;
   id_gt?: Int;
   id_gte?: Int;
-  league?: LeagueWhereInput;
   name?: String;
   name_not?: String;
   name_in?: String[] | String;
@@ -580,17 +628,34 @@ export interface TeamWhereInput {
   name_not_starts_with?: String;
   name_ends_with?: String;
   name_not_ends_with?: String;
-  team_players_every?: TeamPlayerWhereInput;
-  team_players_some?: TeamPlayerWhereInput;
-  team_players_none?: TeamPlayerWhereInput;
-  AND?: TeamWhereInput[] | TeamWhereInput;
-  OR?: TeamWhereInput[] | TeamWhereInput;
-  NOT?: TeamWhereInput[] | TeamWhereInput;
+  teams_every?: TeamWhereInput;
+  teams_some?: TeamWhereInput;
+  teams_none?: TeamWhereInput;
+  AND?: LeagueWhereInput[] | LeagueWhereInput;
+  OR?: LeagueWhereInput[] | LeagueWhereInput;
+  NOT?: LeagueWhereInput[] | LeagueWhereInput;
+}
+
+export interface TeamCreateOneWithoutTeam_playersInput {
+  create?: TeamCreateWithoutTeam_playersInput;
+  connect?: TeamWhereUniqueInput;
+}
+
+export interface NflPlayerSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: NflPlayerWhereInput;
+  AND?: NflPlayerSubscriptionWhereInput[] | NflPlayerSubscriptionWhereInput;
+  OR?: NflPlayerSubscriptionWhereInput[] | NflPlayerSubscriptionWhereInput;
+  NOT?: NflPlayerSubscriptionWhereInput[] | NflPlayerSubscriptionWhereInput;
 }
 
 export interface TeamCreateWithoutTeam_playersInput {
   league: LeagueCreateOneWithoutTeamsInput;
   name: String;
+  owner_user: UserCreateOneInput;
 }
 
 export interface TeamPlayerWhereInput {
@@ -614,7 +679,7 @@ export interface LeagueCreateOneWithoutTeamsInput {
   connect?: LeagueWhereUniqueInput;
 }
 
-export interface FlipGamePlayerWhereInput {
+export interface NflGameWhereInput {
   id?: Int;
   id_not?: Int;
   id_in?: Int[] | Int;
@@ -623,20 +688,107 @@ export interface FlipGamePlayerWhereInput {
   id_lte?: Int;
   id_gt?: Int;
   id_gte?: Int;
-  game?: NflGameWhereInput;
-  team?: NflTeamWhereInput;
-  position?: FlipPosition;
-  position_not?: FlipPosition;
-  position_in?: FlipPosition[] | FlipPosition;
-  position_not_in?: FlipPosition[] | FlipPosition;
-  player?: NflPlayerWhereInput;
-  AND?: FlipGamePlayerWhereInput[] | FlipGamePlayerWhereInput;
-  OR?: FlipGamePlayerWhereInput[] | FlipGamePlayerWhereInput;
-  NOT?: FlipGamePlayerWhereInput[] | FlipGamePlayerWhereInput;
+  away_team?: NflTeamWhereInput;
+  home_team?: NflTeamWhereInput;
+  week?: Int;
+  week_not?: Int;
+  week_in?: Int[] | Int;
+  week_not_in?: Int[] | Int;
+  week_lt?: Int;
+  week_lte?: Int;
+  week_gt?: Int;
+  week_gte?: Int;
+  season?: Int;
+  season_not?: Int;
+  season_in?: Int[] | Int;
+  season_not_in?: Int[] | Int;
+  season_lt?: Int;
+  season_lte?: Int;
+  season_gt?: Int;
+  season_gte?: Int;
+  nfl_feed_id?: Int;
+  nfl_feed_id_not?: Int;
+  nfl_feed_id_in?: Int[] | Int;
+  nfl_feed_id_not_in?: Int[] | Int;
+  nfl_feed_id_lt?: Int;
+  nfl_feed_id_lte?: Int;
+  nfl_feed_id_gt?: Int;
+  nfl_feed_id_gte?: Int;
+  nfl_feed_key?: Int;
+  nfl_feed_key_not?: Int;
+  nfl_feed_key_in?: Int[] | Int;
+  nfl_feed_key_not_in?: Int[] | Int;
+  nfl_feed_key_lt?: Int;
+  nfl_feed_key_lte?: Int;
+  nfl_feed_key_gt?: Int;
+  nfl_feed_key_gte?: Int;
+  start?: DateTimeInput;
+  start_not?: DateTimeInput;
+  start_in?: DateTimeInput[] | DateTimeInput;
+  start_not_in?: DateTimeInput[] | DateTimeInput;
+  start_lt?: DateTimeInput;
+  start_lte?: DateTimeInput;
+  start_gt?: DateTimeInput;
+  start_gte?: DateTimeInput;
+  season_type?: GameSeasonType;
+  season_type_not?: GameSeasonType;
+  season_type_in?: GameSeasonType[] | GameSeasonType;
+  season_type_not_in?: GameSeasonType[] | GameSeasonType;
+  AND?: NflGameWhereInput[] | NflGameWhereInput;
+  OR?: NflGameWhereInput[] | NflGameWhereInput;
+  NOT?: NflGameWhereInput[] | NflGameWhereInput;
 }
 
 export interface LeagueCreateWithoutTeamsInput {
   name: String;
+}
+
+export interface NflGameSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: NflGameWhereInput;
+  AND?: NflGameSubscriptionWhereInput[] | NflGameSubscriptionWhereInput;
+  OR?: NflGameSubscriptionWhereInput[] | NflGameSubscriptionWhereInput;
+  NOT?: NflGameSubscriptionWhereInput[] | NflGameSubscriptionWhereInput;
+}
+
+export interface UserCreateOneInput {
+  create?: UserCreateInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface FlipGamePlayerSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: FlipGamePlayerWhereInput;
+  AND?:
+    | FlipGamePlayerSubscriptionWhereInput[]
+    | FlipGamePlayerSubscriptionWhereInput;
+  OR?:
+    | FlipGamePlayerSubscriptionWhereInput[]
+    | FlipGamePlayerSubscriptionWhereInput;
+  NOT?:
+    | FlipGamePlayerSubscriptionWhereInput[]
+    | FlipGamePlayerSubscriptionWhereInput;
+}
+
+export interface UserCreateInput {
+  username: String;
+  passwordHash: String;
+}
+
+export interface UserUpdateInput {
+  username?: String;
+  passwordHash?: String;
+}
+
+export interface NflPlayerCreateOneInput {
+  create?: NflPlayerCreateInput;
+  connect?: NflPlayerWhereUniqueInput;
 }
 
 export interface NflPlayerWhereInput {
@@ -777,22 +929,6 @@ export interface NflPlayerWhereInput {
   NOT?: NflPlayerWhereInput[] | NflPlayerWhereInput;
 }
 
-export interface NflPlayerCreateOneInput {
-  create?: NflPlayerCreateInput;
-  connect?: NflPlayerWhereUniqueInput;
-}
-
-export interface LeagueSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: LeagueWhereInput;
-  AND?: LeagueSubscriptionWhereInput[] | LeagueSubscriptionWhereInput;
-  OR?: LeagueSubscriptionWhereInput[] | LeagueSubscriptionWhereInput;
-  NOT?: LeagueSubscriptionWhereInput[] | LeagueSubscriptionWhereInput;
-}
-
 export interface NflPlayerCreateInput {
   display_name: String;
   esb_id: String;
@@ -807,9 +943,9 @@ export interface NflPlayerCreateInput {
   team_players?: TeamPlayerCreateManyWithoutNfl_playerInput;
 }
 
-export interface TeamPlayerUpdateInput {
-  nfl_player?: NflPlayerUpdateOneRequiredWithoutTeam_playersInput;
-  team?: TeamUpdateOneRequiredWithoutTeam_playersInput;
+export interface TeamPlayerCreateInput {
+  nfl_player: NflPlayerCreateOneWithoutTeam_playersInput;
+  team: TeamCreateOneWithoutTeam_playersInput;
 }
 
 export interface NflTeamCreateOneWithoutNfl_playersInput {
@@ -817,8 +953,10 @@ export interface NflTeamCreateOneWithoutNfl_playersInput {
   connect?: NflTeamWhereUniqueInput;
 }
 
-export type LeagueWhereUniqueInput = AtLeastOne<{
+export type NflGameWhereUniqueInput = AtLeastOne<{
   id: Int;
+  nfl_feed_id?: Int;
+  nfl_feed_key?: Int;
 }>;
 
 export interface NflTeamCreateWithoutNfl_playersInput {
@@ -829,10 +967,11 @@ export interface NflTeamCreateWithoutNfl_playersInput {
   nfl_feed_id: String;
 }
 
-export interface TeamUpdateInput {
-  league?: LeagueUpdateOneRequiredWithoutTeamsInput;
-  name?: String;
-  team_players?: TeamPlayerUpdateManyWithoutTeamInput;
+export interface TeamCreateInput {
+  league: LeagueCreateOneWithoutTeamsInput;
+  name: String;
+  team_players?: TeamPlayerCreateManyWithoutTeamInput;
+  owner_user: UserCreateOneInput;
 }
 
 export interface FlipGamePlayerUpdateInput {
@@ -842,12 +981,13 @@ export interface FlipGamePlayerUpdateInput {
   player?: NflPlayerUpdateOneRequiredInput;
 }
 
-export interface NflTeamUpdateManyMutationInput {
+export interface NflTeamUpdateInput {
   city?: String;
   code?: String;
   full_name?: String;
   name?: String;
   nfl_feed_id?: String;
+  nfl_players?: NflPlayerUpdateManyWithoutNfl_teamInput;
 }
 
 export interface NflGameUpdateOneRequiredInput {
@@ -857,13 +997,16 @@ export interface NflGameUpdateOneRequiredInput {
   connect?: NflGameWhereUniqueInput;
 }
 
-export interface NflTeamUpdateInput {
-  city?: String;
-  code?: String;
-  full_name?: String;
-  name?: String;
-  nfl_feed_id?: String;
-  nfl_players?: NflPlayerUpdateManyWithoutNfl_teamInput;
+export interface NflPlayerUpdateManyMutationInput {
+  display_name?: String;
+  esb_id?: String;
+  first_name?: String;
+  gsis_id?: String;
+  last_name?: String;
+  nfl_feed_id?: Int;
+  position?: String;
+  position_group?: String;
+  status?: String;
 }
 
 export interface NflGameUpdateDataInput {
@@ -877,18 +1020,13 @@ export interface NflGameUpdateDataInput {
   season_type?: GameSeasonType;
 }
 
-export interface NflPlayerUpdateInput {
-  display_name?: String;
-  esb_id?: String;
-  first_name?: String;
-  gsis_id?: String;
-  last_name?: String;
+export interface NflGameUpdateManyMutationInput {
+  week?: Int;
+  season?: Int;
   nfl_feed_id?: Int;
-  nfl_team?: NflTeamUpdateOneRequiredWithoutNfl_playersInput;
-  position?: String;
-  position_group?: String;
-  status?: String;
-  team_players?: TeamPlayerUpdateManyWithoutNfl_playerInput;
+  nfl_feed_key?: Int;
+  start?: DateTimeInput;
+  season_type?: GameSeasonType;
 }
 
 export interface NflTeamUpdateOneRequiredInput {
@@ -898,10 +1036,16 @@ export interface NflTeamUpdateOneRequiredInput {
   connect?: NflTeamWhereUniqueInput;
 }
 
-export type NflPlayerWhereUniqueInput = AtLeastOne<{
-  id: Int;
+export interface NflGameUpdateInput {
+  away_team?: NflTeamUpdateOneRequiredInput;
+  home_team?: NflTeamUpdateOneRequiredInput;
+  week?: Int;
+  season?: Int;
   nfl_feed_id?: Int;
-}>;
+  nfl_feed_key?: Int;
+  start?: DateTimeInput;
+  season_type?: GameSeasonType;
+}
 
 export interface NflTeamUpdateDataInput {
   city?: String;
@@ -912,7 +1056,7 @@ export interface NflTeamUpdateDataInput {
   nfl_players?: NflPlayerUpdateManyWithoutNfl_teamInput;
 }
 
-export interface LeagueUpdateManyMutationInput {
+export interface TeamUpdateManyDataInput {
   name?: String;
 }
 
@@ -935,9 +1079,8 @@ export interface NflPlayerUpdateManyWithoutNfl_teamInput {
     | NflPlayerUpdateManyWithWhereNestedInput;
 }
 
-export type NflTeamWhereUniqueInput = AtLeastOne<{
+export type TeamWhereUniqueInput = AtLeastOne<{
   id: Int;
-  nfl_feed_id?: String;
 }>;
 
 export interface NflPlayerUpdateWithWhereUniqueWithoutNfl_teamInput {
@@ -945,44 +1088,32 @@ export interface NflPlayerUpdateWithWhereUniqueWithoutNfl_teamInput {
   data: NflPlayerUpdateWithoutNfl_teamDataInput;
 }
 
-export interface TeamScalarWhereInput {
-  id?: Int;
-  id_not?: Int;
-  id_in?: Int[] | Int;
-  id_not_in?: Int[] | Int;
-  id_lt?: Int;
-  id_lte?: Int;
-  id_gt?: Int;
-  id_gte?: Int;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  AND?: TeamScalarWhereInput[] | TeamScalarWhereInput;
-  OR?: TeamScalarWhereInput[] | TeamScalarWhereInput;
-  NOT?: TeamScalarWhereInput[] | TeamScalarWhereInput;
-}
-
-export interface TeamUpdateWithWhereUniqueWithoutLeagueInput {
+export interface TeamUpsertWithWhereUniqueWithoutLeagueInput {
   where: TeamWhereUniqueInput;
-  data: TeamUpdateWithoutLeagueDataInput;
+  update: TeamUpdateWithoutLeagueDataInput;
+  create: TeamCreateWithoutLeagueInput;
 }
 
-export interface TeamPlayerUpsertWithWhereUniqueWithoutTeamInput {
-  where: TeamPlayerWhereUniqueInput;
-  update: TeamPlayerUpdateWithoutTeamDataInput;
-  create: TeamPlayerCreateWithoutTeamInput;
+export interface TeamUpdateManyWithoutLeagueInput {
+  create?: TeamCreateWithoutLeagueInput[] | TeamCreateWithoutLeagueInput;
+  delete?: TeamWhereUniqueInput[] | TeamWhereUniqueInput;
+  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput;
+  disconnect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput;
+  update?:
+    | TeamUpdateWithWhereUniqueWithoutLeagueInput[]
+    | TeamUpdateWithWhereUniqueWithoutLeagueInput;
+  upsert?:
+    | TeamUpsertWithWhereUniqueWithoutLeagueInput[]
+    | TeamUpsertWithWhereUniqueWithoutLeagueInput;
+  deleteMany?: TeamScalarWhereInput[] | TeamScalarWhereInput;
+  updateMany?:
+    | TeamUpdateManyWithWhereNestedInput[]
+    | TeamUpdateManyWithWhereNestedInput;
 }
+
+export type TeamPlayerWhereUniqueInput = AtLeastOne<{
+  id: Int;
+}>;
 
 export interface TeamPlayerUpdateManyWithoutNfl_playerInput {
   create?:
@@ -1000,9 +1131,17 @@ export interface TeamPlayerUpdateManyWithoutNfl_playerInput {
   deleteMany?: TeamPlayerScalarWhereInput[] | TeamPlayerScalarWhereInput;
 }
 
-export interface NflPlayerUpsertWithoutTeam_playersInput {
-  update: NflPlayerUpdateWithoutTeam_playersDataInput;
-  create: NflPlayerCreateWithoutTeam_playersInput;
+export interface NflPlayerUpdateWithoutTeam_playersDataInput {
+  display_name?: String;
+  esb_id?: String;
+  first_name?: String;
+  gsis_id?: String;
+  last_name?: String;
+  nfl_feed_id?: Int;
+  nfl_team?: NflTeamUpdateOneRequiredWithoutNfl_playersInput;
+  position?: String;
+  position_group?: String;
+  status?: String;
 }
 
 export interface TeamPlayerUpdateWithWhereUniqueWithoutNfl_playerInput {
@@ -1010,19 +1149,18 @@ export interface TeamPlayerUpdateWithWhereUniqueWithoutNfl_playerInput {
   data: TeamPlayerUpdateWithoutNfl_playerDataInput;
 }
 
-export interface NflPlayerUpdateOneRequiredWithoutTeam_playersInput {
-  create?: NflPlayerCreateWithoutTeam_playersInput;
-  update?: NflPlayerUpdateWithoutTeam_playersDataInput;
-  upsert?: NflPlayerUpsertWithoutTeam_playersInput;
-  connect?: NflPlayerWhereUniqueInput;
-}
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Int;
+  username?: String;
+}>;
 
 export interface TeamPlayerUpdateWithoutNfl_playerDataInput {
   team?: TeamUpdateOneRequiredWithoutTeam_playersInput;
 }
 
-export interface TeamPlayerUpdateWithoutTeamDataInput {
-  nfl_player?: NflPlayerUpdateOneRequiredWithoutTeam_playersInput;
+export interface TeamPlayerUpdateWithWhereUniqueWithoutTeamInput {
+  where: TeamPlayerWhereUniqueInput;
+  data: TeamPlayerUpdateWithoutTeamDataInput;
 }
 
 export interface TeamUpdateOneRequiredWithoutTeam_playersInput {
@@ -1032,25 +1170,16 @@ export interface TeamUpdateOneRequiredWithoutTeam_playersInput {
   connect?: TeamWhereUniqueInput;
 }
 
-export interface TeamPlayerUpdateManyWithoutTeamInput {
-  create?:
-    | TeamPlayerCreateWithoutTeamInput[]
-    | TeamPlayerCreateWithoutTeamInput;
-  delete?: TeamPlayerWhereUniqueInput[] | TeamPlayerWhereUniqueInput;
-  connect?: TeamPlayerWhereUniqueInput[] | TeamPlayerWhereUniqueInput;
-  disconnect?: TeamPlayerWhereUniqueInput[] | TeamPlayerWhereUniqueInput;
-  update?:
-    | TeamPlayerUpdateWithWhereUniqueWithoutTeamInput[]
-    | TeamPlayerUpdateWithWhereUniqueWithoutTeamInput;
-  upsert?:
-    | TeamPlayerUpsertWithWhereUniqueWithoutTeamInput[]
-    | TeamPlayerUpsertWithWhereUniqueWithoutTeamInput;
-  deleteMany?: TeamPlayerScalarWhereInput[] | TeamPlayerScalarWhereInput;
+export interface TeamUpdateWithoutLeagueDataInput {
+  name?: String;
+  team_players?: TeamPlayerUpdateManyWithoutTeamInput;
+  owner_user?: UserUpdateOneRequiredInput;
 }
 
 export interface TeamUpdateWithoutTeam_playersDataInput {
   league?: LeagueUpdateOneRequiredWithoutTeamsInput;
   name?: String;
+  owner_user?: UserUpdateOneRequiredInput;
 }
 
 export interface NflGameCreateOneInput {
@@ -1058,7 +1187,7 @@ export interface NflGameCreateOneInput {
   connect?: NflGameWhereUniqueInput;
 }
 
-export interface LeagueWhereInput {
+export interface UserWhereInput {
   id?: Int;
   id_not?: Int;
   id_in?: Int[] | Int;
@@ -1067,26 +1196,37 @@ export interface LeagueWhereInput {
   id_lte?: Int;
   id_gt?: Int;
   id_gte?: Int;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  teams_every?: TeamWhereInput;
-  teams_some?: TeamWhereInput;
-  teams_none?: TeamWhereInput;
-  AND?: LeagueWhereInput[] | LeagueWhereInput;
-  OR?: LeagueWhereInput[] | LeagueWhereInput;
-  NOT?: LeagueWhereInput[] | LeagueWhereInput;
+  username?: String;
+  username_not?: String;
+  username_in?: String[] | String;
+  username_not_in?: String[] | String;
+  username_lt?: String;
+  username_lte?: String;
+  username_gt?: String;
+  username_gte?: String;
+  username_contains?: String;
+  username_not_contains?: String;
+  username_starts_with?: String;
+  username_not_starts_with?: String;
+  username_ends_with?: String;
+  username_not_ends_with?: String;
+  passwordHash?: String;
+  passwordHash_not?: String;
+  passwordHash_in?: String[] | String;
+  passwordHash_not_in?: String[] | String;
+  passwordHash_lt?: String;
+  passwordHash_lte?: String;
+  passwordHash_gt?: String;
+  passwordHash_gte?: String;
+  passwordHash_contains?: String;
+  passwordHash_not_contains?: String;
+  passwordHash_starts_with?: String;
+  passwordHash_not_starts_with?: String;
+  passwordHash_ends_with?: String;
+  passwordHash_not_ends_with?: String;
+  AND?: UserWhereInput[] | UserWhereInput;
+  OR?: UserWhereInput[] | UserWhereInput;
+  NOT?: UserWhereInput[] | UserWhereInput;
 }
 
 export interface NflTeamCreateOneInput {
@@ -1098,11 +1238,15 @@ export interface LeagueUpdateWithoutTeamsDataInput {
   name?: String;
 }
 
-export interface NflPlayerCreateManyWithoutNfl_teamInput {
-  create?:
-    | NflPlayerCreateWithoutNfl_teamInput[]
-    | NflPlayerCreateWithoutNfl_teamInput;
-  connect?: NflPlayerWhereUniqueInput[] | NflPlayerWhereUniqueInput;
+export interface UserSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: UserWhereInput;
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
 }
 
 export interface LeagueUpsertWithoutTeamsInput {
@@ -1121,12 +1265,14 @@ export interface NflTeamSubscriptionWhereInput {
   NOT?: NflTeamSubscriptionWhereInput[] | NflTeamSubscriptionWhereInput;
 }
 
-export interface TeamUpsertWithoutTeam_playersInput {
-  update: TeamUpdateWithoutTeam_playersDataInput;
-  create: TeamCreateWithoutTeam_playersInput;
+export interface UserUpdateOneRequiredInput {
+  create?: UserCreateInput;
+  update?: UserUpdateDataInput;
+  upsert?: UserUpsertNestedInput;
+  connect?: UserWhereUniqueInput;
 }
 
-export interface NflTeamWhereInput {
+export interface FlipGamePlayerWhereInput {
   id?: Int;
   id_not?: Int;
   id_in?: Int[] | Int;
@@ -1135,82 +1281,50 @@ export interface NflTeamWhereInput {
   id_lte?: Int;
   id_gt?: Int;
   id_gte?: Int;
-  city?: String;
-  city_not?: String;
-  city_in?: String[] | String;
-  city_not_in?: String[] | String;
-  city_lt?: String;
-  city_lte?: String;
-  city_gt?: String;
-  city_gte?: String;
-  city_contains?: String;
-  city_not_contains?: String;
-  city_starts_with?: String;
-  city_not_starts_with?: String;
-  city_ends_with?: String;
-  city_not_ends_with?: String;
-  code?: String;
-  code_not?: String;
-  code_in?: String[] | String;
-  code_not_in?: String[] | String;
-  code_lt?: String;
-  code_lte?: String;
-  code_gt?: String;
-  code_gte?: String;
-  code_contains?: String;
-  code_not_contains?: String;
-  code_starts_with?: String;
-  code_not_starts_with?: String;
-  code_ends_with?: String;
-  code_not_ends_with?: String;
-  full_name?: String;
-  full_name_not?: String;
-  full_name_in?: String[] | String;
-  full_name_not_in?: String[] | String;
-  full_name_lt?: String;
-  full_name_lte?: String;
-  full_name_gt?: String;
-  full_name_gte?: String;
-  full_name_contains?: String;
-  full_name_not_contains?: String;
-  full_name_starts_with?: String;
-  full_name_not_starts_with?: String;
-  full_name_ends_with?: String;
-  full_name_not_ends_with?: String;
+  game?: NflGameWhereInput;
+  team?: NflTeamWhereInput;
+  position?: FlipPosition;
+  position_not?: FlipPosition;
+  position_in?: FlipPosition[] | FlipPosition;
+  position_not_in?: FlipPosition[] | FlipPosition;
+  player?: NflPlayerWhereInput;
+  AND?: FlipGamePlayerWhereInput[] | FlipGamePlayerWhereInput;
+  OR?: FlipGamePlayerWhereInput[] | FlipGamePlayerWhereInput;
+  NOT?: FlipGamePlayerWhereInput[] | FlipGamePlayerWhereInput;
+}
+
+export interface UserUpdateDataInput {
+  username?: String;
+  passwordHash?: String;
+}
+
+export interface LeagueSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: LeagueWhereInput;
+  AND?: LeagueSubscriptionWhereInput[] | LeagueSubscriptionWhereInput;
+  OR?: LeagueSubscriptionWhereInput[] | LeagueSubscriptionWhereInput;
+  NOT?: LeagueSubscriptionWhereInput[] | LeagueSubscriptionWhereInput;
+}
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export type LeagueWhereUniqueInput = AtLeastOne<{
+  id: Int;
+}>;
+
+export interface TeamUpsertWithoutTeam_playersInput {
+  update: TeamUpdateWithoutTeam_playersDataInput;
+  create: TeamCreateWithoutTeam_playersInput;
+}
+
+export interface TeamUpdateManyMutationInput {
   name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  nfl_feed_id?: String;
-  nfl_feed_id_not?: String;
-  nfl_feed_id_in?: String[] | String;
-  nfl_feed_id_not_in?: String[] | String;
-  nfl_feed_id_lt?: String;
-  nfl_feed_id_lte?: String;
-  nfl_feed_id_gt?: String;
-  nfl_feed_id_gte?: String;
-  nfl_feed_id_contains?: String;
-  nfl_feed_id_not_contains?: String;
-  nfl_feed_id_starts_with?: String;
-  nfl_feed_id_not_starts_with?: String;
-  nfl_feed_id_ends_with?: String;
-  nfl_feed_id_not_ends_with?: String;
-  nfl_players_every?: NflPlayerWhereInput;
-  nfl_players_some?: NflPlayerWhereInput;
-  nfl_players_none?: NflPlayerWhereInput;
-  AND?: NflTeamWhereInput[] | NflTeamWhereInput;
-  OR?: NflTeamWhereInput[] | NflTeamWhereInput;
-  NOT?: NflTeamWhereInput[] | NflTeamWhereInput;
 }
 
 export interface TeamPlayerUpsertWithWhereUniqueWithoutNfl_playerInput {
@@ -1219,15 +1333,12 @@ export interface TeamPlayerUpsertWithWhereUniqueWithoutNfl_playerInput {
   create: TeamPlayerCreateWithoutNfl_playerInput;
 }
 
-export interface NflGameSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: NflGameWhereInput;
-  AND?: NflGameSubscriptionWhereInput[] | NflGameSubscriptionWhereInput;
-  OR?: NflGameSubscriptionWhereInput[] | NflGameSubscriptionWhereInput;
-  NOT?: NflGameSubscriptionWhereInput[] | NflGameSubscriptionWhereInput;
+export interface NflTeamUpdateManyMutationInput {
+  city?: String;
+  code?: String;
+  full_name?: String;
+  name?: String;
+  nfl_feed_id?: String;
 }
 
 export interface TeamPlayerScalarWhereInput {
@@ -1244,9 +1355,18 @@ export interface TeamPlayerScalarWhereInput {
   NOT?: TeamPlayerScalarWhereInput[] | TeamPlayerScalarWhereInput;
 }
 
-export interface TeamPlayerCreateInput {
-  nfl_player: NflPlayerCreateOneWithoutTeam_playersInput;
-  team: TeamCreateOneWithoutTeam_playersInput;
+export interface NflPlayerUpdateInput {
+  display_name?: String;
+  esb_id?: String;
+  first_name?: String;
+  gsis_id?: String;
+  last_name?: String;
+  nfl_feed_id?: Int;
+  nfl_team?: NflTeamUpdateOneRequiredWithoutNfl_playersInput;
+  position?: String;
+  position_group?: String;
+  status?: String;
+  team_players?: TeamPlayerUpdateManyWithoutNfl_playerInput;
 }
 
 export interface NflPlayerUpsertWithWhereUniqueWithoutNfl_teamInput {
@@ -1255,10 +1375,8 @@ export interface NflPlayerUpsertWithWhereUniqueWithoutNfl_teamInput {
   create: NflPlayerCreateWithoutNfl_teamInput;
 }
 
-export interface TeamCreateInput {
-  league: LeagueCreateOneWithoutTeamsInput;
-  name: String;
-  team_players?: TeamPlayerCreateManyWithoutTeamInput;
+export interface LeagueUpdateManyMutationInput {
+  name?: String;
 }
 
 export interface NflPlayerScalarWhereInput {
@@ -1395,16 +1513,32 @@ export interface NflPlayerScalarWhereInput {
   NOT?: NflPlayerScalarWhereInput[] | NflPlayerScalarWhereInput;
 }
 
-export interface NflPlayerUpdateManyMutationInput {
-  display_name?: String;
-  esb_id?: String;
-  first_name?: String;
-  gsis_id?: String;
-  last_name?: String;
-  nfl_feed_id?: Int;
-  position?: String;
-  position_group?: String;
-  status?: String;
+export interface TeamScalarWhereInput {
+  id?: Int;
+  id_not?: Int;
+  id_in?: Int[] | Int;
+  id_not_in?: Int[] | Int;
+  id_lt?: Int;
+  id_lte?: Int;
+  id_gt?: Int;
+  id_gte?: Int;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  AND?: TeamScalarWhereInput[] | TeamScalarWhereInput;
+  OR?: TeamScalarWhereInput[] | TeamScalarWhereInput;
+  NOT?: TeamScalarWhereInput[] | TeamScalarWhereInput;
 }
 
 export interface NflPlayerUpdateManyWithWhereNestedInput {
@@ -1412,15 +1546,9 @@ export interface NflPlayerUpdateManyWithWhereNestedInput {
   data: NflPlayerUpdateManyDataInput;
 }
 
-export interface NflGameUpdateInput {
-  away_team?: NflTeamUpdateOneRequiredInput;
-  home_team?: NflTeamUpdateOneRequiredInput;
-  week?: Int;
-  season?: Int;
-  nfl_feed_id?: Int;
-  nfl_feed_key?: Int;
-  start?: DateTimeInput;
-  season_type?: GameSeasonType;
+export interface NflPlayerUpsertWithoutTeam_playersInput {
+  update: NflPlayerUpdateWithoutTeam_playersDataInput;
+  create: NflPlayerCreateWithoutTeam_playersInput;
 }
 
 export interface NflPlayerUpdateManyDataInput {
@@ -1435,9 +1563,8 @@ export interface NflPlayerUpdateManyDataInput {
   status?: String;
 }
 
-export interface TeamUpdateManyWithWhereNestedInput {
-  where: TeamScalarWhereInput;
-  data: TeamUpdateManyDataInput;
+export interface TeamPlayerUpdateWithoutTeamDataInput {
+  nfl_player?: NflPlayerUpdateOneRequiredWithoutTeam_playersInput;
 }
 
 export interface NflTeamUpsertNestedInput {
@@ -1445,18 +1572,26 @@ export interface NflTeamUpsertNestedInput {
   create: NflTeamCreateInput;
 }
 
-export type TeamWhereUniqueInput = AtLeastOne<{
-  id: Int;
-}>;
+export interface TeamUpdateWithWhereUniqueWithoutLeagueInput {
+  where: TeamWhereUniqueInput;
+  data: TeamUpdateWithoutLeagueDataInput;
+}
 
 export interface NflGameUpsertNestedInput {
   update: NflGameUpdateDataInput;
   create: NflGameCreateInput;
 }
 
-export type TeamPlayerWhereUniqueInput = AtLeastOne<{
-  id: Int;
-}>;
+export interface NflGameCreateInput {
+  away_team: NflTeamCreateOneInput;
+  home_team: NflTeamCreateOneInput;
+  week: Int;
+  season: Int;
+  nfl_feed_id: Int;
+  nfl_feed_key: Int;
+  start: DateTimeInput;
+  season_type: GameSeasonType;
+}
 
 export interface NflPlayerUpdateOneRequiredInput {
   create?: NflPlayerCreateInput;
@@ -1465,9 +1600,15 @@ export interface NflPlayerUpdateOneRequiredInput {
   connect?: NflPlayerWhereUniqueInput;
 }
 
-export interface TeamUpdateWithoutLeagueDataInput {
-  name?: String;
-  team_players?: TeamPlayerUpdateManyWithoutTeamInput;
+export interface TeamSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: TeamWhereInput;
+  AND?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput;
+  OR?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput;
+  NOT?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput;
 }
 
 export interface NflPlayerUpdateDataInput {
@@ -1484,15 +1625,91 @@ export interface NflPlayerUpdateDataInput {
   team_players?: TeamPlayerUpdateManyWithoutNfl_playerInput;
 }
 
-export interface NflGameCreateInput {
-  away_team: NflTeamCreateOneInput;
-  home_team: NflTeamCreateOneInput;
-  week: Int;
-  season: Int;
-  nfl_feed_id: Int;
-  nfl_feed_key: Int;
-  start: DateTimeInput;
-  season_type: GameSeasonType;
+export interface NflTeamWhereInput {
+  id?: Int;
+  id_not?: Int;
+  id_in?: Int[] | Int;
+  id_not_in?: Int[] | Int;
+  id_lt?: Int;
+  id_lte?: Int;
+  id_gt?: Int;
+  id_gte?: Int;
+  city?: String;
+  city_not?: String;
+  city_in?: String[] | String;
+  city_not_in?: String[] | String;
+  city_lt?: String;
+  city_lte?: String;
+  city_gt?: String;
+  city_gte?: String;
+  city_contains?: String;
+  city_not_contains?: String;
+  city_starts_with?: String;
+  city_not_starts_with?: String;
+  city_ends_with?: String;
+  city_not_ends_with?: String;
+  code?: String;
+  code_not?: String;
+  code_in?: String[] | String;
+  code_not_in?: String[] | String;
+  code_lt?: String;
+  code_lte?: String;
+  code_gt?: String;
+  code_gte?: String;
+  code_contains?: String;
+  code_not_contains?: String;
+  code_starts_with?: String;
+  code_not_starts_with?: String;
+  code_ends_with?: String;
+  code_not_ends_with?: String;
+  full_name?: String;
+  full_name_not?: String;
+  full_name_in?: String[] | String;
+  full_name_not_in?: String[] | String;
+  full_name_lt?: String;
+  full_name_lte?: String;
+  full_name_gt?: String;
+  full_name_gte?: String;
+  full_name_contains?: String;
+  full_name_not_contains?: String;
+  full_name_starts_with?: String;
+  full_name_not_starts_with?: String;
+  full_name_ends_with?: String;
+  full_name_not_ends_with?: String;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  nfl_feed_id?: String;
+  nfl_feed_id_not?: String;
+  nfl_feed_id_in?: String[] | String;
+  nfl_feed_id_not_in?: String[] | String;
+  nfl_feed_id_lt?: String;
+  nfl_feed_id_lte?: String;
+  nfl_feed_id_gt?: String;
+  nfl_feed_id_gte?: String;
+  nfl_feed_id_contains?: String;
+  nfl_feed_id_not_contains?: String;
+  nfl_feed_id_starts_with?: String;
+  nfl_feed_id_not_starts_with?: String;
+  nfl_feed_id_ends_with?: String;
+  nfl_feed_id_not_ends_with?: String;
+  nfl_players_every?: NflPlayerWhereInput;
+  nfl_players_some?: NflPlayerWhereInput;
+  nfl_players_none?: NflPlayerWhereInput;
+  AND?: NflTeamWhereInput[] | NflTeamWhereInput;
+  OR?: NflTeamWhereInput[] | NflTeamWhereInput;
+  NOT?: NflTeamWhereInput[] | NflTeamWhereInput;
 }
 
 export interface NflTeamUpdateOneRequiredWithoutNfl_playersInput {
@@ -1502,15 +1719,9 @@ export interface NflTeamUpdateOneRequiredWithoutNfl_playersInput {
   connect?: NflTeamWhereUniqueInput;
 }
 
-export interface TeamPlayerSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: TeamPlayerWhereInput;
-  AND?: TeamPlayerSubscriptionWhereInput[] | TeamPlayerSubscriptionWhereInput;
-  OR?: TeamPlayerSubscriptionWhereInput[] | TeamPlayerSubscriptionWhereInput;
-  NOT?: TeamPlayerSubscriptionWhereInput[] | TeamPlayerSubscriptionWhereInput;
+export interface TeamPlayerUpdateInput {
+  nfl_player?: NflPlayerUpdateOneRequiredWithoutTeam_playersInput;
+  team?: TeamUpdateOneRequiredWithoutTeam_playersInput;
 }
 
 export interface NflTeamUpdateWithoutNfl_playersDataInput {
@@ -1521,7 +1732,50 @@ export interface NflTeamUpdateWithoutNfl_playersDataInput {
   nfl_feed_id?: String;
 }
 
-export interface NflGameWhereInput {
+export type NflPlayerWhereUniqueInput = AtLeastOne<{
+  id: Int;
+  nfl_feed_id?: Int;
+}>;
+
+export interface NflTeamUpsertWithoutNfl_playersInput {
+  update: NflTeamUpdateWithoutNfl_playersDataInput;
+  create: NflTeamCreateWithoutNfl_playersInput;
+}
+
+export interface TeamUpdateManyWithWhereNestedInput {
+  where: TeamScalarWhereInput;
+  data: TeamUpdateManyDataInput;
+}
+
+export interface NflPlayerUpsertNestedInput {
+  update: NflPlayerUpdateDataInput;
+  create: NflPlayerCreateInput;
+}
+
+export interface NflPlayerUpdateOneRequiredWithoutTeam_playersInput {
+  create?: NflPlayerCreateWithoutTeam_playersInput;
+  update?: NflPlayerUpdateWithoutTeam_playersDataInput;
+  upsert?: NflPlayerUpsertWithoutTeam_playersInput;
+  connect?: NflPlayerWhereUniqueInput;
+}
+
+export interface FlipGamePlayerUpdateManyMutationInput {
+  position?: FlipPosition;
+}
+
+export interface FlipGamePlayerCreateInput {
+  game: NflGameCreateOneInput;
+  team: NflTeamCreateOneInput;
+  position: FlipPosition;
+  player: NflPlayerCreateOneInput;
+}
+
+export interface LeagueUpdateInput {
+  name?: String;
+  teams?: TeamUpdateManyWithoutLeagueInput;
+}
+
+export interface TeamWhereInput {
   id?: Int;
   id_not?: Int;
   id_in?: Int[] | Int;
@@ -1530,124 +1784,48 @@ export interface NflGameWhereInput {
   id_lte?: Int;
   id_gt?: Int;
   id_gte?: Int;
-  away_team?: NflTeamWhereInput;
-  home_team?: NflTeamWhereInput;
-  week?: Int;
-  week_not?: Int;
-  week_in?: Int[] | Int;
-  week_not_in?: Int[] | Int;
-  week_lt?: Int;
-  week_lte?: Int;
-  week_gt?: Int;
-  week_gte?: Int;
-  season?: Int;
-  season_not?: Int;
-  season_in?: Int[] | Int;
-  season_not_in?: Int[] | Int;
-  season_lt?: Int;
-  season_lte?: Int;
-  season_gt?: Int;
-  season_gte?: Int;
-  nfl_feed_id?: Int;
-  nfl_feed_id_not?: Int;
-  nfl_feed_id_in?: Int[] | Int;
-  nfl_feed_id_not_in?: Int[] | Int;
-  nfl_feed_id_lt?: Int;
-  nfl_feed_id_lte?: Int;
-  nfl_feed_id_gt?: Int;
-  nfl_feed_id_gte?: Int;
-  nfl_feed_key?: Int;
-  nfl_feed_key_not?: Int;
-  nfl_feed_key_in?: Int[] | Int;
-  nfl_feed_key_not_in?: Int[] | Int;
-  nfl_feed_key_lt?: Int;
-  nfl_feed_key_lte?: Int;
-  nfl_feed_key_gt?: Int;
-  nfl_feed_key_gte?: Int;
-  start?: DateTimeInput;
-  start_not?: DateTimeInput;
-  start_in?: DateTimeInput[] | DateTimeInput;
-  start_not_in?: DateTimeInput[] | DateTimeInput;
-  start_lt?: DateTimeInput;
-  start_lte?: DateTimeInput;
-  start_gt?: DateTimeInput;
-  start_gte?: DateTimeInput;
-  season_type?: GameSeasonType;
-  season_type_not?: GameSeasonType;
-  season_type_in?: GameSeasonType[] | GameSeasonType;
-  season_type_not_in?: GameSeasonType[] | GameSeasonType;
-  AND?: NflGameWhereInput[] | NflGameWhereInput;
-  OR?: NflGameWhereInput[] | NflGameWhereInput;
-  NOT?: NflGameWhereInput[] | NflGameWhereInput;
-}
-
-export interface NflTeamUpsertWithoutNfl_playersInput {
-  update: NflTeamUpdateWithoutNfl_playersDataInput;
-  create: NflTeamCreateWithoutNfl_playersInput;
-}
-
-export interface TeamUpdateManyMutationInput {
+  league?: LeagueWhereInput;
   name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  team_players_every?: TeamPlayerWhereInput;
+  team_players_some?: TeamPlayerWhereInput;
+  team_players_none?: TeamPlayerWhereInput;
+  owner_user?: UserWhereInput;
+  AND?: TeamWhereInput[] | TeamWhereInput;
+  OR?: TeamWhereInput[] | TeamWhereInput;
+  NOT?: TeamWhereInput[] | TeamWhereInput;
 }
 
-export interface NflPlayerUpsertNestedInput {
-  update: NflPlayerUpdateDataInput;
-  create: NflPlayerCreateInput;
+export interface NflPlayerCreateWithoutTeam_playersInput {
+  display_name: String;
+  esb_id: String;
+  first_name: String;
+  gsis_id?: String;
+  last_name: String;
+  nfl_feed_id: Int;
+  nfl_team: NflTeamCreateOneWithoutNfl_playersInput;
+  position: String;
+  position_group: String;
+  status: String;
 }
 
-export interface NflGameUpdateManyMutationInput {
-  week?: Int;
-  season?: Int;
-  nfl_feed_id?: Int;
-  nfl_feed_key?: Int;
-  start?: DateTimeInput;
-  season_type?: GameSeasonType;
-}
-
-export interface FlipGamePlayerUpdateManyMutationInput {
-  position?: FlipPosition;
-}
-
-export interface TeamUpsertWithWhereUniqueWithoutLeagueInput {
-  where: TeamWhereUniqueInput;
-  update: TeamUpdateWithoutLeagueDataInput;
-  create: TeamCreateWithoutLeagueInput;
-}
-
-export interface TeamUpdateManyWithoutLeagueInput {
-  create?: TeamCreateWithoutLeagueInput[] | TeamCreateWithoutLeagueInput;
-  delete?: TeamWhereUniqueInput[] | TeamWhereUniqueInput;
-  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput;
-  disconnect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput;
-  update?:
-    | TeamUpdateWithWhereUniqueWithoutLeagueInput[]
-    | TeamUpdateWithWhereUniqueWithoutLeagueInput;
-  upsert?:
-    | TeamUpsertWithWhereUniqueWithoutLeagueInput[]
-    | TeamUpsertWithWhereUniqueWithoutLeagueInput;
-  deleteMany?: TeamScalarWhereInput[] | TeamScalarWhereInput;
-  updateMany?:
-    | TeamUpdateManyWithWhereNestedInput[]
-    | TeamUpdateManyWithWhereNestedInput;
-}
-
-export interface TeamPlayerUpdateWithWhereUniqueWithoutTeamInput {
-  where: TeamPlayerWhereUniqueInput;
-  data: TeamPlayerUpdateWithoutTeamDataInput;
-}
-
-export interface LeagueUpdateInput {
+export interface TeamUpdateInput {
+  league?: LeagueUpdateOneRequiredWithoutTeamsInput;
   name?: String;
-  teams?: TeamUpdateManyWithoutLeagueInput;
-}
-
-export interface NflTeamCreateInput {
-  city: String;
-  code: String;
-  full_name: String;
-  name: String;
-  nfl_feed_id: String;
-  nfl_players?: NflPlayerCreateManyWithoutNfl_teamInput;
+  team_players?: TeamPlayerUpdateManyWithoutTeamInput;
+  owner_user?: UserUpdateOneRequiredInput;
 }
 
 export interface LeagueCreateInput {
@@ -1655,35 +1833,10 @@ export interface LeagueCreateInput {
   teams?: TeamCreateManyWithoutLeagueInput;
 }
 
-export interface FlipGamePlayerSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: FlipGamePlayerWhereInput;
-  AND?:
-    | FlipGamePlayerSubscriptionWhereInput[]
-    | FlipGamePlayerSubscriptionWhereInput;
-  OR?:
-    | FlipGamePlayerSubscriptionWhereInput[]
-    | FlipGamePlayerSubscriptionWhereInput;
-  NOT?:
-    | FlipGamePlayerSubscriptionWhereInput[]
-    | FlipGamePlayerSubscriptionWhereInput;
-}
-
-export interface TeamCreateManyWithoutLeagueInput {
-  create?: TeamCreateWithoutLeagueInput[] | TeamCreateWithoutLeagueInput;
-  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput;
-}
-
-export interface TeamUpdateManyDataInput {
-  name?: String;
-}
-
-export interface NflPlayerCreateOneWithoutTeam_playersInput {
-  create?: NflPlayerCreateWithoutTeam_playersInput;
-  connect?: NflPlayerWhereUniqueInput;
+export interface TeamPlayerUpsertWithWhereUniqueWithoutTeamInput {
+  where: TeamPlayerWhereUniqueInput;
+  update: TeamPlayerUpdateWithoutTeamDataInput;
+  create: TeamPlayerCreateWithoutTeamInput;
 }
 
 export interface TeamPlayerCreateWithoutTeamInput {
@@ -1700,120 +1853,73 @@ export interface TeamPlayerCreateManyWithoutTeamInput {
 export interface TeamCreateWithoutLeagueInput {
   name: String;
   team_players?: TeamPlayerCreateManyWithoutTeamInput;
+  owner_user: UserCreateOneInput;
 }
 
-export interface NflPlayerUpdateWithoutTeam_playersDataInput {
-  display_name?: String;
-  esb_id?: String;
-  first_name?: String;
-  gsis_id?: String;
-  last_name?: String;
-  nfl_feed_id?: Int;
-  nfl_team?: NflTeamUpdateOneRequiredWithoutNfl_playersInput;
-  position?: String;
-  position_group?: String;
-  status?: String;
+export interface TeamCreateManyWithoutLeagueInput {
+  create?: TeamCreateWithoutLeagueInput[] | TeamCreateWithoutLeagueInput;
+  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput;
 }
 
-export type NflGameWhereUniqueInput = AtLeastOne<{
+export interface TeamPlayerUpdateManyWithoutTeamInput {
+  create?:
+    | TeamPlayerCreateWithoutTeamInput[]
+    | TeamPlayerCreateWithoutTeamInput;
+  delete?: TeamPlayerWhereUniqueInput[] | TeamPlayerWhereUniqueInput;
+  connect?: TeamPlayerWhereUniqueInput[] | TeamPlayerWhereUniqueInput;
+  disconnect?: TeamPlayerWhereUniqueInput[] | TeamPlayerWhereUniqueInput;
+  update?:
+    | TeamPlayerUpdateWithWhereUniqueWithoutTeamInput[]
+    | TeamPlayerUpdateWithWhereUniqueWithoutTeamInput;
+  upsert?:
+    | TeamPlayerUpsertWithWhereUniqueWithoutTeamInput[]
+    | TeamPlayerUpsertWithWhereUniqueWithoutTeamInput;
+  deleteMany?: TeamPlayerScalarWhereInput[] | TeamPlayerScalarWhereInput;
+}
+
+export type NflTeamWhereUniqueInput = AtLeastOne<{
   id: Int;
-  nfl_feed_id?: Int;
-  nfl_feed_key?: Int;
+  nfl_feed_id?: String;
 }>;
 
-export interface NflPlayerSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: NflPlayerWhereInput;
-  AND?: NflPlayerSubscriptionWhereInput[] | NflPlayerSubscriptionWhereInput;
-  OR?: NflPlayerSubscriptionWhereInput[] | NflPlayerSubscriptionWhereInput;
-  NOT?: NflPlayerSubscriptionWhereInput[] | NflPlayerSubscriptionWhereInput;
+export interface UserUpdateManyMutationInput {
+  username?: String;
+  passwordHash?: String;
 }
 
-export interface FlipGamePlayerCreateInput {
-  game: NflGameCreateOneInput;
-  team: NflTeamCreateOneInput;
-  position: FlipPosition;
-  player: NflPlayerCreateOneInput;
+export interface NflTeamCreateInput {
+  city: String;
+  code: String;
+  full_name: String;
+  name: String;
+  nfl_feed_id: String;
+  nfl_players?: NflPlayerCreateManyWithoutNfl_teamInput;
 }
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface TeamPlayerPreviousValues {
+export interface UserPreviousValues {
   id: Int;
+  username: String;
+  passwordHash: String;
 }
 
-export interface TeamPlayerPreviousValuesPromise
-  extends Promise<TeamPlayerPreviousValues>,
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<Int>;
+  username: () => Promise<String>;
+  passwordHash: () => Promise<String>;
 }
 
-export interface TeamPlayerPreviousValuesSubscription
-  extends Promise<AsyncIterator<TeamPlayerPreviousValues>>,
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface LeagueEdge {
-  cursor: String;
-}
-
-export interface LeagueEdgePromise extends Promise<LeagueEdge>, Fragmentable {
-  node: <T = LeaguePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface LeagueEdgeSubscription
-  extends Promise<AsyncIterator<LeagueEdge>>,
-    Fragmentable {
-  node: <T = LeagueSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface Team {
-  id: Int;
-  name: String;
-}
-
-export interface TeamPromise extends Promise<Team>, Fragmentable {
-  id: () => Promise<Int>;
-  league: <T = LeaguePromise>() => T;
-  name: () => Promise<String>;
-  team_players: <T = FragmentableArray<TeamPlayer>>(
-    args?: {
-      where?: TeamPlayerWhereInput;
-      orderBy?: TeamPlayerOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
-export interface TeamSubscription
-  extends Promise<AsyncIterator<Team>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  league: <T = LeagueSubscription>() => T;
-  name: () => Promise<AsyncIterator<String>>;
-  team_players: <T = Promise<AsyncIterator<TeamPlayerSubscription>>>(
-    args?: {
-      where?: TeamPlayerWhereInput;
-      orderBy?: TeamPlayerOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
+  username: () => Promise<AsyncIterator<String>>;
+  passwordHash: () => Promise<AsyncIterator<String>>;
 }
 
 export interface LeagueConnection {}
@@ -1899,6 +2005,65 @@ export interface NflPlayerSubscription
   ) => T;
 }
 
+export interface LeagueEdge {
+  cursor: String;
+}
+
+export interface LeagueEdgePromise extends Promise<LeagueEdge>, Fragmentable {
+  node: <T = LeaguePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface LeagueEdgeSubscription
+  extends Promise<AsyncIterator<LeagueEdge>>,
+    Fragmentable {
+  node: <T = LeagueSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface Team {
+  id: Int;
+  name: String;
+}
+
+export interface TeamPromise extends Promise<Team>, Fragmentable {
+  id: () => Promise<Int>;
+  league: <T = LeaguePromise>() => T;
+  name: () => Promise<String>;
+  team_players: <T = FragmentableArray<TeamPlayer>>(
+    args?: {
+      where?: TeamPlayerWhereInput;
+      orderBy?: TeamPlayerOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  owner_user: <T = UserPromise>() => T;
+}
+
+export interface TeamSubscription
+  extends Promise<AsyncIterator<Team>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  league: <T = LeagueSubscription>() => T;
+  name: () => Promise<AsyncIterator<String>>;
+  team_players: <T = Promise<AsyncIterator<TeamPlayerSubscription>>>(
+    args?: {
+      where?: TeamPlayerWhereInput;
+      orderBy?: TeamPlayerOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  owner_user: <T = UserSubscription>() => T;
+}
+
 export interface BatchPayload {
   count: Long;
 }
@@ -1913,6 +2078,22 @@ export interface BatchPayloadSubscription
   extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface AggregateFlipGamePlayer {
+  count: Int;
+}
+
+export interface AggregateFlipGamePlayerPromise
+  extends Promise<AggregateFlipGamePlayer>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateFlipGamePlayerSubscription
+  extends Promise<AsyncIterator<AggregateFlipGamePlayer>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface TeamPlayer {
@@ -1933,37 +2114,19 @@ export interface TeamPlayerSubscription
   team: <T = TeamSubscription>() => T;
 }
 
-export interface AggregateFlipGamePlayer {
-  count: Int;
-}
-
-export interface AggregateFlipGamePlayerPromise
-  extends Promise<AggregateFlipGamePlayer>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateFlipGamePlayerSubscription
-  extends Promise<AsyncIterator<AggregateFlipGamePlayer>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface TeamPlayerEdge {
+export interface UserEdge {
   cursor: String;
 }
 
-export interface TeamPlayerEdgePromise
-  extends Promise<TeamPlayerEdge>,
-    Fragmentable {
-  node: <T = TeamPlayerPromise>() => T;
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface TeamPlayerEdgeSubscription
-  extends Promise<AsyncIterator<TeamPlayerEdge>>,
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
     Fragmentable {
-  node: <T = TeamPlayerSubscription>() => T;
+  node: <T = UserSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
@@ -1983,123 +2146,6 @@ export interface FlipGamePlayerEdgeSubscription
     Fragmentable {
   node: <T = FlipGamePlayerSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateTeam {
-  count: Int;
-}
-
-export interface AggregateTeamPromise
-  extends Promise<AggregateTeam>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateTeamSubscription
-  extends Promise<AsyncIterator<AggregateTeam>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface TeamPreviousValues {
-  id: Int;
-  name: String;
-}
-
-export interface TeamPreviousValuesPromise
-  extends Promise<TeamPreviousValues>,
-    Fragmentable {
-  id: () => Promise<Int>;
-  name: () => Promise<String>;
-}
-
-export interface TeamPreviousValuesSubscription
-  extends Promise<AsyncIterator<TeamPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface TeamConnection {}
-
-export interface TeamConnectionPromise
-  extends Promise<TeamConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TeamEdge>>() => T;
-  aggregate: <T = AggregateTeamPromise>() => T;
-}
-
-export interface TeamConnectionSubscription
-  extends Promise<AsyncIterator<TeamConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TeamEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTeamSubscription>() => T;
-}
-
-export interface FlipGamePlayer {
-  id: Int;
-  position: FlipPosition;
-}
-
-export interface FlipGamePlayerPromise
-  extends Promise<FlipGamePlayer>,
-    Fragmentable {
-  id: () => Promise<Int>;
-  game: <T = NflGamePromise>() => T;
-  team: <T = NflTeamPromise>() => T;
-  position: () => Promise<FlipPosition>;
-  player: <T = NflPlayerPromise>() => T;
-}
-
-export interface FlipGamePlayerSubscription
-  extends Promise<AsyncIterator<FlipGamePlayer>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  game: <T = NflGameSubscription>() => T;
-  team: <T = NflTeamSubscription>() => T;
-  position: () => Promise<AsyncIterator<FlipPosition>>;
-  player: <T = NflPlayerSubscription>() => T;
-}
-
-export interface NflTeamEdge {
-  cursor: String;
-}
-
-export interface NflTeamEdgePromise extends Promise<NflTeamEdge>, Fragmentable {
-  node: <T = NflTeamPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface NflTeamEdgeSubscription
-  extends Promise<AsyncIterator<NflTeamEdge>>,
-    Fragmentable {
-  node: <T = NflTeamSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface FlipGamePlayerSubscriptionPayload {
-  mutation: MutationType;
-  updatedFields?: String[];
-}
-
-export interface FlipGamePlayerSubscriptionPayloadPromise
-  extends Promise<FlipGamePlayerSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = FlipGamePlayerPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = FlipGamePlayerPreviousValuesPromise>() => T;
-}
-
-export interface FlipGamePlayerSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<FlipGamePlayerSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = FlipGamePlayerSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = FlipGamePlayerPreviousValuesSubscription>() => T;
 }
 
 export interface NflGame {
@@ -2138,6 +2184,122 @@ export interface NflGameSubscription
   season_type: () => Promise<AsyncIterator<GameSeasonType>>;
 }
 
+export interface TeamPlayerPreviousValues {
+  id: Int;
+}
+
+export interface TeamPlayerPreviousValuesPromise
+  extends Promise<TeamPlayerPreviousValues>,
+    Fragmentable {
+  id: () => Promise<Int>;
+}
+
+export interface TeamPlayerPreviousValuesSubscription
+  extends Promise<AsyncIterator<TeamPlayerPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface TeamPlayerEdge {
+  cursor: String;
+}
+
+export interface TeamPlayerEdgePromise
+  extends Promise<TeamPlayerEdge>,
+    Fragmentable {
+  node: <T = TeamPlayerPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface TeamPlayerEdgeSubscription
+  extends Promise<AsyncIterator<TeamPlayerEdge>>,
+    Fragmentable {
+  node: <T = TeamPlayerSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface FlipGamePlayer {
+  id: Int;
+  position: FlipPosition;
+}
+
+export interface FlipGamePlayerPromise
+  extends Promise<FlipGamePlayer>,
+    Fragmentable {
+  id: () => Promise<Int>;
+  game: <T = NflGamePromise>() => T;
+  team: <T = NflTeamPromise>() => T;
+  position: () => Promise<FlipPosition>;
+  player: <T = NflPlayerPromise>() => T;
+}
+
+export interface FlipGamePlayerSubscription
+  extends Promise<AsyncIterator<FlipGamePlayer>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  game: <T = NflGameSubscription>() => T;
+  team: <T = NflTeamSubscription>() => T;
+  position: () => Promise<AsyncIterator<FlipPosition>>;
+  player: <T = NflPlayerSubscription>() => T;
+}
+
+export interface AggregateTeam {
+  count: Int;
+}
+
+export interface AggregateTeamPromise
+  extends Promise<AggregateTeam>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTeamSubscription
+  extends Promise<AsyncIterator<AggregateTeam>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface FlipGamePlayerSubscriptionPayload {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
+
+export interface FlipGamePlayerSubscriptionPayloadPromise
+  extends Promise<FlipGamePlayerSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = FlipGamePlayerPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = FlipGamePlayerPreviousValuesPromise>() => T;
+}
+
+export interface FlipGamePlayerSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<FlipGamePlayerSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = FlipGamePlayerSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = FlipGamePlayerPreviousValuesSubscription>() => T;
+}
+
+export interface TeamConnection {}
+
+export interface TeamConnectionPromise
+  extends Promise<TeamConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<TeamEdge>>() => T;
+  aggregate: <T = AggregateTeamPromise>() => T;
+}
+
+export interface TeamConnectionSubscription
+  extends Promise<AsyncIterator<TeamConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<TeamEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateTeamSubscription>() => T;
+}
+
 export interface FlipGamePlayerPreviousValues {
   id: Int;
   position: FlipPosition;
@@ -2157,21 +2319,19 @@ export interface FlipGamePlayerPreviousValuesSubscription
   position: () => Promise<AsyncIterator<FlipPosition>>;
 }
 
-export interface NflPlayerEdge {
+export interface NflTeamEdge {
   cursor: String;
 }
 
-export interface NflPlayerEdgePromise
-  extends Promise<NflPlayerEdge>,
-    Fragmentable {
-  node: <T = NflPlayerPromise>() => T;
+export interface NflTeamEdgePromise extends Promise<NflTeamEdge>, Fragmentable {
+  node: <T = NflTeamPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface NflPlayerEdgeSubscription
-  extends Promise<AsyncIterator<NflPlayerEdge>>,
+export interface NflTeamEdgeSubscription
+  extends Promise<AsyncIterator<NflTeamEdge>>,
     Fragmentable {
-  node: <T = NflPlayerSubscription>() => T;
+  node: <T = NflTeamSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
@@ -2196,287 +2356,6 @@ export interface PageInfoSubscription
   hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
   startCursor: () => Promise<AsyncIterator<String>>;
   endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateNflGame {
-  count: Int;
-}
-
-export interface AggregateNflGamePromise
-  extends Promise<AggregateNflGame>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateNflGameSubscription
-  extends Promise<AsyncIterator<AggregateNflGame>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface LeagueSubscriptionPayload {
-  mutation: MutationType;
-  updatedFields?: String[];
-}
-
-export interface LeagueSubscriptionPayloadPromise
-  extends Promise<LeagueSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = LeaguePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = LeaguePreviousValuesPromise>() => T;
-}
-
-export interface LeagueSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<LeagueSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = LeagueSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = LeaguePreviousValuesSubscription>() => T;
-}
-
-export interface NflGameConnection {}
-
-export interface NflGameConnectionPromise
-  extends Promise<NflGameConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<NflGameEdge>>() => T;
-  aggregate: <T = AggregateNflGamePromise>() => T;
-}
-
-export interface NflGameConnectionSubscription
-  extends Promise<AsyncIterator<NflGameConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<NflGameEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateNflGameSubscription>() => T;
-}
-
-export interface LeaguePreviousValues {
-  id: Int;
-  name: String;
-}
-
-export interface LeaguePreviousValuesPromise
-  extends Promise<LeaguePreviousValues>,
-    Fragmentable {
-  id: () => Promise<Int>;
-  name: () => Promise<String>;
-}
-
-export interface LeaguePreviousValuesSubscription
-  extends Promise<AsyncIterator<LeaguePreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  name: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateLeague {
-  count: Int;
-}
-
-export interface AggregateLeaguePromise
-  extends Promise<AggregateLeague>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateLeagueSubscription
-  extends Promise<AsyncIterator<AggregateLeague>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface FlipGamePlayerConnection {}
-
-export interface FlipGamePlayerConnectionPromise
-  extends Promise<FlipGamePlayerConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<FlipGamePlayerEdge>>() => T;
-  aggregate: <T = AggregateFlipGamePlayerPromise>() => T;
-}
-
-export interface FlipGamePlayerConnectionSubscription
-  extends Promise<AsyncIterator<FlipGamePlayerConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<FlipGamePlayerEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateFlipGamePlayerSubscription>() => T;
-}
-
-export interface AggregateTeamPlayer {
-  count: Int;
-}
-
-export interface AggregateTeamPlayerPromise
-  extends Promise<AggregateTeamPlayer>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateTeamPlayerSubscription
-  extends Promise<AsyncIterator<AggregateTeamPlayer>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface NflGameSubscriptionPayload {
-  mutation: MutationType;
-  updatedFields?: String[];
-}
-
-export interface NflGameSubscriptionPayloadPromise
-  extends Promise<NflGameSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = NflGamePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = NflGamePreviousValuesPromise>() => T;
-}
-
-export interface NflGameSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<NflGameSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = NflGameSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = NflGamePreviousValuesSubscription>() => T;
-}
-
-export interface TeamEdge {
-  cursor: String;
-}
-
-export interface TeamEdgePromise extends Promise<TeamEdge>, Fragmentable {
-  node: <T = TeamPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface TeamEdgeSubscription
-  extends Promise<AsyncIterator<TeamEdge>>,
-    Fragmentable {
-  node: <T = TeamSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface NflGamePreviousValues {
-  id: Int;
-  week: Int;
-  season: Int;
-  nfl_feed_id: Int;
-  nfl_feed_key: Int;
-  start: DateTimeOutput;
-  season_type: GameSeasonType;
-}
-
-export interface NflGamePreviousValuesPromise
-  extends Promise<NflGamePreviousValues>,
-    Fragmentable {
-  id: () => Promise<Int>;
-  week: () => Promise<Int>;
-  season: () => Promise<Int>;
-  nfl_feed_id: () => Promise<Int>;
-  nfl_feed_key: () => Promise<Int>;
-  start: () => Promise<DateTimeOutput>;
-  season_type: () => Promise<GameSeasonType>;
-}
-
-export interface NflGamePreviousValuesSubscription
-  extends Promise<AsyncIterator<NflGamePreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  week: () => Promise<AsyncIterator<Int>>;
-  season: () => Promise<AsyncIterator<Int>>;
-  nfl_feed_id: () => Promise<AsyncIterator<Int>>;
-  nfl_feed_key: () => Promise<AsyncIterator<Int>>;
-  start: () => Promise<AsyncIterator<DateTimeOutput>>;
-  season_type: () => Promise<AsyncIterator<GameSeasonType>>;
-}
-
-export interface NflTeamConnection {}
-
-export interface NflTeamConnectionPromise
-  extends Promise<NflTeamConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<NflTeamEdge>>() => T;
-  aggregate: <T = AggregateNflTeamPromise>() => T;
-}
-
-export interface NflTeamConnectionSubscription
-  extends Promise<AsyncIterator<NflTeamConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<NflTeamEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateNflTeamSubscription>() => T;
-}
-
-export interface TeamSubscriptionPayload {
-  mutation: MutationType;
-  updatedFields?: String[];
-}
-
-export interface TeamSubscriptionPayloadPromise
-  extends Promise<TeamSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = TeamPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = TeamPreviousValuesPromise>() => T;
-}
-
-export interface TeamSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<TeamSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = TeamSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = TeamPreviousValuesSubscription>() => T;
-}
-
-export interface NflPlayerConnection {}
-
-export interface NflPlayerConnectionPromise
-  extends Promise<NflPlayerConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<NflPlayerEdge>>() => T;
-  aggregate: <T = AggregateNflPlayerPromise>() => T;
-}
-
-export interface NflPlayerConnectionSubscription
-  extends Promise<AsyncIterator<NflPlayerConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<NflPlayerEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateNflPlayerSubscription>() => T;
-}
-
-export interface NflPlayerSubscriptionPayload {
-  mutation: MutationType;
-  updatedFields?: String[];
-}
-
-export interface NflPlayerSubscriptionPayloadPromise
-  extends Promise<NflPlayerSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = NflPlayerPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = NflPlayerPreviousValuesPromise>() => T;
-}
-
-export interface NflPlayerSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<NflPlayerSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = NflPlayerSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = NflPlayerPreviousValuesSubscription>() => T;
 }
 
 export interface NflTeam {
@@ -2530,6 +2409,232 @@ export interface NflTeamSubscription
   ) => T;
 }
 
+export interface LeagueSubscriptionPayload {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
+
+export interface LeagueSubscriptionPayloadPromise
+  extends Promise<LeagueSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = LeaguePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = LeaguePreviousValuesPromise>() => T;
+}
+
+export interface LeagueSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<LeagueSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = LeagueSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = LeaguePreviousValuesSubscription>() => T;
+}
+
+export interface NflPlayerEdge {
+  cursor: String;
+}
+
+export interface NflPlayerEdgePromise
+  extends Promise<NflPlayerEdge>,
+    Fragmentable {
+  node: <T = NflPlayerPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface NflPlayerEdgeSubscription
+  extends Promise<AsyncIterator<NflPlayerEdge>>,
+    Fragmentable {
+  node: <T = NflPlayerSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface LeaguePreviousValues {
+  id: Int;
+  name: String;
+}
+
+export interface LeaguePreviousValuesPromise
+  extends Promise<LeaguePreviousValues>,
+    Fragmentable {
+  id: () => Promise<Int>;
+  name: () => Promise<String>;
+}
+
+export interface LeaguePreviousValuesSubscription
+  extends Promise<AsyncIterator<LeaguePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateNflGame {
+  count: Int;
+}
+
+export interface AggregateNflGamePromise
+  extends Promise<AggregateNflGame>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateNflGameSubscription
+  extends Promise<AsyncIterator<AggregateNflGame>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface FlipGamePlayerConnection {}
+
+export interface FlipGamePlayerConnectionPromise
+  extends Promise<FlipGamePlayerConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<FlipGamePlayerEdge>>() => T;
+  aggregate: <T = AggregateFlipGamePlayerPromise>() => T;
+}
+
+export interface FlipGamePlayerConnectionSubscription
+  extends Promise<AsyncIterator<FlipGamePlayerConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<FlipGamePlayerEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateFlipGamePlayerSubscription>() => T;
+}
+
+export interface NflGameConnection {}
+
+export interface NflGameConnectionPromise
+  extends Promise<NflGameConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<NflGameEdge>>() => T;
+  aggregate: <T = AggregateNflGamePromise>() => T;
+}
+
+export interface NflGameConnectionSubscription
+  extends Promise<AsyncIterator<NflGameConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<NflGameEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateNflGameSubscription>() => T;
+}
+
+export interface NflGameSubscriptionPayload {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
+
+export interface NflGameSubscriptionPayloadPromise
+  extends Promise<NflGameSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = NflGamePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = NflGamePreviousValuesPromise>() => T;
+}
+
+export interface NflGameSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<NflGameSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = NflGameSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = NflGamePreviousValuesSubscription>() => T;
+}
+
+export interface AggregateLeague {
+  count: Int;
+}
+
+export interface AggregateLeaguePromise
+  extends Promise<AggregateLeague>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateLeagueSubscription
+  extends Promise<AsyncIterator<AggregateLeague>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface NflGamePreviousValues {
+  id: Int;
+  week: Int;
+  season: Int;
+  nfl_feed_id: Int;
+  nfl_feed_key: Int;
+  start: DateTimeOutput;
+  season_type: GameSeasonType;
+}
+
+export interface NflGamePreviousValuesPromise
+  extends Promise<NflGamePreviousValues>,
+    Fragmentable {
+  id: () => Promise<Int>;
+  week: () => Promise<Int>;
+  season: () => Promise<Int>;
+  nfl_feed_id: () => Promise<Int>;
+  nfl_feed_key: () => Promise<Int>;
+  start: () => Promise<DateTimeOutput>;
+  season_type: () => Promise<GameSeasonType>;
+}
+
+export interface NflGamePreviousValuesSubscription
+  extends Promise<AsyncIterator<NflGamePreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  week: () => Promise<AsyncIterator<Int>>;
+  season: () => Promise<AsyncIterator<Int>>;
+  nfl_feed_id: () => Promise<AsyncIterator<Int>>;
+  nfl_feed_key: () => Promise<AsyncIterator<Int>>;
+  start: () => Promise<AsyncIterator<DateTimeOutput>>;
+  season_type: () => Promise<AsyncIterator<GameSeasonType>>;
+}
+
+export interface UserConnection {}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface TeamPlayerSubscriptionPayload {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
+
+export interface TeamPlayerSubscriptionPayloadPromise
+  extends Promise<TeamPlayerSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = TeamPlayerPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = TeamPlayerPreviousValuesPromise>() => T;
+}
+
+export interface TeamPlayerSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TeamPlayerSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = TeamPlayerSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = TeamPlayerPreviousValuesSubscription>() => T;
+}
+
 export interface TeamPlayerConnection {}
 
 export interface TeamPlayerConnectionPromise
@@ -2548,97 +2653,43 @@ export interface TeamPlayerConnectionSubscription
   aggregate: <T = AggregateTeamPlayerSubscription>() => T;
 }
 
-export interface NflTeamPreviousValues {
-  id: Int;
-  city: String;
-  code: String;
-  full_name: String;
-  name: String;
-  nfl_feed_id: String;
-}
-
-export interface NflTeamPreviousValuesPromise
-  extends Promise<NflTeamPreviousValues>,
-    Fragmentable {
-  id: () => Promise<Int>;
-  city: () => Promise<String>;
-  code: () => Promise<String>;
-  full_name: () => Promise<String>;
-  name: () => Promise<String>;
-  nfl_feed_id: () => Promise<String>;
-}
-
-export interface NflTeamPreviousValuesSubscription
-  extends Promise<AsyncIterator<NflTeamPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  city: () => Promise<AsyncIterator<String>>;
-  code: () => Promise<AsyncIterator<String>>;
-  full_name: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  nfl_feed_id: () => Promise<AsyncIterator<String>>;
-}
-
-export interface NflTeamSubscriptionPayload {
+export interface NflPlayerSubscriptionPayload {
   mutation: MutationType;
   updatedFields?: String[];
 }
 
-export interface NflTeamSubscriptionPayloadPromise
-  extends Promise<NflTeamSubscriptionPayload>,
+export interface NflPlayerSubscriptionPayloadPromise
+  extends Promise<NflPlayerSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = NflTeamPromise>() => T;
+  node: <T = NflPlayerPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = NflTeamPreviousValuesPromise>() => T;
+  previousValues: <T = NflPlayerPreviousValuesPromise>() => T;
 }
 
-export interface NflTeamSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<NflTeamSubscriptionPayload>>,
+export interface NflPlayerSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<NflPlayerSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = NflTeamSubscription>() => T;
+  node: <T = NflPlayerSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = NflTeamPreviousValuesSubscription>() => T;
+  previousValues: <T = NflPlayerPreviousValuesSubscription>() => T;
 }
 
-export interface League {
-  id: Int;
-  name: String;
+export interface AggregateNflTeam {
+  count: Int;
 }
 
-export interface LeaguePromise extends Promise<League>, Fragmentable {
-  id: () => Promise<Int>;
-  name: () => Promise<String>;
-  teams: <T = FragmentableArray<Team>>(
-    args?: {
-      where?: TeamWhereInput;
-      orderBy?: TeamOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
-}
-
-export interface LeagueSubscription
-  extends Promise<AsyncIterator<League>>,
+export interface AggregateNflTeamPromise
+  extends Promise<AggregateNflTeam>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<Int>>;
-  name: () => Promise<AsyncIterator<String>>;
-  teams: <T = Promise<AsyncIterator<TeamSubscription>>>(
-    args?: {
-      where?: TeamWhereInput;
-      orderBy?: TeamOrderByInput;
-      skip?: Int;
-      after?: String;
-      before?: String;
-      first?: Int;
-      last?: Int;
-    }
-  ) => T;
+  count: () => Promise<Int>;
+}
+
+export interface AggregateNflTeamSubscription
+  extends Promise<AsyncIterator<AggregateNflTeam>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface NflPlayerPreviousValues {
@@ -2684,43 +2735,40 @@ export interface NflPlayerPreviousValuesSubscription
   status: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateNflTeam {
+export interface AggregateNflPlayer {
   count: Int;
 }
 
-export interface AggregateNflTeamPromise
-  extends Promise<AggregateNflTeam>,
+export interface AggregateNflPlayerPromise
+  extends Promise<AggregateNflPlayer>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateNflTeamSubscription
-  extends Promise<AsyncIterator<AggregateNflTeam>>,
+export interface AggregateNflPlayerSubscription
+  extends Promise<AsyncIterator<AggregateNflPlayer>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface TeamPlayerSubscriptionPayload {
-  mutation: MutationType;
-  updatedFields?: String[];
+export interface User {
+  id: Int;
+  username: String;
+  passwordHash: String;
 }
 
-export interface TeamPlayerSubscriptionPayloadPromise
-  extends Promise<TeamPlayerSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = TeamPlayerPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = TeamPlayerPreviousValuesPromise>() => T;
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<Int>;
+  username: () => Promise<String>;
+  passwordHash: () => Promise<String>;
 }
 
-export interface TeamPlayerSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<TeamPlayerSubscriptionPayload>>,
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = TeamPlayerSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = TeamPlayerPreviousValuesSubscription>() => T;
+  id: () => Promise<AsyncIterator<Int>>;
+  username: () => Promise<AsyncIterator<String>>;
+  passwordHash: () => Promise<AsyncIterator<String>>;
 }
 
 export interface NflGameEdge {
@@ -2739,26 +2787,247 @@ export interface NflGameEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateNflPlayer {
+export interface NflTeamSubscriptionPayload {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
+
+export interface NflTeamSubscriptionPayloadPromise
+  extends Promise<NflTeamSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = NflTeamPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = NflTeamPreviousValuesPromise>() => T;
+}
+
+export interface NflTeamSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<NflTeamSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = NflTeamSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = NflTeamPreviousValuesSubscription>() => T;
+}
+
+export interface AggregateUser {
   count: Int;
 }
 
-export interface AggregateNflPlayerPromise
-  extends Promise<AggregateNflPlayer>,
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateNflPlayerSubscription
-  extends Promise<AsyncIterator<AggregateNflPlayer>>,
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
+export interface TeamEdge {
+  cursor: String;
+}
+
+export interface TeamEdgePromise extends Promise<TeamEdge>, Fragmentable {
+  node: <T = TeamPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface TeamEdgeSubscription
+  extends Promise<AsyncIterator<TeamEdge>>,
+    Fragmentable {
+  node: <T = TeamSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TeamPreviousValues {
+  id: Int;
+  name: String;
+}
+
+export interface TeamPreviousValuesPromise
+  extends Promise<TeamPreviousValues>,
+    Fragmentable {
+  id: () => Promise<Int>;
+  name: () => Promise<String>;
+}
+
+export interface TeamPreviousValuesSubscription
+  extends Promise<AsyncIterator<TeamPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  name: () => Promise<AsyncIterator<String>>;
+}
+
+export interface TeamSubscriptionPayload {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
+
+export interface TeamSubscriptionPayloadPromise
+  extends Promise<TeamSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = TeamPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = TeamPreviousValuesPromise>() => T;
+}
+
+export interface TeamSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<TeamSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = TeamSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = TeamPreviousValuesSubscription>() => T;
+}
+
+export interface League {
+  id: Int;
+  name: String;
+}
+
+export interface LeaguePromise extends Promise<League>, Fragmentable {
+  id: () => Promise<Int>;
+  name: () => Promise<String>;
+  teams: <T = FragmentableArray<Team>>(
+    args?: {
+      where?: TeamWhereInput;
+      orderBy?: TeamOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface LeagueSubscription
+  extends Promise<AsyncIterator<League>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  name: () => Promise<AsyncIterator<String>>;
+  teams: <T = Promise<AsyncIterator<TeamSubscription>>>(
+    args?: {
+      where?: TeamWhereInput;
+      orderBy?: TeamOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface NflTeamPreviousValues {
+  id: Int;
+  city: String;
+  code: String;
+  full_name: String;
+  name: String;
+  nfl_feed_id: String;
+}
+
+export interface NflTeamPreviousValuesPromise
+  extends Promise<NflTeamPreviousValues>,
+    Fragmentable {
+  id: () => Promise<Int>;
+  city: () => Promise<String>;
+  code: () => Promise<String>;
+  full_name: () => Promise<String>;
+  name: () => Promise<String>;
+  nfl_feed_id: () => Promise<String>;
+}
+
+export interface NflTeamPreviousValuesSubscription
+  extends Promise<AsyncIterator<NflTeamPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<Int>>;
+  city: () => Promise<AsyncIterator<String>>;
+  code: () => Promise<AsyncIterator<String>>;
+  full_name: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  nfl_feed_id: () => Promise<AsyncIterator<String>>;
+}
+
+export interface NflTeamConnection {}
+
+export interface NflTeamConnectionPromise
+  extends Promise<NflTeamConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<NflTeamEdge>>() => T;
+  aggregate: <T = AggregateNflTeamPromise>() => T;
+}
+
+export interface NflTeamConnectionSubscription
+  extends Promise<AsyncIterator<NflTeamConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<NflTeamEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateNflTeamSubscription>() => T;
+}
+
+export interface AggregateTeamPlayer {
+  count: Int;
+}
+
+export interface AggregateTeamPlayerPromise
+  extends Promise<AggregateTeamPlayer>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateTeamPlayerSubscription
+  extends Promise<AsyncIterator<AggregateTeamPlayer>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface NflPlayerConnection {}
+
+export interface NflPlayerConnectionPromise
+  extends Promise<NflPlayerConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<NflPlayerEdge>>() => T;
+  aggregate: <T = AggregateNflPlayerPromise>() => T;
+}
+
+export interface NflPlayerConnectionSubscription
+  extends Promise<AsyncIterator<NflPlayerConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<NflPlayerEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateNflPlayerSubscription>() => T;
+}
 
 export type Long = string;
 
@@ -2766,6 +3035,11 @@ export type Long = string;
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
 export type Int = number;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -2827,6 +3101,10 @@ export const models = [
   },
   {
     name: "TeamPlayer",
+    embedded: false
+  },
+  {
+    name: "User",
     embedded: false
   }
 ];

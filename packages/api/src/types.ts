@@ -1,5 +1,7 @@
 import { Prisma } from "@ffb/prisma";
+import { User } from "models";
 
 export interface Context {
-  db: Prisma
+  db: Prisma,
+  user: User
 }

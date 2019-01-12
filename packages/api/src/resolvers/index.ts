@@ -9,6 +9,8 @@ import { Mutation } from "./mutation";
 import { Matchup } from "./matchup";
 import { NflGame } from "./nfl-game";
 import { FlipGamePlayer } from "./flip-game-players";
+import { User } from "./user";
+import { SafeUser } from "./safe-user";
 
 export const resolvers: Resolvers = {
     Query,
@@ -20,5 +22,7 @@ export const resolvers: Resolvers = {
     League,
     NflGame,
     FlipGamePlayer,
-    Matchup
+    Matchup,
+    User,
+    SafeUser
 }
