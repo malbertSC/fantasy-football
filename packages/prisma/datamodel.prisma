@@ -4,7 +4,21 @@
 type League @pgTable(name: "league") {
   id: Int! @unique
   name: String!
-  teams: [Team!]!
+  league_lineups: [LeagueLineup!]!
+  league_members: [LeagueMember!]!
+  owner_user: User! @pgRelation(column: "owner_user_id")
+}
+
+type LeagueMember @pgTable(name: "league_member") {
+  id: Int! @unique
+  league: League! @pgRelation(column: "league_id")
+  member_user: User! @pgRelation(column: "member_user_id")
+}
+
+type LeagueLineup @pgTable(name: "league_lineup") {
+  id: Int! @unique
+  lineup: Lineup! @pgRelation(column: "lineup_id")
+  league: League! @pgRelation(column: "league_id")
 }
 
 type NflPlayer @pgTable(name: "nfl_player") {
@@ -19,7 +33,6 @@ type NflPlayer @pgTable(name: "nfl_player") {
   position: String!
   position_group: String!
   status: String!
-  team_players: [TeamPlayer!]!
 }
 
 type NflTeam @pgTable(name: "nfl_team") {
@@ -32,18 +45,18 @@ type NflTeam @pgTable(name: "nfl_team") {
   nfl_players: [NflPlayer!]!
 }
 
-type Team @pgTable(name: "team") {
+type Lineup @pgTable(name: "lineup") {
   id: Int! @unique
-  league: League! @pgRelation(column: "league_id")
+  leagues: [League!]!
   name: String!
-  team_players: [TeamPlayer!]!
+  lineup_players: [LineupPlayer!]!
   owner_user: User! @pgRelation(column: "owner_user_id")
 }
 
-type TeamPlayer @pgTable(name: "team_player") {
+type LineupPlayer @pgTable(name: "lineup_player") {
   id: Int! @unique
   nfl_player: NflPlayer! @pgRelation(column: "nfl_player_id")
-  team: Team! @pgRelation(column: "team_id")
+  lineup: Lineup! @pgRelation(column: "lineup_id")
 }
 enum GameSeasonType {
   PRE,
@@ -81,4 +94,5 @@ type User @pgTable(name: "user") {
   id: Int! @unique
   username: String! @unique
   passwordHash: String!
+  leagues: [League!]!
 }

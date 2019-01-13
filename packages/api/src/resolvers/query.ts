@@ -10,12 +10,18 @@ export const Query: QueryResolvers.Type = {
     nflGame: (parent, {where}, ctx) => ctx.db.nflGame(where),
     leagues: (parent, args, ctx) => ctx.db.leagues(args),
     league: (parent, { where }, ctx) => ctx.db.league(where),
-    teams: (parent, args, ctx) => ctx.db.teams(args),
-    team: (parent, { where }, ctx) => ctx.db.team(where),
-    teamPlayers: (parent, args, ctx) => ctx.db.teamPlayers(args),
-    teamPlayer: (parent,  { where }, ctx) => ctx.db.teamPlayer(where),
+    lineups: (parent, args, ctx) => ctx.db.lineups(args),
+    lineup: (parent, { where }, ctx) => ctx.db.lineup(where),
+    leagueLineups: (parent, args, ctx) => ctx.db.leagueLineups(args),
+    leagueLineup: (parent, { where }, ctx) => ctx.db.leagueLineup(where),
+    leagueMembers: (parent, args, ctx) => ctx.db.leagueMembers(args),
+    leagueMember: (parent, { where }, ctx) => ctx.db.leagueMember(where),
+    lineupPlayers: (parent, args, ctx) => ctx.db.lineupPlayers(args),
+    lineupPlayer: (parent,  { where }, ctx) => ctx.db.lineupPlayer(where),
     flipGamePlayers: (parent, args, ctx) => ctx.db.flipGamePlayers(args),
     flipGamePlayer: (parent, { where }, ctx) => ctx.db.flipGamePlayer(where),
+    users: (parent, args, ctx) => ctx.db.users(args),
+    user: (parent, { where }, ctx) => ctx.db.user(where),
     matchups: (parent, { where }, ctx) => {
         return getMatchups(where.gameID)
     }

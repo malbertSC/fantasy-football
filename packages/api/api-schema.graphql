@@ -1,29 +1,39 @@
 # import FlipGamePlayerWhereUniqueInput, FlipGamePlayerWhereInput, FlipGamePlayer from '../prisma/prisma.graphql'
 # import LeagueWhereUniqueInput, LeagueWhereInput, League from '../prisma/prisma.graphql'
+# import LeagueLineup, LeagueLineupWhereInput, LeagueLineupWhereUniqueInput from '../prisma/prisma.graphql'
+# import LeagueMember, LeagueMemberWhereInput, LeagueMemberWhereUniqueInput from '../prisma/prisma.graphql'
 # import NflGameWhereUniqueInput, NflPlayerWhereInput, NflPlayer from '../prisma/prisma.graphql'
 # import NflTeamWUniqueInput, NflTeamWWhereInput, NflTeamW from '../prisma/prisma.graphql'
-# import TeameWhereUniqueInput, TeamWhereInput, Team from '../prisma/prisma.graphql'
-# import TeamPlayerWhereUniqueInput, TeamPlayerWhereInput, TeamPlayer from '../prisma/prisma.graphql'
-
+# import LineupWhereUniqueInput, LineupWhereInput, Lineup from '../prisma/prisma.graphql'
+# import LineupPlayerWhereUniqueInput, LineupPlayerWhereInput, LineupPlayer from '../prisma/prisma.graphql'
+# import LeagueLineupUpdateManyWithoutLeagueInput, LeagueMemberUpdateManyWithoutLeagueInput from '../prisma/prisma.graphql'
 type Query {
     matchups(where: MatchupWhereInput!): [Matchup]!
     flipGamePlayer(where: FlipGamePlayerWhereUniqueInput!): FlipGamePlayer
-    flipGamePlayers(where: FlipGamePlayerWhereInput, orderBy: FlipGamePlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [FlipGamePlayer]!
+    flipGamePlayers(where: FlipGamePlayerWhereInput, orderBy: FlipGamePlayerOrderByInput, skip: Int, after: String, before: String): [FlipGamePlayer]!
     league(where: LeagueWhereUniqueInput!): League
-    leagues(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [League]!
+    leagues(where: LeagueWhereInput, orderBy: LeagueOrderByInput, skip: Int, after: String, before: String): [League]!
+    leagueLineup(where: LeagueLineupWhereUniqueInput!): LeagueLineup
+    leagueLineups(where: LeagueLineupWhereInput, orderBy: LeagueLineupOrderByInput, skip: Int, after: String, before: String): [LeagueLineup]!
+    leagueMember(where: LeagueMemberWhereUniqueInput!): LeagueMember
+    leagueMembers(where: LeagueMemberWhereInput, orderBy: LeagueMemberOrderByInput, skip: Int, after: String, before: String): [LeagueMember]!
+    lineup(where: LineupWhereUniqueInput!): Lineup
+    lineups(where: LineupWhereInput, orderBy: LineupOrderByInput, skip: Int, after: String, before: String): [Lineup]!
+    lineupPlayer(where: LineupPlayerWhereUniqueInput!): LineupPlayer
+    lineupPlayers(where: LineupPlayerWhereInput, orderBy: LineupPlayerOrderByInput, skip: Int, after: String, before: String): [LineupPlayer]!
     nflGame(where: NflGameWhereUniqueInput!): NflGame
-    nflGames(where: NflGameWhereInput, orderBy: NflGameOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflGame]!
+    nflGames(where: NflGameWhereInput, orderBy: NflGameOrderByInput, skip: Int, after: String, before: String): [NflGame]!
     nflPlayer(where: NflPlayerWhereUniqueInput!): NflPlayer
-    nflPlayers(where: NflPlayerWhereInput, orderBy: NflPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflPlayer]!
+    nflPlayers(where: NflPlayerWhereInput, orderBy: NflPlayerOrderByInput, skip: Int, after: String, before: String): [NflPlayer]!
     nflTeam(where: NflTeamWhereUniqueInput!): NflTeam
-    nflTeams(where: NflTeamWhereInput, orderBy: NflTeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NflTeam]!
-    team(where: TeamWhereUniqueInput!): Team
-    teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team]!
-    teamPlayer(where: TeamPlayerWhereUniqueInput!): TeamPlayer
-    teamPlayers(where: TeamPlayerWhereInput, orderBy: TeamPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [TeamPlayer]!
+    nflTeams(where: NflTeamWhereInput, orderBy: NflTeamOrderByInput, skip: Int, after: String, before: String): [NflTeam]!
+    user(where: UserWhereUniqueInput!): User
+    users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String): [User]!
 }
 type Mutation {
     signup(username: String, password:String): SafeUser
+    createLeague(name: String): League
+    updateLeague(data: LeagueUpdateInput): League
 }
 input MatchupWhereInput {
     gameID: Int!
@@ -40,4 +50,9 @@ type User {
 type SafeUser {
     id: Int!
     username: String!
+}
+input LeagueUpdateInput {
+  name: String
+  league_lineups: LeagueLineupUpdateManyWithoutLeagueInput
+  league_members: LeagueMemberUpdateManyWithoutLeagueInput
 }
