@@ -6,7 +6,7 @@
 # import NflTeamWUniqueInput, NflTeamWWhereInput, NflTeamW from '../prisma/prisma.graphql'
 # import LineupWhereUniqueInput, LineupWhereInput, Lineup from '../prisma/prisma.graphql'
 # import LineupPlayerWhereUniqueInput, LineupPlayerWhereInput, LineupPlayer from '../prisma/prisma.graphql'
-# import LeagueLineupUpdateManyWithoutLeagueInput, LeagueMemberUpdateManyWithoutLeagueInput from '../prisma/prisma.graphql'
+
 type Query {
     matchups(where: MatchupWhereInput!): [Matchup]!
     flipGamePlayer(where: FlipGamePlayerWhereUniqueInput!): FlipGamePlayer
@@ -31,9 +31,11 @@ type Query {
     users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String): [User]!
 }
 type Mutation {
-    signup(username: String, password:String): SafeUser
-    createLeague(name: String): League
-    updateLeague(data: LeagueUpdateInput): League
+    signup(username: String!, password:String!): SafeUser
+    createLeague(name: String!): League
+    updateLeagueName(data: LeagueUpdateNameInput!, where: LeagueWhereUniqueInput!): League
+    createLeagueMember(data: LeagueMemberInput!, where: LeagueWhereUniqueInput!): League
+    deleteLeagueMember(where: LeagueMemberWhereUniqueInput!): LeagueMember
 }
 input MatchupWhereInput {
     gameID: Int!
@@ -51,8 +53,9 @@ type SafeUser {
     id: Int!
     username: String!
 }
-input LeagueUpdateInput {
-  name: String
-  league_lineups: LeagueLineupUpdateManyWithoutLeagueInput
-  league_members: LeagueMemberUpdateManyWithoutLeagueInput
+input LeagueUpdateNameInput {
+    name: String
+}
+input LeagueMemberInput {
+    userID: Int!
 }
