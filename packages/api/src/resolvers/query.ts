@@ -1,5 +1,6 @@
 import { QueryResolvers } from "../generated/graphqlgen"
 import { getMatchups } from "../models/Matchup";
+import { Context } from "types";
 
 export const Query: QueryResolvers.Type = {
     nflTeam: (parent, {where}, ctx) => ctx.db.nflTeam(where),
@@ -24,5 +25,6 @@ export const Query: QueryResolvers.Type = {
     user: (parent, { where }, ctx) => ctx.db.user(where),
     matchups: (parent, { where }, ctx) => {
         return getMatchups(where.gameID)
-    }
+    },
+    currentUser: (parent, args, ctx: Context) => ctx.user
 }

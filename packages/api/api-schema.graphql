@@ -9,6 +9,7 @@
 
 type Query {
     matchups(where: MatchupWhereInput!): [Matchup]!
+    currentUser: SafeUser
     flipGamePlayer(where: FlipGamePlayerWhereUniqueInput!): FlipGamePlayer
     flipGamePlayers(where: FlipGamePlayerWhereInput, orderBy: FlipGamePlayerOrderByInput, skip: Int, after: String, before: String): [FlipGamePlayer]!
     league(where: LeagueWhereUniqueInput!): League
@@ -31,7 +32,7 @@ type Query {
     users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String): [User]!
 }
 type Mutation {
-    signup(username: String!, password:String!): SafeUser
+    signup(username: String!, password: String!): SafeUser
     createLeague(name: String!): League
     updateLeagueName(data: LeagueUpdateNameInput!, where: LeagueWhereUniqueInput!): League
     createLeagueMember(data: LeagueMemberInput!, where: LeagueWhereUniqueInput!): League

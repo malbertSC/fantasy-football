@@ -1,77 +1,93 @@
-import React, { Component } from "react";
-import gql from "graphql-tag";
-import { Mutation, Query } from "react-apollo";
+import React, { Component, ChangeEvent } from "react";
+import { Redirect } from "react-router-dom";
+import { GetCurrentUser as QUERY } from "./queries";
+import { GetCurrentUser_currentUser } from "./__generated__/GetCurrentUser";
+import { CurrentUser } from "../types";
+import { UserConsumer } from "../state/UserContext";
+import { client } from "../App";
 
-// const SIGNIN_MUTATION = gql`
-//     mutation SIGNIN_MUTATION($email: String!, $password: String!) {
-//         signin(email: $email, password: $password) {
-//             id
-//             email
-//         }
-//     }
-// `;
+interface State {
+    password: string;
+    username: string;
+    signinError: boolean;
+    navToDashboard: boolean;
+}
+interface Props { }
 
-// interface Data {
-//     allPeople: {
-//         people: Array<{ name: string }>;
-//     };
-// };
+export class Signin extends Component<Props, State> {
+    public readonly state: State = {
+        password: "",
+        username: "",
+        signinError: false,
+        navToDashboard: false
+    };
 
-// interface Variables {
-//     first: number;
-// };
+    private handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const change: any = {};
+        change[event.target.name] = event.target.value
+        this.setState(change)
+    }
 
-// class AllPeopleQuery extends Query<Data, Variables> { }
+    private handleSigninAttempt = async (event: React.FormEvent<HTMLFormElement>, setUser: (user: CurrentUser) => void) => {
+        {
+            event.preventDefault();
+            localStorage.setItem("token", btoa(`${this.state.username}:${this.state.password}`))
+            let signinUser: CurrentUser | undefined;
+            try {
+                const { data } = await client.query<{currentUser: GetCurrentUser_currentUser}>({
+                    query: QUERY
+                });
+                signinUser = data.currentUser;
+            } catch (err) {
+                localStorage.removeItem("token");
+                this.setState({...this.state, ...{signinError: true}});
+            }
+            if (signinUser !== undefined && signinUser.id) {
+                setUser(signinUser);
+                this.setState({...this.state, ...{navToDashboard: true}});
+            }
+        }
+    }
+    public render() {
+        if (this.state.navToDashboard) return <Redirect to="/dashboard" />
+        return (
+            <UserConsumer>
+                {({setUser}) => (
+                    <form
+                        method="post"
+                        onSubmit={async e => this.handleSigninAttempt(e, setUser)}
+                    >
+                        <fieldset disabled={false} aria-busy={false}>
+                            <h2>Sign into your account</h2>
+                            {/* <Error error={error} /> */}
+                            <label htmlFor="username">
+                                Username
+            <input
+                                    type="username"
+                                    name="username"
+                                    placeholder="username"
+                                    value={this.state.username}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
+                            <label htmlFor="password">
+                                Password
+            <input
+                                    type="password"
+                                    name="password"
+                                    placeholder="password"
+                                    value={this.state.password}
+                                    onChange={this.handleChange}
+                                />
+                            </label>
 
-// export class Signin extends Component {
-
-//     state = {
-//         password: "",
-//         email: "",
-//     };
-//     public render() {
-//         return (
-//             <AllPeopleQuery
-//                 variables={SIGNIN_MUTATION}
-//             >
-//                 {(addTodo, { data }) => (
-//                     <form
-//                         method="post"
-//                         onSubmit={async e => {
-//                             e.preventDefault();
-//                             // await signup();
-//                             this.setState({ email: "", password: "" });
-//                         }}
-//                     >
-//                         <fieldset disabled={false} aria-busy={false}>
-//                             <h2>Sign into your account</h2>
-//                             {/* <Error error={error} /> */}
-//                             <label htmlFor="email">
-//                                 Email
-//                 <input
-//                                     type="email"
-//                                     name="email"
-//                                     placeholder="email"
-//                                     value={this.state.email}
-//                                 // onChange={console.log("changed")}
-//                                 />
-//                             </label>
-//                             <label htmlFor="password">
-//                                 Password
-//                 <input
-//                                     type="password"
-//                                     name="password"
-//                                     placeholder="password"
-//                                     value={this.state.password}
-//                                 // onChange={this.saveToState}
-//                                 />
-//                             </label>
-
-//                             <button type="submit">Sign In!</button>
-//                         </fieldset>
-//                     </form>
-//                 )}
-//             </Mutation>
-//         )
-//     }
-// }
+                            <button type="submit">Sign In!</button>
+                        </fieldset>
+                        {this.state.signinError && <p>Error :( Please try again</p>}
+                    </form>
+                )
+            }
+            </UserConsumer>
+        )
+    }
+}
