@@ -11,11 +11,12 @@ import { UserState, UserProvider } from "./state/UserContext";
 import { SigninOrSignup } from "./components/login-flow/signin-or-signup";
 import { MyLeagues } from "./components/my-leagues";
 import { LoggedInUser } from "./components/logged-in-user";
+import { LocalStorageKeys } from "./state/keys";
 
 export const client = new ApolloClient({
     uri: "http://localhost:4000",
     request: async operation => {
-        const token = await localStorage.getItem("token");
+        const token = await localStorage.getItem(LocalStorageKeys.token);
         operation.setContext({
             headers: {
                 authorization: token ? `Basic ${token}` : ""
@@ -30,13 +31,18 @@ class App extends Component {
     public readonly state: State = {
         isLoading: true,
         user: undefined,
-        setUser: (user: CurrentUser) => {
-            localStorage.setItem("user", JSON.stringify(user));
-            this.setState({...this.state, ...{user}});
+        signin: (user: CurrentUser) => {
+            localStorage.setItem(LocalStorageKeys.user, JSON.stringify(user));
+            this.setState({user});
+        },
+        signout: () => {
+            localStorage.removeItem(LocalStorageKeys.user);
+            localStorage.removeItem(LocalStorageKeys.token);
+            this.setState({user: undefined});
         }
     };
     componentDidMount() {
-        const rawUser = localStorage.getItem("user");
+        const rawUser = localStorage.getItem(LocalStorageKeys.user);
         if (rawUser) {
             const user: CurrentUser = JSON.parse(rawUser);
             this.setState({user});
@@ -48,7 +54,6 @@ class App extends Component {
             <UserProvider value={this.state}>
                 <ApolloProvider client={client}>
                     <div className="App">
-                        <div>logged in user: {(this.state.user !== undefined) ? this.state.user.username : ""}</div>
                         <LoggedInUser></LoggedInUser>
                         <header className="App-header">
                             <Router>

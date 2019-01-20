@@ -5,6 +5,7 @@ import { GetCurrentUser_currentUser } from "../__generated__/GetCurrentUser";
 import { CurrentUser } from "../../types";
 import { UserConsumer } from "../../state/UserContext";
 import { client } from "../../App";
+import { LocalStorageKeys } from "../../state/keys";
 
 interface State {
     password: string;
@@ -28,7 +29,7 @@ export class Signin extends Component<{}, State> {
 
     private handleSigninAttempt = async (setUser: (user: CurrentUser) => void) => {
         {
-            localStorage.setItem("token", btoa(`${this.state.username}:${this.state.password}`))
+            localStorage.setItem(LocalStorageKeys.token, btoa(`${this.state.username}:${this.state.password}`))
             try {
                 const { data } = await client.query<{ currentUser: GetCurrentUser_currentUser }>({
                     query: QUERY
@@ -39,7 +40,8 @@ export class Signin extends Component<{}, State> {
                     this.setState({ ...this.state, ...{ navToDashboard: true } });
                 }
             } catch (err) {
-                localStorage.removeItem("token");
+                localStorage.removeItem(LocalStorageKeys.token);
+                localStorage.removeItem(LocalStorageKeys.token);
                 this.setState({ ...this.state, ...{ signinError: true } });
             }
         }
@@ -49,12 +51,12 @@ export class Signin extends Component<{}, State> {
         if (this.state.navToDashboard) return <Redirect to="/dashboard" />
         return (
             <UserConsumer>
-                {({ setUser }) => (
+                {({ signin }) => (
                     <form
                         method="post"
                         onSubmit={async e => {
                             e.preventDefault();
-                            this.handleSigninAttempt(setUser)
+                            this.handleSigninAttempt(signin)
                         }
                         }
                     >

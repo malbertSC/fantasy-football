@@ -4,12 +4,14 @@ import { CurrentUser } from "../types";
 export interface UserState {
     isLoading: boolean;
     user: CurrentUser | undefined;
-    setUser: (user: CurrentUser) => void;
+    signin: (user: CurrentUser) => void;
+    signout: () => void;
 }
 
 const { Provider, Consumer } = React.createContext<UserState>({
     isLoading: true,
     user: undefined,
-    setUser: () => {}
+    signin: () => {},
+    signout: () => {}
 });
 export { Provider as UserProvider, Consumer as UserConsumer };
