@@ -1,13 +1,5 @@
 import gql from "graphql-tag";
 
-// export const GetTeam = gql`
-//     query GetTeam($id: Int!) {
-//         team(where: {id: $id}) {
-//             id
-//         }
-//     }
-// `;
-
 export const GetCurrentUser = gql`
     query GetCurrentUser {
         currentUser {
@@ -17,16 +9,7 @@ export const GetCurrentUser = gql`
     }
 `;
 
-// export const GetTeams = gql`
-//     query GetTeams {
-//         teams {
-//             id,
-//             name
-//         }
-//     }
-// `;
-
-export const GetMyLeagues = gql`
+export const GetLeaguesForUser = gql`
     query GetLeaguesForUser($userID: Int) {
         leagues(where:{league_members_some:{member_user:{id:$userID}}}) {
             id,

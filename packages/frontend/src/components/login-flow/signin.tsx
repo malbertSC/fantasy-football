@@ -1,10 +1,10 @@
 import React, { Component, ChangeEvent } from "react";
 import { Redirect } from "react-router-dom";
-import { GetCurrentUser as QUERY } from "./queries";
-import { GetCurrentUser_currentUser } from "./__generated__/GetCurrentUser";
-import { CurrentUser } from "../types";
-import { UserConsumer } from "../state/UserContext";
-import { client } from "../App";
+import { GetCurrentUser as QUERY } from "../queries";
+import { GetCurrentUser_currentUser } from "../__generated__/GetCurrentUser";
+import { CurrentUser } from "../../types";
+import { UserConsumer } from "../../state/UserContext";
+import { client } from "../../App";
 
 interface State {
     password: string;
@@ -12,9 +12,7 @@ interface State {
     signinError: boolean;
     navToDashboard: boolean;
 }
-interface Props { }
-
-export class Signin extends Component<Props, State> {
+export class Signin extends Component<{}, State> {
     public readonly state: State = {
         password: "",
         username: "",
@@ -28,41 +26,44 @@ export class Signin extends Component<Props, State> {
         this.setState(change)
     }
 
-    private handleSigninAttempt = async (event: React.FormEvent<HTMLFormElement>, setUser: (user: CurrentUser) => void) => {
+    private handleSigninAttempt = async (setUser: (user: CurrentUser) => void) => {
         {
-            event.preventDefault();
             localStorage.setItem("token", btoa(`${this.state.username}:${this.state.password}`))
-            let signinUser: CurrentUser | undefined;
             try {
-                const { data } = await client.query<{currentUser: GetCurrentUser_currentUser}>({
+                const { data } = await client.query<{ currentUser: GetCurrentUser_currentUser }>({
                     query: QUERY
                 });
-                signinUser = data.currentUser;
+                const signinUser = data.currentUser;
+                if (signinUser !== undefined && signinUser.id) {
+                    setUser(signinUser);
+                    this.setState({ ...this.state, ...{ navToDashboard: true } });
+                }
             } catch (err) {
                 localStorage.removeItem("token");
-                this.setState({...this.state, ...{signinError: true}});
-            }
-            if (signinUser !== undefined && signinUser.id) {
-                setUser(signinUser);
-                this.setState({...this.state, ...{navToDashboard: true}});
+                this.setState({ ...this.state, ...{ signinError: true } });
             }
         }
     }
+
     public render() {
         if (this.state.navToDashboard) return <Redirect to="/dashboard" />
         return (
             <UserConsumer>
-                {({setUser}) => (
+                {({ setUser }) => (
                     <form
                         method="post"
-                        onSubmit={async e => this.handleSigninAttempt(e, setUser)}
+                        onSubmit={async e => {
+                            e.preventDefault();
+                            this.handleSigninAttempt(setUser)
+                        }
+                        }
                     >
                         <fieldset disabled={false} aria-busy={false}>
                             <h2>Sign into your account</h2>
                             {/* <Error error={error} /> */}
                             <label htmlFor="username">
                                 Username
-            <input
+                                <input
                                     type="username"
                                     name="username"
                                     placeholder="username"
@@ -72,7 +73,7 @@ export class Signin extends Component<Props, State> {
                             </label>
                             <label htmlFor="password">
                                 Password
-            <input
+                                <input
                                     type="password"
                                     name="password"
                                     placeholder="password"
@@ -86,7 +87,7 @@ export class Signin extends Component<Props, State> {
                         {this.state.signinError && <p>Error :( Please try again</p>}
                     </form>
                 )
-            }
+                }
             </UserConsumer>
         )
     }
