@@ -51,6 +51,7 @@ type Lineup @pgTable(name: "lineup") {
   name: String!
   lineup_players: [LineupPlayer!]!
   owner_user: User! @pgRelation(column: "owner_user_id")
+  nfl_game: NflGame! @pgRelation(column: "nfl_game_id")
 }
 
 type LineupPlayer @pgTable(name: "lineup_player") {

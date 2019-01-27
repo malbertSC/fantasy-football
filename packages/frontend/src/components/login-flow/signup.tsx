@@ -59,23 +59,23 @@ export class Signup extends Component<{}, State> {
                                     {/* <Error error={error} /> */}
                                     <label htmlFor="username">
                                         Username
-                                    <input
-                                            type="username"
-                                            name="username"
-                                            placeholder="username"
-                                            value={this.state.username}
-                                            onChange={this.handleChange}
-                                        />
+                                        <input
+                                                type="username"
+                                                name="username"
+                                                placeholder="username"
+                                                value={this.state.username}
+                                                onChange={this.handleChange}
+                                            />
                                     </label>
                                     <label htmlFor="password">
                                         Password
-                                    <input
-                                            type="password"
-                                            name="password"
-                                            placeholder="password"
-                                            value={this.state.password}
-                                            onChange={this.handleChange}
-                                        />
+                                        <input
+                                                type="password"
+                                                name="password"
+                                                placeholder="password"
+                                                value={this.state.password}
+                                                onChange={this.handleChange}
+                                            />
                                     </label>
 
                                     <button type="submit">Create Account!</button>

@@ -3,7 +3,11 @@ import { prisma, LeagueWhereUniqueInput, LeagueWhereInput } from "@ffb/prisma";
 import { MutationResolvers } from "../../generated/graphqlgen";
 
 export async function createLeague(parent, { name }, ctx: Context) {
-    return prisma.createLeague({name, owner_user: {connect: {id: ctx.user.id}}});
+    return prisma.createLeague({
+        name,
+        owner_user: {connect: {id: ctx.user.id}},
+        league_members: {create: {member_user: {connect: {id: ctx.user.id}}}}
+    });
 }
 
 export async function updateLeagueName(parent, args: MutationResolvers.ArgsUpdateLeagueName, ctx: Context) {
@@ -51,13 +55,15 @@ async function isUserAlreadyMemberOfLeague(userID: number, leagueID: number): Pr
 }
 
 async function isUpdateAuthorizedByOwner(ownerUserID: number, whereUnique: LeagueWhereUniqueInput): Promise<boolean> {
-    const whereWithUser: LeagueWhereInput = {
-        ...whereUnique,
-        ...{
-            owner_user: {
-                id: ownerUserID
-            }
-        }
-    }
-    return prisma.$exists.league(whereWithUser);
+    // TODO add some kind of request system to join leagues - for now just let anyone do whatever they want
+    // const whereWithUser: LeagueWhereInput = {
+    //     ...whereUnique,
+    //     ...{
+    //         owner_user: {
+    //             id: ownerUserID
+    //         }
+    //     }
+    // }
+    // return prisma.$exists.league(whereWithUser);
+    return true;
 }

@@ -689,6 +689,7 @@ type Lineup {
   name: String!
   lineup_players(where: LineupPlayerWhereInput, orderBy: LineupPlayerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [LineupPlayer!]
   owner_user: User!
+  nfl_game: NflGame!
 }
 
 type LineupConnection {
@@ -702,6 +703,7 @@ input LineupCreateInput {
   name: String!
   lineup_players: LineupPlayerCreateManyWithoutLineupInput
   owner_user: UserCreateOneInput!
+  nfl_game: NflGameCreateOneInput!
 }
 
 input LineupCreateOneInput {
@@ -718,6 +720,7 @@ input LineupCreateWithoutLineup_playersInput {
   leagues: LeagueCreateManyInput
   name: String!
   owner_user: UserCreateOneInput!
+  nfl_game: NflGameCreateOneInput!
 }
 
 type LineupEdge {
@@ -890,6 +893,7 @@ input LineupUpdateDataInput {
   name: String
   lineup_players: LineupPlayerUpdateManyWithoutLineupInput
   owner_user: UserUpdateOneRequiredInput
+  nfl_game: NflGameUpdateOneRequiredInput
 }
 
 input LineupUpdateInput {
@@ -897,6 +901,7 @@ input LineupUpdateInput {
   name: String
   lineup_players: LineupPlayerUpdateManyWithoutLineupInput
   owner_user: UserUpdateOneRequiredInput
+  nfl_game: NflGameUpdateOneRequiredInput
 }
 
 input LineupUpdateManyMutationInput {
@@ -921,6 +926,7 @@ input LineupUpdateWithoutLineup_playersDataInput {
   leagues: LeagueUpdateManyInput
   name: String
   owner_user: UserUpdateOneRequiredInput
+  nfl_game: NflGameUpdateOneRequiredInput
 }
 
 input LineupUpsertNestedInput {
@@ -963,6 +969,7 @@ input LineupWhereInput {
   lineup_players_some: LineupPlayerWhereInput
   lineup_players_none: LineupPlayerWhereInput
   owner_user: UserWhereInput
+  nfl_game: NflGameWhereInput
   AND: [LineupWhereInput!]
   OR: [LineupWhereInput!]
   NOT: [LineupWhereInput!]

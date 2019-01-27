@@ -18,25 +18,17 @@ export const GetLeaguesForUser = gql`
     }
 `
 
-export const GetWeekGames = gql`
-    query GetWeekGames($week:Int) {
-        nflGames(where: {week: $week}) {
+export const GetJoinableLeagues = gql`
+    query GetJoinableLeagues($userID: Int, $searchTerm: String) {
+        leagues(where: {
+            name_contains: $searchTerm,
+            league_members_none:{member_user:{id:$userID}}
+        }) {
             id,
-            start,
-            week,
-            away_team {
-                id,
-                full_name,
-                code
-            },
-            home_team {
-                id,
-                full_name,
-                code
-            }
+            name
         }
     }
-`;
+`
 
 export const GetMatchups = gql`
     query GetMatchups($id:Int!) {

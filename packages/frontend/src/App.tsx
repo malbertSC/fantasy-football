@@ -9,9 +9,10 @@ import { Matchups } from "./components/flip_matchups/matchups";
 import { CurrentUser } from "./types";
 import { UserState, UserProvider } from "./state/UserContext";
 import { SigninOrSignup } from "./components/login-flow/signin-or-signup";
-import { MyLeagues } from "./components/my-leagues";
 import { LoggedInUser } from "./components/logged-in-user";
 import { LocalStorageKeys } from "./state/keys";
+import { Dashboard } from "./components/dashboard";
+import { NFLWeekLoader } from "./state/nfl-week-loader";
 
 export const client = new ApolloClient({
     uri: "http://localhost:4000",
@@ -68,7 +69,7 @@ class App extends Component {
 
                                     <Route path="/" exact component={SigninOrSignup} />
                                     <Route path="/game/:gameId" component={Matchups} />
-                                    <Route path="/test" component={MyLeagues} />
+                                    <Route path="/dashboard" component={Dashboard} />
                                 </div>
                             </Router>
                         </header>

@@ -822,6 +822,7 @@ export interface LineupWhereInput {
   lineup_players_some?: LineupPlayerWhereInput;
   lineup_players_none?: LineupPlayerWhereInput;
   owner_user?: UserWhereInput;
+  nfl_game?: NflGameWhereInput;
   AND?: LineupWhereInput[] | LineupWhereInput;
   OR?: LineupWhereInput[] | LineupWhereInput;
   NOT?: LineupWhereInput[] | LineupWhereInput;
@@ -1461,6 +1462,7 @@ export interface LineupUpdateInput {
   name?: String;
   lineup_players?: LineupPlayerUpdateManyWithoutLineupInput;
   owner_user?: UserUpdateOneRequiredInput;
+  nfl_game?: NflGameUpdateOneRequiredInput;
 }
 
 export interface LeagueLineupScalarWhereInput {
@@ -1533,6 +1535,7 @@ export interface LineupCreateInput {
   name: String;
   lineup_players?: LineupPlayerCreateManyWithoutLineupInput;
   owner_user: UserCreateOneInput;
+  nfl_game: NflGameCreateOneInput;
 }
 
 export type UserWhereUniqueInput = AtLeastOne<{
@@ -1801,6 +1804,7 @@ export interface LineupUpdateDataInput {
   name?: String;
   lineup_players?: LineupPlayerUpdateManyWithoutLineupInput;
   owner_user?: UserUpdateOneRequiredInput;
+  nfl_game?: NflGameUpdateOneRequiredInput;
 }
 
 export interface LineupPlayerCreateInput {
@@ -2044,6 +2048,7 @@ export interface LineupUpdateWithoutLineup_playersDataInput {
   leagues?: LeagueUpdateManyInput;
   name?: String;
   owner_user?: UserUpdateOneRequiredInput;
+  nfl_game?: NflGameUpdateOneRequiredInput;
 }
 
 export interface LeagueScalarWhereInput {
@@ -2165,6 +2170,7 @@ export interface LineupCreateWithoutLineup_playersInput {
   leagues?: LeagueCreateManyInput;
   name: String;
   owner_user: UserCreateOneInput;
+  nfl_game: NflGameCreateOneInput;
 }
 
 export interface UserUpdateWithoutLeaguesDataInput {
@@ -3217,6 +3223,7 @@ export interface LineupPromise extends Promise<Lineup>, Fragmentable {
     }
   ) => T;
   owner_user: <T = UserPromise>() => T;
+  nfl_game: <T = NflGamePromise>() => T;
 }
 
 export interface LineupSubscription
@@ -3247,6 +3254,7 @@ export interface LineupSubscription
     }
   ) => T;
   owner_user: <T = UserSubscription>() => T;
+  nfl_game: <T = NflGameSubscription>() => T;
 }
 
 export interface LineupPlayerEdge {
