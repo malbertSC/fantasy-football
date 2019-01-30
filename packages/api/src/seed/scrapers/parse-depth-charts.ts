@@ -7,11 +7,13 @@ import { PositionOption } from "seed/flip-team-players";
 export interface DepthChartPlayer {
     teamID: number;
     playerID: number;
+    projected_score: number;
 }
 
 interface FantasyProsPlayer {
     Player: string;
     Team: string;
+    FPTS: string;
 }
 
 export type DepthChart = DepthChartPlayer[][];
@@ -64,6 +66,7 @@ async function buildDepthCharts(fileName: string, positionOption: PositionOption
         const depthChartPlayer: DepthChartPlayer = {
             teamID: (await getTeamByFuzzyAbbreviation(player.Team)).id,
             playerID: (await getPlayerByFuzzyName(player.Player, positionOption.position)).id,
+            projected_score: parseFloat(player.FPTS)
         };
         depthChart = addPlayerToDepthChart(depthChart, depthChartPlayer);
     }
@@ -85,7 +88,8 @@ async function buildGamePlayers(week: number, depthChart: DepthChart, positionOp
                 player: {connect: {id: depthChartPlayer.playerID}},
                 team: {connect: {id: depthChartPlayer.teamID}},
                 position: positionOption.flipPosition,
-                game: {connect: {id: game.id}}
+                game: {connect: {id: game.id}},
+                projected_score: depthChartPlayer.projected_score
             };
             flipGamePlayers.push(gamePlayer);
         }

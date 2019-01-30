@@ -9,7 +9,6 @@ const mutationRules: any = Object.keys(Mutation).reduce((accum, mutationKey) => 
 delete mutationRules.signup;
 export const permissions = shield({
     Query: {
-        matchups: rules.isLoggedIn,
         currentUser: rules.isLoggedIn
     },
     Mutation: mutationRules

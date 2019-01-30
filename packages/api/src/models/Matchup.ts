@@ -3,8 +3,12 @@ import { NflPlayer, FlipPosition, prisma } from "@ffb/prisma";
 // jank: FlipPosition doesn't work here for some reason so using the copied string literal for position
 export interface Matchup {
     position: "QB" | "WR1" | "WR2" | "RB" | "TE";
-    homePlayer: Promise<NflPlayer>;
-    awayPlayer: Promise<NflPlayer>;
+    homePlayer: MatchupPlayer;
+    awayPlayer: MatchupPlayer;
+}
+export interface MatchupPlayer {
+    nflPlayer: Promise<NflPlayer>;
+    projectedScore: number;
 }
 
 export async function getMatchups(gameID: number): Promise<Matchup[]> {
@@ -18,7 +22,8 @@ export async function getMatchups(gameID: number): Promise<Matchup[]> {
                 position,
                 player{
                     id
-                }
+                },
+                projected_score
             }
         }`;
 
@@ -33,8 +38,14 @@ export async function getMatchups(gameID: number): Promise<Matchup[]> {
         if (!homeFlipGamePlayer || !awayFlipGamePlayer) throw new Error("Unable to create matchup - players invalid");
         return {
             position: uniquePosition,
-            homePlayer: prisma.nflPlayer({id: homeFlipGamePlayer.player.id}),
-            awayPlayer: prisma.nflPlayer({id: awayFlipGamePlayer.player.id})
+            homePlayer: {
+                nflPlayer: prisma.nflPlayer({id: homeFlipGamePlayer.player.id}),
+                projectedScore: homeFlipGamePlayer.projected_score
+            },
+            awayPlayer: {
+                nflPlayer: prisma.nflPlayer({id: awayFlipGamePlayer.player.id}),
+                projectedScore: awayFlipGamePlayer.projected_score
+            }
         }
     })
     return matchups;

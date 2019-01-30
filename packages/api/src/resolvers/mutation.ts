@@ -1,6 +1,7 @@
 import { MutationResolvers } from "../generated/graphqlgen";
 import { signup } from "./Mutations/user";
 import { createLeague, createLeagueMember, updateLeagueName, deleteLeagueMember } from "./Mutations/league";
+import { createLineup } from "./Mutations/lineup";
 
 export const Mutation: MutationResolvers.Type = {
     ...MutationResolvers.defaultResolvers,
@@ -8,5 +9,6 @@ export const Mutation: MutationResolvers.Type = {
     createLeague,
     updateLeagueName,
     createLeagueMember,
-    deleteLeagueMember
+    deleteLeagueMember,
+    createLineup
 };

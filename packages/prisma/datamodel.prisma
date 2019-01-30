@@ -1,6 +1,7 @@
 # todo: snake_case to camelcase for column names if we can rename columns in a directive
 # see: https://github.com/prisma/prisma/issues/3408
 
+# TODO: scoring type for league
 type League @pgTable(name: "league") {
   id: Int! @unique
   name: String!
@@ -62,6 +63,8 @@ type LineupPlayer @pgTable(name: "lineup_player") {
 enum GameSeasonType {
   PRE,
   REG,
+  POST,
+  PRO
 }
 type NflGame @pgTable(name: "nfl_game") {
   id: Int! @unique
@@ -89,6 +92,7 @@ type FlipGamePlayer @pgTable(name: "flip_game_player") {
   team: NflTeam! @pgRelation(column: "nfl_team_id")
   position: FlipPosition!
   player: NflPlayer! @pgRelation(column: "nfl_player_id")
+  projected_score: Float
 }
 
 type User @pgTable(name: "user") {

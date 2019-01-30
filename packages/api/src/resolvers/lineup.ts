@@ -10,5 +10,8 @@ export const Lineup: LineupResolvers.Type = {
     },
     owner_user: (parent, args, ctx) => {
         return ctx.db.lineup({id: parent.id}).owner_user();
+    },
+    nfl_game: (parent, args, ctx) => {
+        return ctx.db.lineup({id: parent.id}).nfl_game();
     }
 };

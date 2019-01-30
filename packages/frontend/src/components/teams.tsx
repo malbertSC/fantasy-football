@@ -2,7 +2,6 @@
 // import { GetTeams as QUERY } from "./queries";
 import { Query } from "react-apollo";
 import React, { Component } from "react";
-import { GetTeam_team } from "./__generated__/GetTeam";
 
 // class GetTeamsQuery extends Query<GetTeams> { }
 

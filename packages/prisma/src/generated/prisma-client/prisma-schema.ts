@@ -50,6 +50,7 @@ type FlipGamePlayer {
   team: NflTeam!
   position: FlipPosition!
   player: NflPlayer!
+  projected_score: Float
 }
 
 type FlipGamePlayerConnection {
@@ -63,6 +64,7 @@ input FlipGamePlayerCreateInput {
   team: NflTeamCreateOneInput!
   position: FlipPosition!
   player: NflPlayerCreateOneInput!
+  projected_score: Float
 }
 
 type FlipGamePlayerEdge {
@@ -75,6 +77,8 @@ enum FlipGamePlayerOrderByInput {
   id_DESC
   position_ASC
   position_DESC
+  projected_score_ASC
+  projected_score_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -84,6 +88,7 @@ enum FlipGamePlayerOrderByInput {
 type FlipGamePlayerPreviousValues {
   id: Int!
   position: FlipPosition!
+  projected_score: Float
 }
 
 type FlipGamePlayerSubscriptionPayload {
@@ -109,10 +114,12 @@ input FlipGamePlayerUpdateInput {
   team: NflTeamUpdateOneRequiredInput
   position: FlipPosition
   player: NflPlayerUpdateOneRequiredInput
+  projected_score: Float
 }
 
 input FlipGamePlayerUpdateManyMutationInput {
   position: FlipPosition
+  projected_score: Float
 }
 
 input FlipGamePlayerWhereInput {
@@ -131,6 +138,14 @@ input FlipGamePlayerWhereInput {
   position_in: [FlipPosition!]
   position_not_in: [FlipPosition!]
   player: NflPlayerWhereInput
+  projected_score: Float
+  projected_score_not: Float
+  projected_score_in: [Float!]
+  projected_score_not_in: [Float!]
+  projected_score_lt: Float
+  projected_score_lte: Float
+  projected_score_gt: Float
+  projected_score_gte: Float
   AND: [FlipGamePlayerWhereInput!]
   OR: [FlipGamePlayerWhereInput!]
   NOT: [FlipGamePlayerWhereInput!]
@@ -151,6 +166,8 @@ enum FlipPosition {
 enum GameSeasonType {
   PRE
   REG
+  POST
+  PRO
 }
 
 type League {

@@ -41,7 +41,11 @@ export async function loadGames() {
         return newGame
     })
 
-    await Promise.all(games.map(game => prisma.upsertNflGame({
+    const nonProBowlGames = games.filter((game) => {
+        return game.season_type !== "PRO";
+    })
+
+    await Promise.all(nonProBowlGames.map(game => prisma.upsertNflGame({
         where: {
             nfl_feed_id: game.nfl_feed_id
         },

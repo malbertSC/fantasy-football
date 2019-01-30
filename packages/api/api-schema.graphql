@@ -37,14 +37,19 @@ type Mutation {
     updateLeagueName(data: LeagueUpdateNameInput!, where: LeagueWhereUniqueInput!): League
     createLeagueMember(data: LeagueMemberInput!, where: LeagueWhereUniqueInput!): League
     deleteLeagueMember(where: LeagueMemberWhereUniqueInput!): LeagueMember
+    createLineup(data: LineupInput!): Lineup
 }
 input MatchupWhereInput {
     gameID: Int!
 }
+type MatchupPlayer {
+    nflPlayer: NflPlayer!
+    projectedScore: Float
+}
 type Matchup {
     position: FlipPosition!
-    homePlayer: NflPlayer!
-    awayPlayer: NflPlayer!
+    homePlayer: MatchupPlayer!
+    awayPlayer: MatchupPlayer!
 }
 type User {
     id: Int!
@@ -59,4 +64,9 @@ input LeagueUpdateNameInput {
 }
 input LeagueMemberInput {
     userID: Int!
+}
+input LineupInput {
+    name: String!
+    nflGameID: Int!
+    playerIDs: [Int!]!
 }

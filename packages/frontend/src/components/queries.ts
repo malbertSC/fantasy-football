@@ -35,19 +35,107 @@ export const GetMatchups = gql`
         matchups(where:{gameID: $id}) {
             position,
             homePlayer{
+                nflPlayer {
+                    id,
+                    display_name,
+                    nfl_team {
+                        id,
+                        full_name
+                    }
+                },
+                projectedScore
+            },
+            awayPlayer{
+                nflPlayer {
+                    id,
+                    display_name,
+                    nfl_team {
+                        id,
+                        full_name
+                    }
+                },
+                projectedScore
+            }
+        }
+    }
+`;
+
+export const GetLineups = gql`
+    query GetLineups($userID: Int!, $week: Int!){
+        lineups(where: {
+            owner_user:{id: $userID},
+            nfl_game:{week: $week}
+        }) {
+            id,
+            name,
+            lineup_players {
                 id,
-                display_name,
-                nfl_team {
+                nfl_player {
+                    id,
+                    nfl_team {
+                        id,
+                        name
+                    },
+                    display_name
+                }
+            },
+            nfl_game {
+                id,
+                home_team {
+                    id,
+                    full_name
+                },
+                away_team{
                     id,
                     full_name
                 }
             },
-            awayPlayer{
+            owner_user{
                 id,
-                display_name,
-                nfl_team {
+                username
+            }
+        }
+    }
+`;
+
+export const GetLeague = gql`
+    query GetLeague($id: Int!) {
+        league(where:{id: $id}) {
+            id,
+            name,
+            league_lineups {
+                lineup{
                     id,
-                    full_name
+                    name,
+                    lineup_players{
+                        id,
+                        nfl_player {
+                            id,
+                            display_name
+                        }
+                    },
+                    nfl_game {
+                        id,
+                        home_team {
+                            id,
+                            full_name
+                        },
+                        away_team{
+                            id,
+                            full_name
+                        }
+                    },
+                    owner_user{
+                        id,
+                        username
+                    }
+                },
+            },
+            league_members{
+                id,
+                member_user {
+                    id,
+                    username
                 }
             }
         }

@@ -1,5 +1,5 @@
 import React from "react";
-import { GetWeekGames_nflGames } from "../__generated__/GetWeekGames";
+import { GetWeekGames_nflGames } from "../../state/__generated__/GetWeekGames";
 
 interface FlipGameProps {
     nflGame: GetWeekGames_nflGames

@@ -12,13 +12,16 @@ class GetLeaguesForUserQuery extends Query<GetLeaguesForUser, GetLeaguesForUserV
 
 interface State {
     showMyLeagues: boolean;
+    redirectToLeagueID: number | undefined
 }
 
 export class LeaguesDashboard extends React.Component<{}, State> {
     public readonly state: State = {
-        showMyLeagues: true
+        showMyLeagues: true,
+        redirectToLeagueID: undefined
     }
     public render() {
+        if (this.state.redirectToLeagueID) return <Redirect to={`/league/${this.state.redirectToLeagueID}`}></Redirect>
         return (
             <UserConsumer>{({isLoading, user}) => {
                 if (isLoading) return
@@ -36,7 +39,13 @@ export class LeaguesDashboard extends React.Component<{}, State> {
                                         <div>
                                             <h2>My Leagues</h2>
                                             {/* https://github.com/prisma/prisma/issues/2999 */}
-                                            <LeagueList leagues={leagues as Array<GetLeaguesForUser_leagues>}></LeagueList>
+                                            <LeagueList
+                                                leagues={leagues as Array<GetLeaguesForUser_leagues>}
+                                                onClick={(leagueID) => {
+                                                    this.setState({redirectToLeagueID: leagueID})
+                                                }}
+                                                actionButtonText="Settings"
+                                            ></LeagueList>
                                             <CreateLeagueButton onCreate={() => {
                                                 this.setState({showMyLeagues: true});
                                                 refetch();

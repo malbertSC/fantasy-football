@@ -46,9 +46,13 @@ const playerAliasMap = [
     { nflPlayerName: "Mitchell Trubisky", options: ["Mitch Trubisky"] },
     { nflPlayerName: "Robert Griffin III", options: ["Robert Griffin"] },
     { nflPlayerName: "Ronald Jones", options: ["Ronald Jones II"] },
-    { nflPlayerName: "DeVante Parker", options: ["Devante Parker"]},
-    { nflPlayerName: "T.J. Jones", options: ["TJ Jones"]},
-    { nflPlayerName: "Chris Herndon", options: ["Chris Herndon IV"]}
+    { nflPlayerName: "DeVante Parker", options: ["Devante Parker"] },
+    { nflPlayerName: "T.J. Jones", options: ["TJ Jones"] },
+    { nflPlayerName: "Chris Herndon", options: ["Chris Herndon IV"] },
+    { nflPlayerName: "KhaDarel Hodge", options: ["Khadarel Hodge"] },
+    { nflPlayerName: "Matthew Slater", options: ["Matt Slater"] },
+    { nflPlayerName: "Steven Mitchell", options: ["Steven Mitchell Jr."] },
+    { nflPlayerName: "Henry Krieger-Coble", options: ["Henry Krieger Coble"] },
 ]
 
 const offPositionPlayers = [

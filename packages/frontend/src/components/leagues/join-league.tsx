@@ -1,9 +1,8 @@
 import React from "react";
 import { LeagueList } from "./league-list";
 import { Query } from "react-apollo";
-import { GetJoinableLeagues, GetJoinableLeaguesVariables } from "../__generated__/GetJoinableLeagues";
+import { GetJoinableLeagues, GetJoinableLeaguesVariables, GetJoinableLeagues_leagues } from "../__generated__/GetJoinableLeagues";
 import { GetJoinableLeagues as QUERY } from "../queries";
-import { GetAllLeagues_leagues } from "../__generated__/GetAllLeagues";
 import { UserConsumer } from "../../state/UserContext";
 import { Redirect } from "react-router";
 import { SearchBox } from "../search-box";
@@ -35,7 +34,7 @@ export class JoinLeague extends React.Component<Props, State> {
                             return (
                                 <div>
                                     {/* https://github.com/prisma/prisma/issues/2999 */}
-                                    <JoinLeagueList leagues={leagues as Array<GetAllLeagues_leagues>}
+                                    <JoinLeagueList leagues={leagues as Array<GetJoinableLeagues_leagues>}
                                         onJoin={this.props.onJoin}
                                         userID={user.id}
                                     ></JoinLeagueList>

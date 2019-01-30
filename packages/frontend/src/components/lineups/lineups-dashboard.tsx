@@ -1,18 +1,29 @@
 import React from "react";
 import { NFLWeekConsumer } from "../../state/nfl-week-context";
+import { UserConsumer } from "../../state/UserContext";
+import { MyLineups } from "./my-lineups";
+import { Link } from "react-router-dom";
 export const LineupsDashboard: React.SFC = () => {
     return (
         <div>
             <h2>My Lineups</h2>
-            <NFLWeekConsumer>{({nflGames, isLoading}) => {
-                if (!isLoading) {
-                    if (!nflGames) return <div>nfl games bad</div>
-                    return nflGames.map((nflGame) => {
-                        return (<div key={nflGame.id}>{nflGame.away_team.full_name} vs. {nflGame.home_team.full_name}</div>)
-                    })
+            <UserConsumer>{({isLoading, user}) => {
+                if (!isLoading && user) {
+                    return (
+                        <NFLWeekConsumer>{({nflCurrentWeek, isLoading: isNFLWeekLoading}) => {
+                            if (!isNFLWeekLoading) {
+                                return (
+                                    <div>
+                                        <MyLineups currentNFLWeek={nflCurrentWeek} userID={user.id}></MyLineups>
+                                        <Link to="/create-lineup"><button>Create Lineup</button></Link>
+                                    </div>
+                                )
+                            }
+                        }}</NFLWeekConsumer>
+                    )
                 }
-                else return (<div>fail</div>)
-            }}</NFLWeekConsumer>
+            }}
+            </UserConsumer>
         </div>
     )
 }

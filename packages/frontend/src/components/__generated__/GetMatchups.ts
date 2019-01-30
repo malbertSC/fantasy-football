@@ -7,30 +7,42 @@ import { FlipPosition } from "./../../../__generated__/globalTypes";
 // GraphQL query operation: GetMatchups
 // ====================================================
 
-export interface GetMatchups_matchups_homePlayer_nfl_team {
+export interface GetMatchups_matchups_homePlayer_nflPlayer_nfl_team {
   __typename: "NflTeam";
   id: number;
   full_name: string;
+}
+
+export interface GetMatchups_matchups_homePlayer_nflPlayer {
+  __typename: "NflPlayer";
+  id: number;
+  display_name: string;
+  nfl_team: GetMatchups_matchups_homePlayer_nflPlayer_nfl_team;
 }
 
 export interface GetMatchups_matchups_homePlayer {
-  __typename: "NflPlayer";
-  id: number;
-  display_name: string;
-  nfl_team: GetMatchups_matchups_homePlayer_nfl_team;
+  __typename: "MatchupPlayer";
+  nflPlayer: GetMatchups_matchups_homePlayer_nflPlayer;
+  projectedScore: number | null;
 }
 
-export interface GetMatchups_matchups_awayPlayer_nfl_team {
+export interface GetMatchups_matchups_awayPlayer_nflPlayer_nfl_team {
   __typename: "NflTeam";
   id: number;
   full_name: string;
 }
 
-export interface GetMatchups_matchups_awayPlayer {
+export interface GetMatchups_matchups_awayPlayer_nflPlayer {
   __typename: "NflPlayer";
   id: number;
   display_name: string;
-  nfl_team: GetMatchups_matchups_awayPlayer_nfl_team;
+  nfl_team: GetMatchups_matchups_awayPlayer_nflPlayer_nfl_team;
+}
+
+export interface GetMatchups_matchups_awayPlayer {
+  __typename: "MatchupPlayer";
+  nflPlayer: GetMatchups_matchups_awayPlayer_nflPlayer;
+  projectedScore: number | null;
 }
 
 export interface GetMatchups_matchups {

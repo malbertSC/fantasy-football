@@ -5,7 +5,6 @@ import React from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Matchups } from "./components/flip_matchups/matchups";
 import { CurrentUser } from "./types";
 import { UserState, UserProvider } from "./state/UserContext";
 import { SigninOrSignup } from "./components/login-flow/signin-or-signup";
@@ -13,6 +12,8 @@ import { LoggedInUser } from "./components/logged-in-user";
 import { LocalStorageKeys } from "./state/keys";
 import { Dashboard } from "./components/dashboard";
 import { NFLWeekLoader } from "./state/nfl-week-loader";
+import { CreateLineup } from "./components/lineups/create-lineup";
+import { League } from "./components/leagues/league";
 
 export const client = new ApolloClient({
     uri: "http://localhost:4000",
@@ -54,26 +55,29 @@ class App extends Component {
         return (
             <UserProvider value={this.state}>
                 <ApolloProvider client={client}>
-                    <div className="App">
-                        <LoggedInUser></LoggedInUser>
-                        <header className="App-header">
-                            <Router>
-                                <div>
-                                    <nav>
-                                        <ul>
-                                            <li>
-                                                <Link to="/">Home</Link>
-                                            </li>
-                                        </ul>
-                                    </nav>
+                    <NFLWeekLoader>
+                        <div className="App">
+                            <LoggedInUser></LoggedInUser>
+                            <header className="App-header">
+                                <Router>
+                                    <div>
+                                        <nav>
+                                            <ul>
+                                                <li>
+                                                    <Link to="/">Home</Link>
+                                                </li>
+                                            </ul>
+                                        </nav>
 
-                                    <Route path="/" exact component={SigninOrSignup} />
-                                    <Route path="/game/:gameId" component={Matchups} />
-                                    <Route path="/dashboard" component={Dashboard} />
-                                </div>
-                            </Router>
-                        </header>
-                    </div>
+                                        <Route path="/" exact component={SigninOrSignup} />
+                                        <Route path="/dashboard" component={Dashboard} />
+                                        <Route path="/create-lineup" component={CreateLineup} />
+                                        <Route path="/league/:leagueID" component={League} />
+                                    </div>
+                                </Router>
+                            </header>
+                        </div>
+                    </NFLWeekLoader>
                 </ApolloProvider>
             </UserProvider>
         );
