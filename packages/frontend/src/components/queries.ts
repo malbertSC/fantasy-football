@@ -9,6 +9,46 @@ export const GetCurrentUser = gql`
     }
 `;
 
+export const LineupPlayerFragment = gql`
+    fragment LineupPlayer on LineupPlayer {
+        id,
+        nfl_player {
+            id,
+            nfl_team {
+                id,
+                name
+            },
+            display_name
+        }
+    }
+`;
+
+export const LineupFragment = gql`
+    fragment Lineup on Lineup {
+        id,
+        name,
+        lineup_players {
+            ...LineupPlayer
+        },
+        nfl_game {
+            id,
+            home_team {
+                id,
+                full_name
+            },
+            away_team{
+                id,
+                full_name
+            }
+        },
+        owner_user{
+            id,
+            username
+        }
+    }
+    ${LineupPlayerFragment}
+`;
+
 export const GetLeaguesForUser = gql`
     query GetLeaguesForUser($userID: Int) {
         leagues(where:{league_members_some:{member_user:{id:$userID}}}) {
@@ -61,41 +101,17 @@ export const GetMatchups = gql`
 `;
 
 export const GetLineups = gql`
-    query GetLineups($userID: Int!, $week: Int!){
+    query GetLineups($userID: Int!, $week: Int!, $leagueID: Int){
         lineups(where: {
             owner_user:{id: $userID},
-            nfl_game:{week: $week}
+            nfl_game:{week: $week},
+            leagues_every:{id: $leagueID},
+            leagues_some:{id_not: null}
         }) {
-            id,
-            name,
-            lineup_players {
-                id,
-                nfl_player {
-                    id,
-                    nfl_team {
-                        id,
-                        name
-                    },
-                    display_name
-                }
-            },
-            nfl_game {
-                id,
-                home_team {
-                    id,
-                    full_name
-                },
-                away_team{
-                    id,
-                    full_name
-                }
-            },
-            owner_user{
-                id,
-                username
-            }
+            ...Lineup
         }
     }
+    ${LineupFragment}
 `;
 
 export const GetLeague = gql`
@@ -105,30 +121,7 @@ export const GetLeague = gql`
             name,
             league_lineups {
                 lineup{
-                    id,
-                    name,
-                    lineup_players{
-                        id,
-                        nfl_player {
-                            id,
-                            display_name
-                        }
-                    },
-                    nfl_game {
-                        id,
-                        home_team {
-                            id,
-                            full_name
-                        },
-                        away_team{
-                            id,
-                            full_name
-                        }
-                    },
-                    owner_user{
-                        id,
-                        username
-                    }
+                    ...Lineup
                 },
             },
             league_members{
@@ -140,4 +133,5 @@ export const GetLeague = gql`
             }
         }
     }
+    ${LineupFragment}
 `;

@@ -14,6 +14,7 @@ import { Dashboard } from "./components/dashboard";
 import { NFLWeekLoader } from "./state/nfl-week-loader";
 import { CreateLineup } from "./components/lineups/create-lineup";
 import { League } from "./components/leagues/league";
+import { LineupPage } from "./components/lineups/lineup-page";
 
 export const client = new ApolloClient({
     uri: "http://localhost:4000",
@@ -38,8 +39,9 @@ class App extends Component {
             this.setState({user});
         },
         signout: () => {
-            localStorage.removeItem(LocalStorageKeys.user);
             localStorage.removeItem(LocalStorageKeys.token);
+            localStorage.removeItem(LocalStorageKeys.user);
+            client.resetStore();
             this.setState({user: undefined});
         }
     };
@@ -70,9 +72,10 @@ class App extends Component {
                                         </nav>
 
                                         <Route path="/" exact component={SigninOrSignup} />
-                                        <Route path="/dashboard" component={Dashboard} />
-                                        <Route path="/create-lineup" component={CreateLineup} />
-                                        <Route path="/league/:leagueID" component={League} />
+                                        <Route path="/dashboard/" component={Dashboard} />
+                                        <Route exact path="/league/:leagueID/create-lineup" component={CreateLineup} />
+                                        <Route exact path="/league/:leagueID/:userID/lineup" component={LineupPage} />
+                                        <Route exact path="/league/:leagueID/" component={League} />
                                     </div>
                                 </Router>
                             </header>

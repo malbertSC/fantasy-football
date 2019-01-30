@@ -65,4 +65,5 @@ export interface GetLineups {
 export interface GetLineupsVariables {
   userID: number;
   week: number;
+  leagueID?: number | null;
 }

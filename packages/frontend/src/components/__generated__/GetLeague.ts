@@ -5,9 +5,16 @@
 // GraphQL query operation: GetLeague
 // ====================================================
 
+export interface GetLeague_league_league_lineups_lineup_lineup_players_nfl_player_nfl_team {
+  __typename: "NflTeam";
+  id: number;
+  name: string;
+}
+
 export interface GetLeague_league_league_lineups_lineup_lineup_players_nfl_player {
   __typename: "NflPlayer";
   id: number;
+  nfl_team: GetLeague_league_league_lineups_lineup_lineup_players_nfl_player_nfl_team;
   display_name: string;
 }
 

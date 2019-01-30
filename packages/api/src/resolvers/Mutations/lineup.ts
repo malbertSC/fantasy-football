@@ -4,7 +4,7 @@ import { MutationResolvers } from "generated/graphqlgen";
 
 export async function createLineup(parent, args: MutationResolvers.ArgsCreateLineup, ctx: Context) {
     // TODO actually check to make sure lineup isn't BS
-    return prisma.createLineup({
+    let createLineupConfig = {
         name: args.data.name,
         lineup_players: {create: args.data.playerIDs.map((playerID) => {
             return {
@@ -13,5 +13,12 @@ export async function createLineup(parent, args: MutationResolvers.ArgsCreateLin
         )},
         owner_user: {connect: {id: ctx.user.id}},
         nfl_game: {connect: {id: args.data.nflGameID}}
-    })
+    };
+    if (args.data.leagueID) {
+        createLineupConfig = {
+            ...createLineupConfig,
+            ...{leagues: {connect: {id: args.data.leagueID}}}
+        }
+    }
+    return prisma.createLineup(createLineupConfig);
 }

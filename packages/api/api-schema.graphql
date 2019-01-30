@@ -69,4 +69,5 @@ input LineupInput {
     name: String!
     nflGameID: Int!
     playerIDs: [Int!]!
+    leagueID: Int
 }

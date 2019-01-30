@@ -11,6 +11,7 @@ class GetMatchupsQuery extends Query<GetMatchups, GetMatchupsVariables> {}
 
 interface Props {
     gameId: number;
+    onSubmitLineup: (name: string, playerIDs: number[]) => void;
 }
 
 export interface MatchupPlayer {
@@ -25,14 +26,12 @@ export type Lineup = Array<{
 interface State {
     lineup: Lineup,
     name: string;
-    submitted: boolean;
 }
 
 export class Matchups extends Component<Props, State> {
     public readonly state: State = {
         lineup: [],
-        name: "",
-        submitted: false
+        name: ""
     }
     public resetLineup = () => {
         this.setState({lineup: []});
@@ -43,31 +42,7 @@ export class Matchups extends Component<Props, State> {
             player
         }]})
     }
-    public submitLineup = async () => {
-        const mutationQuery = gql`
-            mutation CreateLineup($name: String!, $nflGameID: Int!, $playerIDs: [Int!]!) {
-                createLineup(data: {
-                    name: $name,
-                    nflGameID: $nflGameID,
-                    playerIDs: $playerIDs
-                }) {
-                    id,
-                    name
-                }
-            }
-        `;
-        const response = await client.mutate({
-            mutation: mutationQuery,
-            variables: {
-                name: this.state.name,
-                nflGameID: this.props.gameId,
-                playerIDs: this.state.lineup.map((lineupItem) => lineupItem.player.id)
-            }
-        });
-        this.setState({submitted: true});
-    }
     public render() {
-        if (this.state.submitted) return (<Redirect to="/dashboard"></Redirect>)
         return (
             <GetMatchupsQuery query={QUERY} variables={{id: this.props.gameId}}>
                 {({ loading, data, error }) => {
@@ -91,7 +66,7 @@ export class Matchups extends Component<Props, State> {
                             </ul>
                             <button onClick={(e) => {
                                 e.preventDefault();
-                                this.submitLineup();
+                                this.props.onSubmitLineup(this.state.name, this.state.lineup.map((lineupItem) => lineupItem.player.id));
                             }}>Submit</button>
                             <button onClick={(e) => {
                                 e.preventDefault();

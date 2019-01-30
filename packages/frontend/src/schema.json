@@ -9419,6 +9419,16 @@
               }
             },
             "defaultValue": null
+          },
+          {
+            "name": "leagueID",
+            "description": "",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "interfaces": null,
