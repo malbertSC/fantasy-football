@@ -47,6 +47,7 @@ export const League: React.SFC<Props> = (props) => {
                         .map((member) => member.member_user);
                     return (
                         <div>
+                            <h1>{league.name}</h1>
                             <h2>My Lineup</h2>
                             {(() => {
                                 const myLineup = findLineupForMember(lineups, user.id);

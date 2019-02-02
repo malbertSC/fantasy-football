@@ -23,7 +23,7 @@ export interface GetMatchups_matchups_homePlayer_nflPlayer {
 export interface GetMatchups_matchups_homePlayer {
   __typename: "MatchupPlayer";
   nflPlayer: GetMatchups_matchups_homePlayer_nflPlayer;
-  projectedScore: number | null;
+  projectedScore: number;
 }
 
 export interface GetMatchups_matchups_awayPlayer_nflPlayer_nfl_team {
@@ -42,7 +42,7 @@ export interface GetMatchups_matchups_awayPlayer_nflPlayer {
 export interface GetMatchups_matchups_awayPlayer {
   __typename: "MatchupPlayer";
   nflPlayer: GetMatchups_matchups_awayPlayer_nflPlayer;
-  projectedScore: number | null;
+  projectedScore: number;
 }
 
 export interface GetMatchups_matchups {

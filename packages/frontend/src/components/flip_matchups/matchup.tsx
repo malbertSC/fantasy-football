@@ -7,6 +7,11 @@ interface Props {
     addPlayerToLineup: (position: string, player: MatchupPlayer) => void;
 }
 export const Matchup: React.SFC<Props> = (props) => {
+    const homePlayer = props.matchup.homePlayer;
+    const awayPlayer = props.matchup.awayPlayer;
+    const advantage = homePlayer.projectedScore - awayPlayer.projectedScore;
+    const displayAdvantage = `(- ${Math.abs(advantage).toFixed(1)})`;
+    const advantagedPlayer: "home"|"away" = advantage > 0 ? "home" : "away";
     const currentLineupPick = props.lineup.find((lineupItem) => {
         return lineupItem.position === props.matchup.position;
     })
@@ -20,18 +25,18 @@ export const Matchup: React.SFC<Props> = (props) => {
         <div>
             <div>{props.matchup.position}</div>
             <span>
-                <span>{props.matchup.awayPlayer.nflPlayer.display_name}</span>
-                <span> ({props.matchup.awayPlayer.projectedScore})</span>
+                <span>{awayPlayer.nflPlayer.display_name}</span>
+                <span> {advantagedPlayer === "away" && displayAdvantage}</span>
                 <button onClick={(e) => {
                     e.preventDefault();
-                    props.addPlayerToLineup(props.matchup.position, props.matchup.awayPlayer.nflPlayer)
+                    props.addPlayerToLineup(props.matchup.position, awayPlayer.nflPlayer)
                 }}>Pick</button>
                 <span> vs. </span>
-                <span>{props.matchup.homePlayer.nflPlayer.display_name}</span>
-                <span> ({props.matchup.homePlayer.projectedScore})</span>
+                <span>{homePlayer.nflPlayer.display_name}</span>
+                <span> {advantagedPlayer === "home" && displayAdvantage}</span>
                 <button onClick={(e) => {
                     e.preventDefault();
-                    props.addPlayerToLineup(props.matchup.position, props.matchup.homePlayer.nflPlayer)
+                    props.addPlayerToLineup(props.matchup.position, homePlayer.nflPlayer)
                 }}>Pick</button>
             </span>
         </div>

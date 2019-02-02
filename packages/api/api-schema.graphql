@@ -44,7 +44,7 @@ input MatchupWhereInput {
 }
 type MatchupPlayer {
     nflPlayer: NflPlayer!
-    projectedScore: Float
+    projectedScore: Float!
 }
 type Matchup {
     position: FlipPosition!

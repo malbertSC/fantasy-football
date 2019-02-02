@@ -7,6 +7,7 @@ import { UserConsumer } from "../../state/UserContext";
 import { Redirect } from "react-router";
 import { LeagueList } from "./league-list";
 import { GetLeaguesForUser as QUERY } from "../queries";
+import { Link } from "react-router-dom";
 
 class GetLeaguesForUserQuery extends Query<GetLeaguesForUser, GetLeaguesForUserVariables> { }
 
@@ -38,14 +39,16 @@ export class LeaguesDashboard extends React.Component<{}, State> {
                                     {this.state.showMyLeagues &&
                                         <div>
                                             <h2>My Leagues</h2>
-                                            {/* https://github.com/prisma/prisma/issues/2999 */}
-                                            <LeagueList
-                                                leagues={leagues as Array<GetLeaguesForUser_leagues>}
-                                                onClick={(leagueID) => {
-                                                    this.setState({redirectToLeagueID: leagueID})
-                                                }}
-                                                actionButtonText="Settings"
-                                            ></LeagueList>
+                                            <ul>
+                                                {(() => {
+                                                    {/* https://github.com/prisma/prisma/issues/2999 */}
+                                                    return (leagues as Array<GetLeaguesForUser_leagues>).map((league) => {
+                                                        return (
+                                                            <Link to={`/league/${league.id}`}><li>{league.name}</li></Link>
+                                                        )
+                                                    })
+                                                })()}
+                                            </ul>
                                             <CreateLeagueButton onCreate={() => {
                                                 this.setState({showMyLeagues: true});
                                                 refetch();
