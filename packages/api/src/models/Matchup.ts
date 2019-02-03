@@ -9,6 +9,7 @@ export interface Matchup {
 export interface MatchupPlayer {
     nflPlayer: Promise<NflPlayer>;
     projectedScore: number;
+    actualScore: number;
 }
 
 export async function getMatchups(gameID: number): Promise<Matchup[]> {
@@ -23,7 +24,8 @@ export async function getMatchups(gameID: number): Promise<Matchup[]> {
                 player{
                     id
                 },
-                projected_score
+                projected_score,
+                actual_score
             }
         }`;
 
@@ -40,11 +42,13 @@ export async function getMatchups(gameID: number): Promise<Matchup[]> {
             position: uniquePosition,
             homePlayer: {
                 nflPlayer: prisma.nflPlayer({id: homeFlipGamePlayer.player.id}),
-                projectedScore: homeFlipGamePlayer.projected_score
+                projectedScore: homeFlipGamePlayer.projected_score,
+                actualScore: homeFlipGamePlayer.actual_score
             },
             awayPlayer: {
                 nflPlayer: prisma.nflPlayer({id: awayFlipGamePlayer.player.id}),
-                projectedScore: awayFlipGamePlayer.projected_score
+                projectedScore: awayFlipGamePlayer.projected_score,
+                actualScore: awayFlipGamePlayer.actual_score
             }
         }
     })

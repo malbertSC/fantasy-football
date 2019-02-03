@@ -539,6 +539,8 @@ export type FlipGamePlayerOrderByInput =
   | "position_DESC"
   | "projected_score_ASC"
   | "projected_score_DESC"
+  | "actual_score_ASC"
+  | "actual_score_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -749,6 +751,7 @@ export interface FlipGamePlayerUpdateInput {
   position?: FlipPosition;
   player?: NflPlayerUpdateOneRequiredInput;
   projected_score?: Float;
+  actual_score?: Float;
 }
 
 export interface NflTeamSubscriptionWhereInput {
@@ -1263,6 +1266,7 @@ export interface LineupUpdateInput {
 export interface FlipGamePlayerUpdateManyMutationInput {
   position?: FlipPosition;
   projected_score?: Float;
+  actual_score?: Float;
 }
 
 export interface LeagueUpsertWithoutLeague_membersInput {
@@ -1399,6 +1403,7 @@ export interface FlipGamePlayerCreateInput {
   position: FlipPosition;
   player: NflPlayerCreateOneInput;
   projected_score?: Float;
+  actual_score: Float;
 }
 
 export interface FlipGamePlayerWhereInput {
@@ -1425,6 +1430,14 @@ export interface FlipGamePlayerWhereInput {
   projected_score_lte?: Float;
   projected_score_gt?: Float;
   projected_score_gte?: Float;
+  actual_score?: Float;
+  actual_score_not?: Float;
+  actual_score_in?: Float[] | Float;
+  actual_score_not_in?: Float[] | Float;
+  actual_score_lt?: Float;
+  actual_score_lte?: Float;
+  actual_score_gt?: Float;
+  actual_score_gte?: Float;
   AND?: FlipGamePlayerWhereInput[] | FlipGamePlayerWhereInput;
   OR?: FlipGamePlayerWhereInput[] | FlipGamePlayerWhereInput;
   NOT?: FlipGamePlayerWhereInput[] | FlipGamePlayerWhereInput;
@@ -2631,6 +2644,7 @@ export interface FlipGamePlayer {
   id: Int;
   position: FlipPosition;
   projected_score?: Float;
+  actual_score: Float;
 }
 
 export interface FlipGamePlayerPromise
@@ -2642,6 +2656,7 @@ export interface FlipGamePlayerPromise
   position: () => Promise<FlipPosition>;
   player: <T = NflPlayerPromise>() => T;
   projected_score: () => Promise<Float>;
+  actual_score: () => Promise<Float>;
 }
 
 export interface FlipGamePlayerSubscription
@@ -2653,6 +2668,7 @@ export interface FlipGamePlayerSubscription
   position: () => Promise<AsyncIterator<FlipPosition>>;
   player: <T = NflPlayerSubscription>() => T;
   projected_score: () => Promise<AsyncIterator<Float>>;
+  actual_score: () => Promise<AsyncIterator<Float>>;
 }
 
 export interface AggregateNflPlayer {
@@ -2716,6 +2732,7 @@ export interface FlipGamePlayerPreviousValues {
   id: Int;
   position: FlipPosition;
   projected_score?: Float;
+  actual_score: Float;
 }
 
 export interface FlipGamePlayerPreviousValuesPromise
@@ -2724,6 +2741,7 @@ export interface FlipGamePlayerPreviousValuesPromise
   id: () => Promise<Int>;
   position: () => Promise<FlipPosition>;
   projected_score: () => Promise<Float>;
+  actual_score: () => Promise<Float>;
 }
 
 export interface FlipGamePlayerPreviousValuesSubscription
@@ -2732,6 +2750,7 @@ export interface FlipGamePlayerPreviousValuesSubscription
   id: () => Promise<AsyncIterator<Int>>;
   position: () => Promise<AsyncIterator<FlipPosition>>;
   projected_score: () => Promise<AsyncIterator<Float>>;
+  actual_score: () => Promise<AsyncIterator<Float>>;
 }
 
 export interface NflGameEdge {

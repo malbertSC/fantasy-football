@@ -3,9 +3,10 @@ import { RouteComponentProps } from "react-router";
 import { Query } from "react-apollo";
 import { GetLineups as QUERY } from "../queries";
 import { GetLineups, GetLineupsVariables } from "../__generated__/GetLineups";
-import { Lineup as LineupFragment } from "../__generated__/Lineup";
+import { Lineup as LineupFragment, Lineup_lineup_players } from "../__generated__/Lineup";
 import { Lineup } from "./lineup";
 import { Link } from "react-router-dom";
+import { LiveUpdateMatchup } from "../flip_matchups/live-update-matchup";
 interface RouteProps {
     leagueID: string;
     userID: string;
@@ -28,9 +29,9 @@ export const LineupPage: React.SFC<RouteComponentProps<RouteProps>> = (props) =>
                     if (lineups.length !== 1) {
                         return <div>ERROR</div>
                     }
-                    const lineup = lineups[0];
-                    console.log(lineup);
-                    return <Lineup lineup={lineup as LineupFragment}></Lineup>
+                    const lineup = lineups[0] as LineupFragment;
+                    const lineupPlayers = lineup.lineup_players as Lineup_lineup_players[];
+                    return <LiveUpdateMatchup lineupPlayers={lineupPlayers} gameID={lineup.nfl_game.id}></LiveUpdateMatchup>
                 } else return (<div>Loading Lineup</div>)
             }}</GetLineupsQuery>
         </div>

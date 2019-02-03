@@ -17,7 +17,7 @@ async function main() {
             middlewares: [permissions],
             context: req => ({
                 db: prisma,
-                user: req.request.user
+                user: req.request ? req.request.user : undefined
             }),
         } as any);
         server.options.debug = false;

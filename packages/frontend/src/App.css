@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  width: 800px;
+  margin: 0 auto;
 }
 
 .App-logo {
@@ -7,7 +9,7 @@
   height: 40vmin;
 }
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -16,7 +18,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
 .App-link {
   color: #61dafb;
@@ -28,7 +30,24 @@ ul {
   list-style-type: none;
   padding-inline-start: 0px;
 }
-
+.picked-player {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.home-player {
+  display: inline-block;
+  width: 45%;
+  text-align: left;
+}
+.away-player {
+  display: inline-block;
+  width: 45%;
+  text-align: right;
+}
+.home-away-divider {
+  display: inline-block;
+  width: 10%;
+}
 
 @keyframes App-logo-spin {
   from {

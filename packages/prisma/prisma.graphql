@@ -51,6 +51,7 @@ type FlipGamePlayer {
   position: FlipPosition!
   player: NflPlayer!
   projected_score: Float
+  actual_score: Float!
 }
 
 type FlipGamePlayerConnection {
@@ -65,6 +66,7 @@ input FlipGamePlayerCreateInput {
   position: FlipPosition!
   player: NflPlayerCreateOneInput!
   projected_score: Float
+  actual_score: Float!
 }
 
 type FlipGamePlayerEdge {
@@ -79,6 +81,8 @@ enum FlipGamePlayerOrderByInput {
   position_DESC
   projected_score_ASC
   projected_score_DESC
+  actual_score_ASC
+  actual_score_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -89,6 +93,7 @@ type FlipGamePlayerPreviousValues {
   id: Int!
   position: FlipPosition!
   projected_score: Float
+  actual_score: Float!
 }
 
 type FlipGamePlayerSubscriptionPayload {
@@ -115,11 +120,13 @@ input FlipGamePlayerUpdateInput {
   position: FlipPosition
   player: NflPlayerUpdateOneRequiredInput
   projected_score: Float
+  actual_score: Float
 }
 
 input FlipGamePlayerUpdateManyMutationInput {
   position: FlipPosition
   projected_score: Float
+  actual_score: Float
 }
 
 input FlipGamePlayerWhereInput {
@@ -146,6 +153,14 @@ input FlipGamePlayerWhereInput {
   projected_score_lte: Float
   projected_score_gt: Float
   projected_score_gte: Float
+  actual_score: Float
+  actual_score_not: Float
+  actual_score_in: [Float!]
+  actual_score_not_in: [Float!]
+  actual_score_lt: Float
+  actual_score_lte: Float
+  actual_score_gt: Float
+  actual_score_gte: Float
   AND: [FlipGamePlayerWhereInput!]
   OR: [FlipGamePlayerWhereInput!]
   NOT: [FlipGamePlayerWhereInput!]

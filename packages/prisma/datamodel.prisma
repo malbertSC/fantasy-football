@@ -93,6 +93,7 @@ type FlipGamePlayer @pgTable(name: "flip_game_player") {
   position: FlipPosition!
   player: NflPlayer! @pgRelation(column: "nfl_player_id")
   projected_score: Float
+  actual_score: Float!
 }
 
 type User @pgTable(name: "user") {

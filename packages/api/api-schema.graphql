@@ -39,12 +39,16 @@ type Mutation {
     deleteLeagueMember(where: LeagueMemberWhereUniqueInput!): LeagueMember
     createLineup(data: LineupInput!): Lineup
 }
+type Subscription {
+    matchup(where: MatchupWhereInput): [Matchup!]
+}
 input MatchupWhereInput {
     gameID: Int!
 }
 type MatchupPlayer {
     nflPlayer: NflPlayer!
-    projectedScore: Float!
+    projectedScore: Float
+    actualScore: Float
 }
 type Matchup {
     position: FlipPosition!

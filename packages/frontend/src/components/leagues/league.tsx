@@ -2,11 +2,11 @@ import React from "react";
 import { RouteComponentProps, Redirect } from "react-router";
 import { Query } from "react-apollo";
 import { GetLeagueVariables, GetLeague} from "../__generated__/GetLeague";
-import { Lineup as LineupFragment } from "../__generated__/Lineup";
+import { Lineup as LineupFragment, Lineup_lineup_players } from "../__generated__/Lineup";
 import { GetLeague as QUERY} from "../queries";
 import { UserConsumer } from "../../state/UserContext";
-import { Lineup } from "../lineups/lineup";
 import { Link } from "react-router-dom";
+import { LiveUpdateMatchup } from "../flip_matchups/live-update-matchup";
 
 interface RoutedProps {
     leagueID: string;
@@ -49,10 +49,13 @@ export const League: React.SFC<Props> = (props) => {
                         <div>
                             <h1>{league.name}</h1>
                             <h2>My Lineup</h2>
+                            <h3>Scores update live!</h3>
                             {(() => {
                                 const myLineup = findLineupForMember(lineups, user.id);
                                 if (!myLineup) return (<Link to={`/league/${league.id}/create-lineup`}><button>Set Lineup</button></Link>)
-                                return <Lineup lineup={findLineupForMember(lineups, user.id) as LineupFragment}></Lineup>
+                                return <LiveUpdateMatchup gameID={myLineup.nfl_game.id}
+                                    lineupPlayers={myLineup.lineup_players as Lineup_lineup_players[]}>
+                                </LiveUpdateMatchup>
                             })()}
                             <h2>Members</h2>
                             {otherLeagueMembers.length === 0 && <div>No other teams in league</div>}

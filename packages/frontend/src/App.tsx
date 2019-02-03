@@ -28,7 +28,7 @@ export const client = new ApolloClient({
     }
 });
 
-interface State extends UserState {}
+interface State extends UserState { }
 
 class App extends Component {
     public readonly state: State = {
@@ -36,22 +36,22 @@ class App extends Component {
         user: undefined,
         signin: (user: CurrentUser) => {
             localStorage.setItem(LocalStorageKeys.user, JSON.stringify(user));
-            this.setState({user});
+            this.setState({ user });
         },
         signout: () => {
             localStorage.removeItem(LocalStorageKeys.token);
             localStorage.removeItem(LocalStorageKeys.user);
             client.resetStore();
-            this.setState({user: undefined});
+            this.setState({ user: undefined });
         }
     };
     componentDidMount() {
         const rawUser = localStorage.getItem(LocalStorageKeys.user);
         if (rawUser) {
             const user: CurrentUser = JSON.parse(rawUser);
-            this.setState({user});
+            this.setState({ user });
         };
-        this.setState({isLoading: false})
+        this.setState({ isLoading: false })
     }
     render() {
         return (
@@ -60,25 +60,23 @@ class App extends Component {
                     <NFLWeekLoader>
                         <div className="App">
                             <LoggedInUser></LoggedInUser>
-                            <header className="App-header">
-                                <Router>
-                                    <div>
-                                        <nav>
-                                            <ul>
-                                                <li>
-                                                    <Link to="/">Home</Link>
-                                                </li>
-                                            </ul>
-                                        </nav>
+                            <Router>
+                                <div>
+                                    <nav>
+                                        <ul>
+                                            <li>
+                                                <Link to="/">Home</Link>
+                                            </li>
+                                        </ul>
+                                    </nav>
 
-                                        <Route path="/" exact component={SigninOrSignup} />
-                                        <Route path="/dashboard/" component={Dashboard} />
-                                        <Route exact path="/league/:leagueID/create-lineup" component={CreateLineup} />
-                                        <Route exact path="/league/:leagueID/:userID/lineup" component={LineupPage} />
-                                        <Route exact path="/league/:leagueID/" component={League} />
-                                    </div>
-                                </Router>
-                            </header>
+                                    <Route path="/" exact component={SigninOrSignup} />
+                                    <Route path="/dashboard/" component={Dashboard} />
+                                    <Route exact path="/league/:leagueID/create-lineup" component={CreateLineup} />
+                                    <Route exact path="/league/:leagueID/:userID/lineup" component={LineupPage} />
+                                    <Route exact path="/league/:leagueID/" component={League} />
+                                </div>
+                            </Router>
                         </div>
                     </NFLWeekLoader>
                 </ApolloProvider>

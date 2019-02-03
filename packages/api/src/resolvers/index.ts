@@ -13,6 +13,9 @@ import { User } from "./user";
 import { SafeUser } from "./safe-user";
 import { LeagueLineup } from "./league-lineup";
 import { LeagueMember } from "./league-members";
+import { MatchupPlayer } from "./matchup-player";
+import { prisma } from "@ffb/prisma";
+import { getMatchups } from "../models";
 
 export const resolvers: Resolvers = {
     Query,
@@ -27,6 +30,20 @@ export const resolvers: Resolvers = {
     NflGame,
     FlipGamePlayer,
     Matchup,
+    MatchupPlayer,
     User,
-    SafeUser
+    SafeUser,
+    Subscription: {
+        matchup: {
+            subscribe: async (parent, args, ctx) => {
+                const subscription = await prisma.$subscribe.flipGamePlayer({
+                    node: {game: {id: args.where.gameID}},
+                });
+                return subscription as any;
+            },
+            resolve: async (payload, args, ctx) => {
+                return getMatchups(args.where.gameID);
+            }
+        }
+    }
 }

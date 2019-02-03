@@ -83,7 +83,8 @@ export const GetMatchups = gql`
                         full_name
                     }
                 },
-                projectedScore
+                projectedScore,
+                actualScore
             },
             awayPlayer{
                 nflPlayer {
@@ -94,7 +95,8 @@ export const GetMatchups = gql`
                         full_name
                     }
                 },
-                projectedScore
+                projectedScore,
+                actualScore
             }
         }
     }

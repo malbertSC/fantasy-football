@@ -2,10 +2,7 @@ import { Query } from "react-apollo";
 import { GetMatchups as QUERY } from "../queries";
 import React, { Component } from "react";
 import { GetMatchups, GetMatchupsVariables, GetMatchups_matchups } from "../__generated__/GetMatchups";
-import { Matchup } from "./matchup";
-import { client } from "../../App";
-import gql from "graphql-tag";
-import { Redirect } from "react-router";
+import { PickMatchup } from "./pick-matchup";
 
 class GetMatchupsQuery extends Query<GetMatchups, GetMatchupsVariables> {}
 
@@ -56,12 +53,12 @@ export class Matchups extends Component<Props, State> {
                             <ul>
                                 {matchups.map((matchup, i) => {
                                     // https://github.com/prisma/prisma/issues/2999
-                                    return <Matchup
+                                    return <PickMatchup
                                         key={i}
                                         matchup={matchup as GetMatchups_matchups}
                                         lineup={this.state.lineup}
                                         addPlayerToLineup={this.addPlayerToLineup}
-                                    ></Matchup>
+                                    ></PickMatchup>
                                 })}
                             </ul>
                             <button onClick={(e) => {

@@ -6,10 +6,12 @@ interface Props {
     lineup: Lineup;
     addPlayerToLineup: (position: string, player: MatchupPlayer) => void;
 }
-export const Matchup: React.SFC<Props> = (props) => {
+export const PickMatchup: React.SFC<Props> = (props) => {
     const homePlayer = props.matchup.homePlayer;
     const awayPlayer = props.matchup.awayPlayer;
-    const advantage = homePlayer.projectedScore - awayPlayer.projectedScore;
+    const homePlayerProjected = homePlayer.projectedScore ? homePlayer.projectedScore : 0;
+    const awayPlayerProjected = awayPlayer.projectedScore ? awayPlayer.projectedScore : 0;
+    const advantage =  homePlayerProjected - awayPlayerProjected;
     const displayAdvantage = `(- ${Math.abs(advantage).toFixed(1)})`;
     const advantagedPlayer: "home"|"away" = advantage > 0 ? "home" : "away";
     const currentLineupPick = props.lineup.find((lineupItem) => {
