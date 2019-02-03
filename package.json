@@ -12,6 +12,7 @@
     "lerna": "^3.0.0-alpha.1"
   },
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "start-api": "cd packages/api && ts-node ./src/index.ts",
     "debug-api": "cd packages/api && node --inspect -r ts-node/register ./src/index.ts",
     "start-prisma": "cd packages/prisma && docker-compose up -d",
