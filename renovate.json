@@ -3,7 +3,6 @@
     "config:base"
   ],
   "ignorePaths": [
-    "package.json",
     "packages/api/package.json"
   ],
   "prConcurrentLimit": 3
