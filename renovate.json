@@ -2,8 +2,5 @@
   "extends": [
     "config:base"
   ],
-  "ignorePaths": [
-    "packages/prisma/package.json"
-  ],
   "prConcurrentLimit": 3
 }
