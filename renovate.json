@@ -2,9 +2,8 @@
   "extends": [
     "config:base"
   ],
-  "includePaths": [
-    "packages/api/package.json",
-    "packages/frontend/package.json"
+  "ignorePaths": [
+    "packages/prisma/package.json"
   ],
   "prConcurrentLimit": 3
 }
