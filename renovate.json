@@ -2,5 +2,9 @@
   "extends": [
     "config:base"
   ],
+  "includePaths": [
+    "packages/api/package.json",
+    "packages/frontend/package.json"
+  ],
   "prConcurrentLimit": 3
 }
