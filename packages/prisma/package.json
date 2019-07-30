@@ -19,8 +19,5 @@
         "prepublish": "yarn build",
         "deploy": "prisma deploy",
         "generate": "prisma generate && yarn build"
-    },
-    "renovate": {
-        "enabled": false
     }
 }
