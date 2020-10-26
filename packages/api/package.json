@@ -17,7 +17,7 @@
         "bcrypt": "3.0.6",
         "csvtojson": "2.0.10",
         "dotenv": "6.2.0",
-        "graphql-shield": "5.7.3",
+        "graphql-shield": "6.0.6",
         "graphql-tag": "2.10.1",
         "graphql-yoga": "1.16.7",
         "passport": "0.4.0",
