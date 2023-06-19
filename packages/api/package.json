@@ -18,7 +18,7 @@
         "csvtojson": "2.0.10",
         "dotenv": "6.2.0",
         "graphql-shield": "5.7.3",
-        "graphql-tag": "2.10.1",
+        "graphql-tag": "2.12.6",
         "graphql-yoga": "1.16.7",
         "passport": "0.4.0",
         "passport-http": "0.3.0",
