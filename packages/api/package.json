@@ -20,7 +20,7 @@
         "graphql-shield": "5.7.3",
         "graphql-tag": "2.10.1",
         "graphql-yoga": "1.16.7",
-        "passport": "0.4.0",
+        "passport": "0.6.0",
         "passport-http": "0.3.0",
         "pg": "7.6.1",
         "puppeteer": "1.19.0",
